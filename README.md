@@ -1,4 +1,4 @@
-# sbahn-berlin-disruptions
+# S-Bahn Berlin Disruptions Calendar
 
 Builds an iCalendar feed of S-Bahn Berlin disruptions (consequences) for the lines you care about, so you can subscribe to it in Google Calendar. See `GLOSSARY.md` for terminology.
 
