@@ -1,0 +1,165 @@
+{
+  "elements": [
+    {
+      "content": [
+        {
+          "content": "<p>Bus 160, 163: Haltestellen <strong>Hermann-Dorner-Allee</strong> werden um ca. 200 Meter verlegt.<br />\nGrund: Neuer Standort noch im Bau &ndash; bitte beachten Sie die Beschilderung.</p>\n<ul>\n\t<li><strong>Ersatzverkehr&nbsp;<bds-signet-group><bds-signet-transport transport-id='bus' aria-label='Bus '></bds-signet-transport><bds-signet-line as='<span>' line-id='160' aria-label='Bus 160'></bds-signet-line></bds-signet-group></strong> f&auml;hrt ab Stra&szlig;e &amp; Platz</li>\n</ul>",
+          "headline": "Haltestelle verlegt",
+          "icon": "bds-alert-line"
+        }
+      ],
+      "directionOne": "right",
+      "disruptionTypes": [{ "color": "default", "displayName": "Haltestelle verlegt" }],
+      "endDate": "2026-11-02T03:30:00+01:00",
+      "hideTime": false,
+      "id": "HIM_FREETEXT_357299",
+      "images": [],
+      "lines": [
+        {
+          "bus": [
+            { "name": "160", "slug": "160", "lineType": 1, "isExternal": false },
+            { "name": "163", "slug": "163", "lineType": 1, "isExternal": false }
+          ]
+        }
+      ],
+      "messageCategory": [1],
+      "messageType": "TRAFFIC",
+      "modDate": "2026-10-20T21:39:14.123+02:00",
+      "scheduled": false,
+      "showOnStartpage": false,
+      "startDate": "2026-10-05T03:30:00+02:00",
+      "stationOne": { "displayName": "Hermann-Dorner-Allee" },
+      "firstLineLineType": 1
+    },
+    {
+      "content": [
+        {
+          "content": "<p>Bus 160 f&auml;hrt wegen einer Demonstration nicht zwischen Hermannplatz und Rathaus.</p>",
+          "headline": "Umleitung wegen Demonstration",
+          "icon": "bds-alert-line"
+        }
+      ],
+      "directionOne": "both",
+      "disruptionTypes": [
+        { "color": "info", "displayName": "Umleitung" },
+        { "color": "info", "displayName": "Kein Halt" }
+      ],
+      "endDate": "2026-10-23T16:00:00+02:00",
+      "hideTime": false,
+      "id": "HIM_FREETEXT_400001",
+      "images": [],
+      "lines": [
+        {
+          "bus": [{ "name": "160", "slug": "160", "lineType": 1, "isExternal": false }]
+        }
+      ],
+      "messageType": "TRAFFIC",
+      "modDate": "2026-10-22T09:00:00+02:00",
+      "scheduled": false,
+      "showOnStartpage": false,
+      "startDate": "2026-10-23T08:00:00+02:00",
+      "stationOne": { "displayName": "S+U Rathaus Neukölln" },
+      "stationTwo": { "displayName": "U Hermannplatz" },
+      "firstLineLineType": 1
+    },
+    {
+      "content": [
+        {
+          "content": "<p>Bus 200: Umleitung.</p>",
+          "headline": "Umleitung",
+          "icon": "bds-alert-line"
+        }
+      ],
+      "disruptionTypes": [{ "color": "info", "displayName": "Umleitung" }],
+      "endDate": "2026-10-25T18:00:00+02:00",
+      "id": "HIM_FREETEXT_400002",
+      "lines": [
+        { "bus": [{ "name": "200", "slug": "200", "lineType": 1, "isExternal": false }] }
+      ],
+      "messageType": "TRAFFIC",
+      "modDate": "2026-10-22T09:00:00+02:00",
+      "startDate": "2026-10-24T08:00:00+02:00",
+      "firstLineLineType": 1
+    },
+    {
+      "content": [
+        {
+          "content": "<p>Bus 160: Baustelle in 2027.</p>",
+          "headline": "Baustelle",
+          "icon": "bds-construction-site-line"
+        }
+      ],
+      "disruptionTypes": [{ "color": "info", "displayName": "Baustelle" }],
+      "endDate": "2026-12-02T18:00:00+01:00",
+      "id": "HIM_FREETEXT_400003",
+      "lines": [
+        { "bus": [{ "name": "160", "slug": "160", "lineType": 1, "isExternal": false }] }
+      ],
+      "messageType": "TRAFFIC",
+      "modDate": "2026-10-01T09:00:00+02:00",
+      "startDate": "2026-12-01T08:00:00+01:00",
+      "firstLineLineType": 1
+    },
+    {
+      "content": [
+        {
+          "content": "<p>Bus 160: Bereits beendet.</p>",
+          "headline": "Beendet",
+          "icon": "bds-alert-line"
+        }
+      ],
+      "disruptionTypes": [{ "color": "info", "displayName": "Umleitung" }],
+      "endDate": "2026-10-20T18:00:00+02:00",
+      "id": "HIM_FREETEXT_400004",
+      "lines": [
+        { "bus": [{ "name": "160", "slug": "160", "lineType": 1, "isExternal": false }] }
+      ],
+      "messageType": "TRAFFIC",
+      "modDate": "2026-10-10T09:00:00+02:00",
+      "startDate": "2026-10-19T08:00:00+02:00",
+      "firstLineLineType": 1
+    },
+    {
+      "content": [
+        {
+          "content": "<p>Aufzug außer Betrieb.</p>",
+          "headline": "Aufzug defekt",
+          "icon": "bds-alert-line"
+        }
+      ],
+      "disruptionTypes": [{ "color": "info", "displayName": "Aufzug" }],
+      "endDate": "2026-10-30T18:00:00+01:00",
+      "id": "ELEVATOR_1",
+      "lines": [
+        { "bus": [{ "name": "160", "slug": "160", "lineType": 1, "isExternal": false }] }
+      ],
+      "messageType": "ELEVATOR",
+      "modDate": "2026-10-10T09:00:00+02:00",
+      "startDate": "2026-10-19T08:00:00+02:00",
+      "firstLineLineType": 1
+    }
+    ,
+    {
+      "content": [
+        {
+          "content": "<p>Bus 160: Haltestelle <strong>Rathaus</strong> entf&auml;llt.</p>",
+          "headline": "Kein Halt: Rathaus",
+          "icon": "bds-alert-line"
+        }
+      ],
+      "disruptionTypes": [{ "color": "default", "displayName": "Kein Halt" }],
+      "endDate": "2026-11-03T18:00:00+01:00",
+      "id": "HIM_FREETEXT_400005",
+      "lines": [
+        { "bus": [{ "name": "160", "slug": "160", "lineType": 1, "isExternal": false }] }
+      ],
+      "messageType": "TRAFFIC",
+      "modDate": "2026-10-21T09:00:00+02:00",
+      "startDate": "2026-11-03T08:00:00+01:00",
+      "firstLineLineType": 1
+    }
+  ],
+  "numFound": 7,
+  "numPages": 1,
+  "page": 1
+}

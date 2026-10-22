@@ -5,6 +5,7 @@ set -uo pipefail
 root="$(cd "$(dirname "$0")/.." && pwd)"
 script="$root/scripts/build-calendar.sh"
 fixture="$root/tests/fixtures/api-response.json"
+bvg_fixture="$root/tests/fixtures/bvg-response.json"
 golden="$root/tests/golden"
 tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT
@@ -24,7 +25,7 @@ test_golden() {
   shift 2
   local out="$tmp/case-$((++case_no)).ics"
   # A fixed clock and the maximum horizon keep fixtures valid; cases override --now/--days where they test them.
-  if ! "$script" --input-sbahn-berlin "$fixture" --output "$out" --now "$default_now" --days 14 "$@" >/dev/null 2>&1; then
+  if ! "$script" --input-sbahn-berlin "$fixture" --input-bvg "$bvg_fixture" --output "$out" --now "$default_now" --days 14 "$@" >/dev/null 2>&1; then
     fail "$name: script exited non-zero"
     return
   fi
@@ -72,6 +73,13 @@ test_golden "station OR line" lines-s9-s26 --station Schöneweide --line S26 --n
 test_golden "station and line match once" line-s9 --station Westkreuz --line S9
 test_golden "multiple stations" lines-s9-s26 --station Schöneweide --station Westkreuz --line S26 --now 2026-10-28T12:00:00Z
 
+# BVG: lines are routed to the operator by label, items without a watched line or of another type are ignored.
+test_golden "BVG bus 160" bvg-bus-160 --line "Bus 160"
+test_golden "BVG bus 160 + 163 is one event for the shared item" bvg-bus-160-163 --line "Bus 160" --line "Bus 163"
+test_golden "BVG label is case-insensitive" bvg-bus-160 --line "bus 160"
+test_golden "S-Bahn and BVG in one feed" mixed-s9-bus-160 --line S9 --line "Bus 160"
+test_golden "BVG horizon drops items beyond it" bvg-bus-160-days-3 --line "Bus 160" --days 3
+
 # Horizon: occurrences overlapping [now, now + days] are kept in full, the rest are dropped.
 test_golden "--days 7 drops later occurrences" line-s85-days-7 --line S85 --days 7
 test_golden "past occurrences dropped, running one kept in full" line-s85-from-26-oct --line S85 --now 2026-10-26T12:00:00Z --days 14
@@ -98,6 +106,12 @@ test_fails "invalid --days" "--days must be an integer from 1 to 14" --line S9 -
 test_fails "--days above 14" "--days must be an integer from 1 to 14" --line S9 --days 15
 test_fails "old --input flag is gone" "unknown argument: --input" --line S9 --input "$fixture"
 test_fails "old --api-url flag is gone" "unknown argument: --api-url" --line S9 --api-url "file://$fixture"
+test_fails "bare BVG line number" "invalid line" --line 160
+test_fails "unknown mode prefix" "invalid line" --line "Ferry F1"
+failing_bvg_input="$root/tests/fixtures/malformed.json"
+err="$("$script" --input-bvg "$failing_bvg_input" --input-sbahn-berlin "$fixture" --output "$tmp/keep.ics" --line "Bus 160" 2>&1 >/dev/null)" && status=0 || status=$?
+if [ "$status" -ne 0 ]; then pass "malformed BVG input: exits non-zero"; else fail "malformed BVG input: exits non-zero"; fi
+case "$err" in *"not a valid BVG API response"*) pass "malformed BVG input: explains itself" ;; *) fail "malformed BVG input: explains itself (got: $err)" ;; esac
 test_fails "invalid --now" "--now must be" --line S9 --now yesterday
 
 # Without --input the script fetches the API; a file:// URL stands in for the endpoint.
