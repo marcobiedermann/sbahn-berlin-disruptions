@@ -79,6 +79,12 @@ test_golden "BVG bus 160" bvg-bus-160 --line "Bus 160"
 test_golden "BVG bus 160 + 163 is one event for the shared item" bvg-bus-160-163 --line "Bus 160" --line "Bus 163"
 test_golden "BVG label is case-insensitive" bvg-bus-160 --line "bus 160"
 test_golden "S-Bahn and BVG in one feed" mixed-s9-bus-160 --line S9 --line "Bus 160"
+test_golden "BVG tram line" tram-m10 --line "Tram M10"
+test_golden "BVG U-Bahn line incl. replacement bus notice" ubahn-u2 --line U2
+test_golden "BVG U-Bahn label is case-insensitive" ubahn-u2 --line u2
+test_golden "tram 12 does not match bus 12" tram-12 --line "Tram 12"
+test_golden "bus 12 does not match tram 12" bus-12 --line "Bus 12"
+test_golden "tram M1 and bus M1 are different lines" tram-m1 --line "Tram M1"
 test_golden "BVG open-ended item is an all-day event on its start day" bvg-open-ended --line "Bus 160" --now 2026-10-22T12:00:00Z --days 1
 test_golden "BVG horizon drops items beyond it" bvg-bus-160-days-3 --line "Bus 160" --days 3
 
