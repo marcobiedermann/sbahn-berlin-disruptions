@@ -132,6 +132,54 @@ if [ "$status" -ne 0 ]; then pass "failed fetch exits non-zero"; else fail "fail
 case "$err" in *"could not fetch"*) pass "failed fetch explains itself" ;; *) fail "failed fetch explains itself (got: $err)" ;; esac
 if [ "$(cat "$tmp/keep.ics")" = "previous feed" ]; then pass "failed fetch leaves output untouched"; else fail "failed fetch leaves output untouched"; fi
 
+# Live BVG fetch against a local server that serves two pages and records every request.
+serve="$tmp/serve"; mkdir -p "$serve"
+jq -c '{elements: .elements[:5], numFound: 9, numPages: 2, page: 1}' "$root/tests/fixtures/bvg-response.json" >"$serve/page1.json"
+jq -c '{elements: .elements[5:], numFound: 9, numPages: 2, page: 2}' "$root/tests/fixtures/bvg-response.json" >"$serve/page2.json"
+cat >"$tmp/server.py" <<'PY'
+import http.server, sys, urllib.parse
+root, log = sys.argv[1], sys.argv[2]
+class H(http.server.BaseHTTPRequestHandler):
+    def do_GET(self):
+        u = urllib.parse.urlparse(self.path)
+        with open(log, "a") as f: f.write(self.path + "\n")
+        q = urllib.parse.parse_qs(u.query)
+        if u.path == "/fail": self.send_error(500); return
+        body = open(f"{root}/page{q.get('page', ['1'])[0]}.json", "rb").read()
+        self.send_response(200); self.send_header("content-type", "application/json"); self.end_headers(); self.wfile.write(body)
+    def log_message(self, *a): pass
+srv = http.server.HTTPServer(("127.0.0.1", 0), H)
+print(srv.server_port, flush=True)
+srv.serve_forever()
+PY
+python3 "$tmp/server.py" "$serve" "$tmp/requests.log" >"$tmp/port" &
+server_pid=$!; disown
+trap 'kill "$server_pid" 2>/dev/null || true; rm -rf "$tmp"' EXIT
+while [ ! -s "$tmp/port" ]; do sleep 0.1; done
+port="$(cat "$tmp/port")"
+bvg_url="http://127.0.0.1:$port/v1/de"
+
+"$script" --output "$tmp/live-bvg.ics" --api-url-bvg "$bvg_url" --now "$default_now" --days 14 --line "Bus 160" --line "Bus 163" >/dev/null 2>&1
+if diff <(unfold "$tmp/live-bvg.ics") "$golden/bvg-bus-160-163.ics" >/dev/null; then pass "live BVG fetch merges all pages"; else fail "live BVG fetch merges all pages"; fi
+if grep -q 'type=TRAFFIC&timeFrame=FORTNIGHT&page=1' "$tmp/requests.log" && grep -q 'page=2' "$tmp/requests.log"; then pass "live BVG fetch requests traffic, fortnight, every page"; else fail "live BVG fetch requests traffic, fortnight, every page"; fi
+
+: >"$tmp/requests.log"
+"$script" --output "$tmp/sbahn-only.ics" --input-sbahn-berlin "$fixture" --api-url-bvg "$bvg_url" --now "$default_now" --days 14 --line S9 >/dev/null 2>&1
+if [ ! -s "$tmp/requests.log" ]; then pass "S-Bahn-only watchlist makes no BVG call"; else fail "S-Bahn-only watchlist makes no BVG call"; fi
+
+echo "previous feed" >"$tmp/keep.ics"
+err="$("$script" --output "$tmp/keep.ics" --api-url-bvg "http://127.0.0.1:$port/fail" --line "Bus 160" 2>&1 >/dev/null)" && status=0 || status=$?
+if [ "$status" -ne 0 ]; then pass "failed BVG fetch exits non-zero"; else fail "failed BVG fetch exits non-zero"; fi
+case "$err" in *"could not fetch"*) pass "failed BVG fetch explains itself" ;; *) fail "failed BVG fetch explains itself (got: $err)" ;; esac
+if [ "$(cat "$tmp/keep.ics")" = "previous feed" ]; then pass "failed BVG fetch leaves output untouched"; else fail "failed BVG fetch leaves output untouched"; fi
+
+# A BVG failure fails the whole run even when S-Bahn data is fine.
+"$script" --output "$tmp/keep.ics" --input-sbahn-berlin "$fixture" --api-url-bvg "http://127.0.0.1:$port/fail" --line S9 --line "Bus 160" >/dev/null 2>&1 && status=0 || status=$?
+if [ "$status" -ne 0 ] && [ "$(cat "$tmp/keep.ics")" = "previous feed" ]; then pass "BVG failure fails the whole mixed run"; else fail "BVG failure fails the whole mixed run"; fi
+
+: >"$tmp/requests.log"
+if "$script" --output "$tmp/bvg-only.ics" --api-url-sbahn-berlin "file://$tmp/missing.json" --api-url-bvg "$bvg_url" --now "$default_now" --days 14 --line "Bus 160" >/dev/null 2>&1; then pass "BVG-only watchlist makes no S-Bahn call"; else fail "BVG-only watchlist makes no S-Bahn call"; fi
+
 if [ "$failures" -ne 0 ]; then
   echo "$failures failure(s)"
   exit 1

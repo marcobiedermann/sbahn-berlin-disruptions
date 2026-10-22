@@ -6,7 +6,7 @@
 #                          [--input-sbahn-berlin <api-response.json>] [--input-bvg <api-response.json>]
 # Lines: S9 (S-Bahn Berlin); U2, "Tram M10", "Bus 160" (BVG). Stations are S-Bahn Berlin only.
 # Without --input-sbahn-berlin the S-Bahn Berlin GraphQL API is queried
-# (--api-url-sbahn-berlin overrides the endpoint). --days accepts 1 to 14.
+# (--api-url-sbahn-berlin and --api-url-bvg override the endpoints). --days accepts 1 to 14.
 set -euo pipefail
 
 die() {
@@ -22,9 +22,12 @@ stations=()
 days=14
 now=""
 api_url_sbahn="https://api.sbahn.berlin/construction-api/query"
+api_url_bvg="https://www.bvg.de/disruption-reports-service/disruptions/v1/de"
 fetched=""
 tmp=""
-trap 'rm -f "$fetched" "$tmp"' EXIT
+tmp_bvg=""
+tmp_page=""
+trap 'rm -f "$fetched" "$tmp" "$tmp_bvg" "$tmp_page"' EXIT
 
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -36,6 +39,7 @@ while [ $# -gt 0 ]; do
     --days) days="${2:?--days needs a value}"; shift 2 ;;
     --now) now="${2:?--now needs a value}"; shift 2 ;;
     --api-url-sbahn-berlin) api_url_sbahn="${2:?--api-url-sbahn-berlin needs a value}"; shift 2 ;;
+    --api-url-bvg) api_url_bvg="${2:?--api-url-bvg needs a value}"; shift 2 ;;
     *) die "unknown argument: $1" ;;
   esac
 done
@@ -358,12 +362,39 @@ JQ
 sbahn_events='[]'
 if $use_sbahn; then sbahn_events="$(build_sbahn_events)"; fi
 
+# Fetches every page of the BVG disruption list and merges the elements.
+fetch_bvg() {
+  command -v curl >/dev/null || die "curl is required"
+  local page=1 pages=1 file
+  file="$(mktemp)"
+  tmp_page="$file"
+  local merged='[]'
+  while [ "$page" -le "$pages" ]; do
+    curl --silent --show-error --fail --location --max-time 30 --retry 2 --retry-delay 5 \
+      --header 'accept: application/json' \
+      --header 'user-agent: Mozilla/5.0 (compatible; sbahn-berlin-disruptions)' \
+      --output "$file" \
+      "$api_url_bvg?type=TRAFFIC&timeFrame=FORTNIGHT&page=$page" || die "could not fetch $api_url_bvg"
+    jq -e '(.elements | type == "array") and ((.numPages // 1) | type == "number")' "$file" >/dev/null 2>&1 || die "input is not a valid BVG API response"
+    pages="$(jq -r '.numPages // 1' "$file")"
+    merged="$(jq -c -n --argjson acc "$merged" --slurpfile page "$file" '$acc + $page[0].elements')"
+    page=$((page + 1))
+  done
+  jq -c -n --argjson elements "$merged" '{elements: $elements}'
+}
+
 bvg_events='[]'
 if $use_bvg; then
-  [ -n "$input_bvg" ] || die "BVG lines need --input-bvg; live fetching is not implemented yet"
-  jq -e '.elements | type == "array"' "$input_bvg" >/dev/null 2>&1 || die "input is not a valid BVG API response"
+  bvg_input="$(mktemp)"
+  tmp_bvg="$bvg_input"
+  if [ -n "$input_bvg" ]; then
+    jq -e '.elements | type == "array"' "$input_bvg" >/dev/null 2>&1 || die "input is not a valid BVG API response"
+    cp "$input_bvg" "$bvg_input"
+  else
+    fetch_bvg >"$bvg_input"
+  fi
   bvg_wanted="$(printf '%s\n' "${bvg_lines[@]}" | jq -R . | jq -s -c .)"
-  bvg_events="$(TZ=Europe/Berlin jq -c --argjson wanted "$bvg_wanted" --arg now "$now" --argjson days "$days" "$jq_common$jq_bvg" "$input_bvg")"
+  bvg_events="$(TZ=Europe/Berlin jq -c --argjson wanted "$bvg_wanted" --arg now "$now" --argjson days "$days" "$jq_common$jq_bvg" "$bvg_input")"
 fi
 
 tmp="$(mktemp "$(dirname "$output")/.feed.XXXXXX")"
