@@ -140,6 +140,9 @@ if [ "$(cat "$tmp/keep.ics")" = "previous feed" ]; then pass "failed fetch leave
 serve="$tmp/serve"; mkdir -p "$serve"
 jq -c '{elements: .elements[:5], numFound: 9, numPages: 2, page: 1}' "$root/tests/fixtures/bvg-response.json" >"$serve/page1.json"
 jq -c '{elements: .elements[5:], numFound: 9, numPages: 2, page: 2}' "$root/tests/fixtures/bvg-response.json" >"$serve/page2.json"
+# Live responses are far larger than the shell's per-argument limit (128 KiB on Linux).
+jq -c '[.elements[] | select(.id == "HIM_FREETEXT_400001")] as $t | {elements: [range(1500) as $i | $t[0] | .id = "BIG_\($i)"], numPages: 2, page: 1}' "$root/tests/fixtures/bvg-response.json" >"$serve/bigpage1.json"
+jq -c '.page = 2 | .elements = []' "$serve/bigpage1.json" >"$serve/bigpage2.json"
 cat >"$tmp/server.py" <<'PY'
 import http.server, sys, urllib.parse
 root, log = sys.argv[1], sys.argv[2]
@@ -149,7 +152,8 @@ class H(http.server.BaseHTTPRequestHandler):
         with open(log, "a") as f: f.write(self.path + "\n")
         q = urllib.parse.parse_qs(u.query)
         if u.path == "/fail": self.send_error(500); return
-        body = open(f"{root}/page{q.get('page', ['1'])[0]}.json", "rb").read()
+        prefix = "big" if u.path.startswith("/big/") else ""
+        body = open(f"{root}/{prefix}page{q.get('page', ['1'])[0]}.json", "rb").read()
         self.send_response(200); self.send_header("content-type", "application/json"); self.end_headers(); self.wfile.write(body)
     def log_message(self, *a): pass
 srv = http.server.HTTPServer(("127.0.0.1", 0), H)
@@ -170,6 +174,8 @@ if grep -q 'type=TRAFFIC&timeFrame=FORTNIGHT&page=1' "$tmp/requests.log" && grep
 : >"$tmp/requests.log"
 "$script" --output "$tmp/sbahn-only.ics" --input-sbahn-berlin "$fixture" --api-url-bvg "$bvg_url" --now "$default_now" --days 14 --line S9 >/dev/null 2>&1
 if [ ! -s "$tmp/requests.log" ]; then pass "S-Bahn-only watchlist makes no BVG call"; else fail "S-Bahn-only watchlist makes no BVG call"; fi
+
+if "$script" --output "$tmp/big.ics" --api-url-bvg "http://127.0.0.1:$port/big/v1/de" --now "$default_now" --days 14 --line "Bus 160" >/dev/null 2>&1 && [ "$(grep -c '^BEGIN:VEVENT' "$tmp/big.ics")" -eq 1500 ]; then pass "live BVG response larger than the argument limit"; else fail "live BVG response larger than the argument limit"; fi
 
 echo "previous feed" >"$tmp/keep.ics"
 err="$("$script" --output "$tmp/keep.ics" --api-url-bvg "http://127.0.0.1:$port/fail" --line "Bus 160" 2>&1 >/dev/null)" && status=0 || status=$?

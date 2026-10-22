@@ -35,7 +35,8 @@ fetched=""
 tmp=""
 tmp_bvg=""
 tmp_page=""
-trap 'rm -f "$fetched" "$tmp" "$tmp_bvg" "$tmp_page"' EXIT
+tmp_acc=""
+trap 'rm -f "$fetched" "$tmp" "$tmp_bvg" "$tmp_page" "$tmp_acc"' EXIT
 
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -375,7 +376,9 @@ fetch_bvg() {
   local page=1 pages=1 file
   file="$(mktemp)"
   tmp_page="$file"
-  local merged='[]'
+  local acc
+  acc="$(mktemp)"
+  tmp_acc="$acc" # pages accumulate in a file: live data exceeds the argument-size limit
   while [ "$page" -le "$pages" ]; do
     curl --silent --show-error --fail --location --max-time 30 --retry 2 --retry-delay 5 \
       --header 'accept: application/json' \
@@ -384,10 +387,10 @@ fetch_bvg() {
       "$api_url_bvg?type=TRAFFIC&timeFrame=FORTNIGHT&page=$page" || die "could not fetch $api_url_bvg"
     jq -e '(.elements | type == "array") and ((.numPages // 1) | type == "number")' "$file" >/dev/null 2>&1 || die "input is not a valid BVG API response"
     pages="$(jq -r '.numPages // 1' "$file")"
-    merged="$(jq -c -n --argjson acc "$merged" --slurpfile page "$file" '$acc + $page[0].elements')"
+    jq -c '{elements}' "$file" >>"$acc"
     page=$((page + 1))
   done
-  jq -c -n --argjson elements "$merged" '{elements: $elements}'
+  jq -s -c '{elements: (map(.elements) | add // [])}' "$acc"
 }
 
 bvg_events='[]'
@@ -405,6 +408,6 @@ if $use_bvg; then
 fi
 
 tmp="$(mktemp "$(dirname "$output")/.feed.XXXXXX")"
-TZ=Europe/Berlin jq -n -j --argjson sbahn "$sbahn_events" --argjson bvg "$bvg_events" "$jq_common"'($sbahn + $bvg) | '"$jq_render" >"$tmp"
+TZ=Europe/Berlin jq -n -j --slurpfile sbahn <(printf '%s' "$sbahn_events") --slurpfile bvg <(printf '%s' "$bvg_events") "$jq_common"'($sbahn[0] + $bvg[0]) | '"$jq_render" >"$tmp"
 
 mv "$tmp" "$output"
