@@ -45,6 +45,7 @@ command -v jq >/dev/null || die "jq is required"
 
 if [ -z "$input" ]; then
   command -v curl >/dev/null || die "curl is required"
+  # shellcheck disable=SC2016 # $language is a GraphQL variable, not a shell one
   graphql_query='query Consequences($language: Language!) {
     consequences(language: $language) {
       id effect title updated

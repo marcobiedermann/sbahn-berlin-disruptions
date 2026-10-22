@@ -17,7 +17,7 @@ A span of time during which a consequence applies; either one continuous span or
 _Avoid_: Interval, timeframe
 
 **Daily window**:
-The recurring time-of-day range of a repeating period (e.g. 08:00 - 16:00), occurring on each day of its date range.
+The recurring time-of-day range of a repeating period (e.g. 08:00 - 16:00), occurring on each day of its date range. If the end time of day is not later than the start, the window ends the next day; the last window ends at the period's `dateEnd`.
 _Avoid_: Recurrence
 
 **Occurrence**:
@@ -25,7 +25,7 @@ One concrete calendar event: a continuous period, or a single day of a daily win
 _Avoid_: Instance, entry
 
 **Station**:
-An S-Bahn stop, identified by the user via its name (e.g. "Schöneweide"), not an internal ID.
+An S-Bahn stop, identified by the user via its name (e.g. "Schöneweide"), not an internal ID. Resolved by exact match on the title without its `S `/`S+U `/`U ` prefix; zero or several matches is an error.
 _Avoid_: Stop, Bahnhof
 
 **Line**:
@@ -33,13 +33,13 @@ An S-Bahn route, identified by its label (e.g. "S9").
 _Avoid_: Route
 
 **Watchlist**:
-The configured set of stations and lines the user cares about; a consequence is relevant if it touches any of them.
+The configured set of stations and lines the user cares about; a consequence is relevant if it touches any of them. Set once in the `STATIONS`, `LINES` and `DAYS` env vars of `.github/workflows/update-calendar.yml`, passed to the script as `--station`, `--line` and `--days`.
 _Avoid_: Filter, subscription
 
 **Horizon**:
-The forward-looking window (14 days from run time) within which occurrences are published.
+The forward-looking window (14 days from run time, `--days`) within which occurrences are published. An occurrence overlapping the horizon is kept in full.
 _Avoid_: Range
 
 **Feed**:
-The single calendar file consumed by Google Calendar, always mirroring the current relevant consequences within the horizon.
+The single calendar file consumed by Google Calendar, always mirroring the current relevant consequences within the horizon. Lives at `calendar.ics`, written only by the workflow.
 _Avoid_: Calendar export, ICS dump

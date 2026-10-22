@@ -62,4 +62,6 @@ scripts/build-calendar.sh --input tests/fixtures/api-response.json --output /tmp
 tests/run.sh
 ```
 
+To run it automatically before every commit (shellcheck + tests), enable the bundled hook once: `git config core.hooksPath .githooks`. CI runs the same checks on pull requests.
+
 The tests call the script through its command line with `tests/fixtures/api-response.json` and compare the output to the files in `tests/golden/` (after undoing line folding), and also check line length, CRLF endings, deterministic output and error handling.
