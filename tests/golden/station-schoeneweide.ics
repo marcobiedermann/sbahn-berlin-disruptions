@@ -27,7 +27,7 @@ DTSTAMP:20261015T103418Z
 DTSTART;TZID=Europe/Berlin:20261103T014500
 DTEND;TZID=Europe/Berlin:20261106T034000
 SUMMARY:S9 · Schöneweide ⇄ Flughafen BER · Ersatzverkehr
-DESCRIPTION:Zeitraum: 03.11 (Di) 01:45 Uhr bis 06.11 (Fr) 03:40 Uhr\nLinien: S9\nBahnhöfe: S Schöneweide\nMehr: https://sbahn.berlin/fahren/s9/\nStand: 2026-10-15T10:34:18Z
+DESCRIPTION:Zeitraum: 03.11 (Di) 01:45 Uhr bis 06.11 (Fr) 03:40 Uhr\nLinien: S9\nBahnhöfe: S Schöneweide\nDetails: https://sbahn.berlin/fahren/bauen-stoerung/bauen/1/auswirkung/100/\nMehr: https://sbahn.berlin/fahren/s9/\nStand: 2026-10-15T10:34:18Z
 TRANSP:TRANSPARENT
 END:VEVENT
 END:VCALENDAR

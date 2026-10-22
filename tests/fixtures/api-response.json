@@ -150,8 +150,7 @@
             "link": "https://sbahn.berlin/fahren/s85/",
             "direction": "LINEAR"
           }
-        ],
-        "task": { "id": "5" }
+        ]
       }
     ],
     "lines": [

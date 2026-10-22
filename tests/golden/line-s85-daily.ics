@@ -27,7 +27,7 @@ DTSTAMP:20261021T090000Z
 DTSTART;TZID=Europe/Berlin:20261024T080000
 DTEND;TZID=Europe/Berlin:20261024T160000
 SUMMARY:S85 · Grünau ⇄ Schöneweide · Ersatzverkehr
-DESCRIPTION:Zeitraum: 24.10 (Sa) bis 26.10 (Mo)\, täglich 08:00 - 16:00 Uhr\nLinien: S85\nMehr: https://sbahn.berlin/fahren/s85/\nStand: 2026-10-21T09:00:00Z
+DESCRIPTION:Zeitraum: 24.10 (Sa) bis 26.10 (Mo)\, täglich 08:00 - 16:00 Uhr\nLinien: S85\nDetails: https://sbahn.berlin/fahren/bauen-stoerung/bauen/4/auswirkung/400/\nMehr: https://sbahn.berlin/fahren/s85/\nStand: 2026-10-21T09:00:00Z
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
@@ -36,7 +36,7 @@ DTSTAMP:20261021T090000Z
 DTSTART;TZID=Europe/Berlin:20261025T080000
 DTEND;TZID=Europe/Berlin:20261025T160000
 SUMMARY:S85 · Grünau ⇄ Schöneweide · Ersatzverkehr
-DESCRIPTION:Zeitraum: 24.10 (Sa) bis 26.10 (Mo)\, täglich 08:00 - 16:00 Uhr\nLinien: S85\nMehr: https://sbahn.berlin/fahren/s85/\nStand: 2026-10-21T09:00:00Z
+DESCRIPTION:Zeitraum: 24.10 (Sa) bis 26.10 (Mo)\, täglich 08:00 - 16:00 Uhr\nLinien: S85\nDetails: https://sbahn.berlin/fahren/bauen-stoerung/bauen/4/auswirkung/400/\nMehr: https://sbahn.berlin/fahren/s85/\nStand: 2026-10-21T09:00:00Z
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
@@ -45,7 +45,7 @@ DTSTAMP:20261021T090000Z
 DTSTART;TZID=Europe/Berlin:20261026T080000
 DTEND;TZID=Europe/Berlin:20261026T160000
 SUMMARY:S85 · Grünau ⇄ Schöneweide · Ersatzverkehr
-DESCRIPTION:Zeitraum: 24.10 (Sa) bis 26.10 (Mo)\, täglich 08:00 - 16:00 Uhr\nLinien: S85\nMehr: https://sbahn.berlin/fahren/s85/\nStand: 2026-10-21T09:00:00Z
+DESCRIPTION:Zeitraum: 24.10 (Sa) bis 26.10 (Mo)\, täglich 08:00 - 16:00 Uhr\nLinien: S85\nDetails: https://sbahn.berlin/fahren/bauen-stoerung/bauen/4/auswirkung/400/\nMehr: https://sbahn.berlin/fahren/s85/\nStand: 2026-10-21T09:00:00Z
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT

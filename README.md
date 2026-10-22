@@ -114,7 +114,7 @@ scripts/build-calendar.sh --input-sbahn-berlin tests/fixtures/api-response.json 
 
 - A continuous period becomes one event; a daily repeating period (e.g. "täglich 08:00 - 16:00") becomes one event per day. Overnight windows (22:00 - 01:30) end on the following day.
 - Times are Europe/Berlin local time (`TZID`), so daily windows keep their wall-clock time across the daylight saving change. The script sets `TZ` itself; your machine's time zone doesn't matter.
-- Summary: `S9 · Schöneweide ⇄ Flughafen BER · Ersatzverkehr`. The description has the period, lines, affected stations, line links and the last update. Events are marked as free.
+- Summary: `S9 · Schöneweide ⇄ Flughafen BER · Ersatzverkehr`. The description has the period, lines, affected stations, a link to the consequence's detail page (S-Bahn Berlin only, omitted if the API gives no task), line links and the last update. Events are marked as free.
 
 ## Tests
 

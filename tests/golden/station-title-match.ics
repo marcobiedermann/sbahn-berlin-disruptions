@@ -27,7 +27,7 @@ DTSTAMP:20261015T103418Z
 DTSTART;TZID=Europe/Berlin:20261029T230000
 DTEND;TZID=Europe/Berlin:20261030T040000
 SUMMARY:S9 · Treptower Park → Schöneweide · Ersatzverkehr
-DESCRIPTION:Zeitraum: x\nLinien: S9\nBahnhöfe: S Schöneweide\nMehr: https://sbahn.berlin/fahren/s9/\nStand: 2026-10-15T10:34:18Z
+DESCRIPTION:Zeitraum: x\nLinien: S9\nBahnhöfe: S Schöneweide\nDetails: https://sbahn.berlin/fahren/bauen-stoerung/bauen/1/auswirkung/901/\nMehr: https://sbahn.berlin/fahren/s9/\nStand: 2026-10-15T10:34:18Z
 TRANSP:TRANSPARENT
 END:VEVENT
 END:VCALENDAR
