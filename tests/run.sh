@@ -97,6 +97,16 @@ failing_input="$root/tests/fixtures/graphql-partial-errors.json" test_fails "Gra
 test_fails "invalid --days" "--days must be a positive integer" --line S9 --days 0
 test_fails "invalid --now" "--now must be" --line S9 --now yesterday
 
+# Without --input the script fetches the API; a file:// URL stands in for the endpoint.
+"$script" --output "$tmp/fetched.ics" --api-url "file://$fixture" --now "$default_now" --days 365 --line S9 >/dev/null 2>&1
+if diff <(unfold "$tmp/fetched.ics") "$golden/line-s9.ics" >/dev/null; then pass "fetches API when --input is absent"; else fail "fetches API when --input is absent"; fi
+
+echo "previous feed" >"$tmp/keep.ics"
+err="$("$script" --output "$tmp/keep.ics" --api-url "file://$tmp/missing.json" --line S9 2>&1 >/dev/null)" && status=0 || status=$?
+if [ "$status" -ne 0 ]; then pass "failed fetch exits non-zero"; else fail "failed fetch exits non-zero"; fi
+case "$err" in *"could not fetch"*) pass "failed fetch explains itself" ;; *) fail "failed fetch explains itself (got: $err)" ;; esac
+if [ "$(cat "$tmp/keep.ics")" = "previous feed" ]; then pass "failed fetch leaves output untouched"; else fail "failed fetch leaves output untouched"; fi
+
 if [ "$failures" -ne 0 ]; then
   echo "$failures failure(s)"
   exit 1

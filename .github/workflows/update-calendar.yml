@@ -1,0 +1,46 @@
+name: Update calendar
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-calendar
+  cancel-in-progress: false
+
+env:
+  # Watchlist: comma-separated station names and line labels.
+  STATIONS: "Schöneweide"
+  LINES: "S85,S9"
+  DAYS: "14"
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build calendar
+        run: |
+          args=()
+          IFS=',' read -ra stations <<< "$STATIONS"
+          IFS=',' read -ra lines <<< "$LINES"
+          for s in "${stations[@]}"; do [ -n "$s" ] && args+=(--station "$(echo "$s" | xargs)"); done
+          for l in "${lines[@]}"; do [ -n "$l" ] && args+=(--line "$(echo "$l" | xargs)"); done
+          scripts/build-calendar.sh --output calendar.ics --days "$DAYS" "${args[@]}"
+
+      - name: Commit changes
+        run: |
+          if [ -z "$(git status --porcelain calendar.ics)" ]; then
+            echo "calendar.ics unchanged"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add calendar.ics
+          git commit -m "chore: update calendar"
+          git push
