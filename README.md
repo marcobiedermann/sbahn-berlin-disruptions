@@ -73,7 +73,6 @@ https://raw.githubusercontent.com/marcobiedermann/sbahn-berlin-disruptions/main/
 ## Run locally
 
 ```bash
-git clone https://github.com/<your-user>/<your-repo>.git && cd <your-repo>
 scripts/build-calendar.sh --output /tmp/feed.ics --station Schöneweide --line "Bus 160"
 ```
 
