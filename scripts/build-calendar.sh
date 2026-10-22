@@ -72,7 +72,7 @@ station_ids="$(jq -c --argjson queries "$queries" "$norm_def"'
 tmp="$(mktemp "$(dirname "$output")/.feed.XXXXXX")"
 trap 'rm -f "$tmp"' EXIT
 
-jq -j --argjson wanted "$wanted" --argjson stationIds "$station_ids" '
+TZ=Europe/Berlin jq -j --argjson wanted "$wanted" --argjson stationIds "$station_ids" '
   def esc: gsub("\\\\"; "\\\\") | gsub(";"; "\\;") | gsub(","; "\\,") | gsub("\n"; "\\n");
 
   # Folds a content line at 75 octets (RFC 5545), counting UTF-8 bytes.
@@ -86,6 +86,50 @@ jq -j --argjson wanted "$wanted" --argjson stationIds "$station_ids" '
     | (.out + [.cur | implode]) | join("\r\n ");
 
   def utc: gsub("[-:]"; "") | sub("\\+0000$"; "Z");
+
+  # Berlin wall-clock time of an API timestamp, as seconds since epoch read as if UTC.
+  # Plain arithmetic on it adds calendar days without DST jumps. Needs TZ=Europe/Berlin.
+  def wallclock: sub("\\+00:00$"; "Z") | fromdateiso8601 | localtime | mktime;
+  def local: gmtime | strftime("%Y%m%dT%H%M%S");
+
+  # One occurrence per day for a daily window: the window is the time of day of the period
+  # start and end, and the last window ends at the period end.
+  def occurrences:
+    if .p.type == "REPEATING_DAILY" then
+      (.p.dateStart | wallclock) as $s
+      | (.p.dateEnd | wallclock) as $e
+      | ($s % 86400) as $from
+      | ($e % 86400) as $to
+      | (if $to <= $from then 86400 else 0 end) as $wrap
+      | ($s - $from) as $firstDay
+      | (($e - $e % 86400 - $wrap - $firstDay) / 86400 | floor + 1) as $days
+      | if $days < 1 then {c, p, start: $s, end: $e}
+        else range(0; $days) as $k
+          | {c, p, start: ($firstDay + $k * 86400 + $from), end: ($firstDay + $k * 86400 + $to + $wrap)}
+        end
+    else
+      {c, p, start: (.p.dateStart | wallclock), end: (.p.dateEnd | wallclock)}
+    end;
+
+  def timezone: [
+    "BEGIN:VTIMEZONE",
+    "TZID:Europe/Berlin",
+    "BEGIN:DAYLIGHT",
+    "TZOFFSETFROM:+0100",
+    "TZOFFSETTO:+0200",
+    "TZNAME:CEST",
+    "DTSTART:19700329T020000",
+    "RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU",
+    "END:DAYLIGHT",
+    "BEGIN:STANDARD",
+    "TZOFFSETFROM:+0200",
+    "TZOFFSETTO:+0100",
+    "TZNAME:CET",
+    "DTSTART:19701025T030000",
+    "RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU",
+    "END:STANDARD",
+    "END:VTIMEZONE"
+  ];
 
   def effects: {
     NO_SERVICE: "Kein Zugverkehr",
@@ -105,22 +149,22 @@ jq -j --argjson wanted "$wanted" --argjson stationIds "$station_ids" '
           (([.lines[].title] | map(select(. as $t | $wanted | any(. == $t)))) | length > 0)
           or ($stationConsequenceIds | any(. == $c.id)))
       | .periods[]
-      | select(.type == "DEFAULT")
-      | {c: $c, p: .} ]
-  | sort_by([.p.dateStart, (.c.id | tonumber), (.p.id | tonumber)])
+      | {c: $c, p: .}
+      | occurrences ]
+  | sort_by([.start, (.c.id | tonumber), (.p.id | tonumber)])
   | map(
       .c as $c | .p as $p
       | ($c.lines | map(.title)) as $lineTitles
       | [$d.stations[] | select(.consequences | any(.id == $c.id)) | .title] as $stations
       | ($c.updated | utc) as $updated
-      | ($p.dateStart | utc) as $start
+      | (.start | local) as $start
       | ($c.title | gsub("<>"; "⇄") | gsub(">"; "→")) as $title
       | [
           "BEGIN:VEVENT",
           "UID:\($c.id)-\($p.id)-\($start[0:8])@sbahn-berlin-disruptions",
           "DTSTAMP:\($updated)",
-          "DTSTART:\($start)",
-          "DTEND:\($p.dateEnd | utc)",
+          "DTSTART;TZID=Europe/Berlin:\($start)",
+          "DTEND;TZID=Europe/Berlin:\(.end | local)",
           "SUMMARY:\(($lineTitles | join("/")) + " · " + $title + " · " + (effects[$c.effect] // $c.effect) | esc)",
           "DESCRIPTION:\(
             ([ "Zeitraum: \($p.title)",
@@ -139,6 +183,7 @@ jq -j --argjson wanted "$wanted" --argjson stationIds "$station_ids" '
        "CALSCALE:GREGORIAN",
        "METHOD:PUBLISH",
        "X-WR-CALNAME:S-Bahn Berlin Störungen" ]
+     + timezone
      + ($events | add // [])
      + [ "END:VCALENDAR" ])
   | .[] | fold + "\r\n"

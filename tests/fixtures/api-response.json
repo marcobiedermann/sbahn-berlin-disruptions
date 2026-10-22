@@ -94,11 +94,70 @@
           }
         ],
         "task": { "id": "3" }
+      },
+      {
+        "id": "400",
+        "type": "CONSTRUCTION_ACTIVITY",
+        "effect": "REPLACEMENT",
+        "score": 1,
+        "timeFrames": [],
+        "title": "Grünau <> Schöneweide",
+        "updated": "2026-10-21T09:00:00+00:00",
+        "periods": [
+          {
+            "id": "41",
+            "score": 1,
+            "title": "24.10 (Sa) bis 26.10 (Mo), täglich 08:00 - 16:00 Uhr",
+            "type": "REPEATING_DAILY",
+            "dateStart": "2026-10-24T06:00:00+00:00",
+            "dateEnd": "2026-10-26T15:00:00+00:00"
+          }
+        ],
+        "lines": [
+          {
+            "id": "17",
+            "t3Id": "18",
+            "title": "S85",
+            "link": "https://sbahn.berlin/fahren/s85/",
+            "direction": "LINEAR"
+          }
+        ],
+        "task": { "id": "4" }
+      },
+      {
+        "id": "500",
+        "type": "CONSTRUCTION_ACTIVITY",
+        "effect": "TACT_CHANGE",
+        "score": 1,
+        "timeFrames": [],
+        "title": "Baumschulenweg <> Spindlersfeld",
+        "updated": "2026-10-22T10:00:00+00:00",
+        "periods": [
+          {
+            "id": "51",
+            "score": 1,
+            "title": "03.11 (Di) bis 05.11 (Do), täglich 22:00 - 01:30 Uhr",
+            "type": "REPEATING_DAILY",
+            "dateStart": "2026-11-03T21:00:00+00:00",
+            "dateEnd": "2026-11-05T00:30:00+00:00"
+          }
+        ],
+        "lines": [
+          {
+            "id": "17",
+            "t3Id": "18",
+            "title": "S85",
+            "link": "https://sbahn.berlin/fahren/s85/",
+            "direction": "LINEAR"
+          }
+        ],
+        "task": { "id": "5" }
       }
     ],
     "lines": [
       { "id": "15", "t3Id": "15", "title": "S9", "link": "https://sbahn.berlin/fahren/s9/", "direction": "LINEAR" },
-      { "id": "16", "t3Id": "17", "title": "S26", "link": "https://sbahn.berlin/fahren/s26/", "direction": "LINEAR" }
+      { "id": "16", "t3Id": "17", "title": "S26", "link": "https://sbahn.berlin/fahren/s26/", "direction": "LINEAR" },
+      { "id": "17", "t3Id": "18", "title": "S85", "link": "https://sbahn.berlin/fahren/s85/", "direction": "LINEAR" }
     ],
     "stations": [
       {

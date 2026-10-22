@@ -61,6 +61,7 @@ case_no=0
 
 test_golden "line S9" line-s9 --line S9
 test_golden "lines S9 + S26" lines-s9-s26 --line S9 --line S26
+test_golden "daily windows, overnight end, DST change" line-s85-daily --line S85
 test_golden "station by name" station-schoeneweide --station Schöneweide
 test_golden "station with S prefix" station-schoeneweide --station "S Schöneweide"
 test_golden "station case-insensitive" station-schoeneweide --station SCHÖNEWEIDE

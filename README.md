@@ -6,7 +6,7 @@ Builds an iCalendar feed of S-Bahn Berlin disruptions (consequences) for the lin
 
 Disruptions come from the GraphQL API behind the [S-Bahn Berlin](https://sbahn.berlin/) website (`https://api.sbahn.berlin/construction-api/query`). It is an unofficial, undocumented API discovered via the browser's network tab, so it may change without notice.
 
-> Work in progress: so far the script reads a saved API response and supports stations, lines and continuous periods only. Daily repeating periods, the horizon, the live API fetch and the scheduled workflow are tracked in the open issues.
+> Work in progress: so far the script reads a saved API response and supports stations, lines, continuous periods and daily repeating windows. The horizon (`--days`), the live API fetch and the scheduled workflow are tracked in the open issues.
 
 ## Requirements
 
@@ -34,6 +34,12 @@ Example using the bundled fixture:
 ```bash
 scripts/build-calendar.sh --input tests/fixtures/api-response.json --output /tmp/feed.ics --station Schöneweide --line S9
 ```
+
+## Events
+
+- A continuous period becomes one event; a daily repeating period (e.g. "täglich 08:00 - 16:00") becomes one event per day. Overnight windows (22:00 - 01:30) end on the following day.
+- Times are Europe/Berlin local time (`TZID`), so daily windows keep their wall-clock time across the daylight saving change. The script sets `TZ` itself; your machine's time zone doesn't matter.
+- Summary: `S9 · Schöneweide ⇄ Flughafen BER · Ersatzverkehr`. The description has the period, lines, affected stations, line links and the last update. Events are marked as free.
 
 ## Tests
 
