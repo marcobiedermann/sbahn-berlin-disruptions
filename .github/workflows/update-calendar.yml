@@ -13,9 +13,9 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  # Watchlist: comma-separated station names and line labels.
+  # Watchlist: comma-separated station names and line labels (a station covers all its lines).
   STATIONS: "Schöneweide"
-  LINES: "S85,S9"
+  LINES: ""
   DAYS: "14"
 
 jobs:
