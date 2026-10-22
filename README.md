@@ -6,7 +6,7 @@ Builds an iCalendar feed of S-Bahn Berlin disruptions (consequences) for the lin
 
 Disruptions come from the GraphQL API behind the [S-Bahn Berlin](https://sbahn.berlin/) website (`https://api.sbahn.berlin/construction-api/query`). It is an unofficial, undocumented API discovered via the browser's network tab, so it may change without notice.
 
-Without `--input-sbahn-berlin` the script queries the live API (`--api-url-sbahn-berlin` overrides the endpoint). `--input-sbahn-berlin <file>` reads a saved response instead, which the tests use.
+Without `--input-sbahn-berlin` the script queries the live API (`--api-url-sbahn-berlin` overrides the endpoint). `--input-sbahn-berlin <file>` reads a saved response instead, which the tests use. BVG lines (bus, tram, U-Bahn) work the same way with `--api-url-bvg` and `--input-bvg`. An operator is only queried if the watchlist needs it; if any queried operator fails, the whole run fails and the existing feed is kept.
 
 ## Subscribing in Google Calendar
 
@@ -27,7 +27,7 @@ The repository must be public for this URL to work. Google refreshes subscribed 
 ## Usage
 
 ```bash
-scripts/build-calendar.sh --output <feed.ics> [--station <name> ...] [--line <label> ...] [--days <n>] [--now <timestamp>] [--input-sbahn-berlin <api-response.json>] [--api-url-sbahn-berlin <url>]
+scripts/build-calendar.sh --output <feed.ics> [--station <name> ...] [--line <label> ...] [--days <n>] [--now <timestamp>] [--input-sbahn-berlin <api-response.json>] [--input-bvg <bvg-response.json>] [--api-url-sbahn-berlin <url>] [--api-url-bvg <url>]
 ```
 
 | Flag        | Description                                                                    | Example                                    |
@@ -36,7 +36,9 @@ scripts/build-calendar.sh --output <feed.ics> [--station <name> ...] [--line <la
 | `--api-url-sbahn-berlin`| GraphQL endpoint to query when `--input-sbahn-berlin` is absent                             | `--api-url-sbahn-berlin https://api.sbahn.berlin/construction-api/query` |
 | `--output`  | Path of the `.ics` feed to write (required)                                    | `--output calendar.ics`                    |
 | `--station` | Station name; repeatable. At least one `--station` or `--line` is required     | `--station Schöneweide --station Westkreuz` |
-| `--line`    | Line label; repeatable                                                         | `--line S9 --line S85`                     |
+| `--input-bvg` | Saved BVG response (JSON); if omitted, the live BVG API is queried | `--input-bvg tests/fixtures/bvg-response.json` |
+| `--api-url-bvg` | BVG endpoint to query when `--input-bvg` is absent | `--api-url-bvg https://www.bvg.de/disruption-reports-service/disruptions/v1/de` |
+| `--line`    | Line label, case-insensitive; repeatable. `S9` (S-Bahn), `U2` (U-Bahn), `"Tram M10"`, `"Bus 160"` | `--line S9 --line "Bus 160" --line "Bus 163"` |
 | `--days`    | Horizon length in days from now (1 to 14, default `14`)                                 | `--days 7`                                 |
 | `--now`     | UTC timestamp to use as "now" (default: current time), for reproducible runs   | `--now 2026-10-22T12:00:00Z`               |
 
@@ -65,3 +67,6 @@ tests/run.sh
 To run it automatically before every commit (shellcheck + tests), enable the bundled hook once: `git config core.hooksPath .githooks`. CI runs the same checks on pull requests.
 
 The tests call the script through its command line with `tests/fixtures/api-response.json` and compare the output to the files in `tests/golden/` (after undoing line folding), and also check line length, CRLF endings, deterministic output and error handling.
+
+
+BVG disruptions without an end date become an all-day event on their start day. Only the BVG type `TRAFFIC` is used (elevator messages are ignored). Stations are S-Bahn only.
