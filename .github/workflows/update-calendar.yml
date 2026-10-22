@@ -15,7 +15,7 @@ concurrency:
 env:
   # Watchlist: comma-separated station names and line labels (a station covers all its lines).
   STATIONS: "Schöneweide"
-  LINES: ""
+  LINES: "" # comma-separated, e.g. "S9,U2,Tram M10,Bus 160"
   DAYS: "14"
 
 jobs:
