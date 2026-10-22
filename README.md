@@ -2,6 +2,27 @@
 
 Builds an iCalendar feed of public transport (ÖPNV) disruptions in Berlin for the stations and lines you care about, covering S-Bahn Berlin and BVG (bus, tram, U-Bahn), so you can subscribe to it in Google Calendar. See `GLOSSARY.md` for terminology.
 
+## How it works
+
+```mermaid
+flowchart LR
+    Cron["GitHub Actions scheduler<br/>every 30 min / manual dispatch"] --> WF["update-calendar.yml<br/>reads STATIONS, LINES, DAYS"]
+    WF --> Script["scripts/build-calendar.sh"]
+    SB[("S-Bahn Berlin<br/>GraphQL API")] -->|fetch| Script
+    BVG[("BVG disruption<br/>service")] -->|fetch| Script
+    Script -->|"filter by watchlist,<br/>transform to events"| ICS["calendar.ics"]
+    ICS -->|"commit only if changed"| Repo[("main branch")]
+    Repo -->|"static hosting<br/>raw.githubusercontent.com"| URL["Public .ics URL"]
+    URL -->|"subscribe, refreshed<br/>every few hours"| GCal["Google Calendar"]
+```
+
+1. **Scheduler:** a GitHub Actions workflow runs every 30 minutes (or on manual dispatch).
+2. **Fetch:** the script queries only the operators the watchlist needs (S-Bahn Berlin, BVG). If any query fails, the run fails and the existing feed is kept.
+3. **Transform:** consequences touching a watched station or line and overlapping the horizon become iCalendar events (see [Events](#events)).
+4. **Commit:** the workflow commits `calendar.ics` to `main` only when it changed.
+5. **Static hosting:** the file is served as-is from GitHub (`raw.githubusercontent.com`); there is no server.
+6. **Google Calendar:** subscribes to that URL and polls it on its own schedule.
+
 ## Data source
 
 Disruptions come from two operators:
@@ -13,17 +34,50 @@ Both are unofficial, undocumented APIs discovered via the browser's network tab,
 
 Without `--input-sbahn-berlin` the script queries the live API (`--api-url-sbahn-berlin` overrides the endpoint). `--input-sbahn-berlin <file>` reads a saved response instead, which the tests use. BVG lines (bus, tram, U-Bahn) work the same way with `--api-url-bvg` and `--input-bvg`. An operator is only queried if the watchlist needs it; if any queried operator fails, the whole run fails and the existing feed is kept.
 
+## Use it for your own stations and lines
+
+The watchlist is hardcoded in the workflow, so make it yours by forking:
+
+1. **Fork** this repository on GitHub. Keep it **public**, otherwise the raw URL below needs authentication and Google Calendar can't read it.
+2. **Edit the watchlist** in [`.github/workflows/update-calendar.yml`](.github/workflows/update-calendar.yml):
+
+   ```yaml
+   env:
+     STATIONS: "Schöneweide,Westkreuz" # S-Bahn stations, comma-separated
+     LINES: "S9,U2,Tram M10,Bus 160"   # line labels, comma-separated
+     DAYS: "14"                        # horizon in days, 1 to 14
+   ```
+
+   - Stations are S-Bahn only and matched by name (no `S ` prefix needed). Lines use labels like `S9`, `U2`, `Tram M10`, `Bus 160`. At least one station or line is required; the lists are combined (union).
+   - Try your values locally first (see [Usage](#usage)): the script reports unknown or ambiguous names and lists suggestions.
+3. **Enable Actions** in the fork's *Actions* tab (scheduled workflows are off in forks by default). Under *Settings → Actions → General → Workflow permissions* choose *Read and write permissions* so the workflow can push `calendar.ics`.
+4. **Run it once:** *Actions → Update calendar → Run workflow*. After that it runs every 30 minutes. Adjust the `cron` line in the workflow to change the frequency.
+5. **Subscribe** in Google Calendar (*Other calendars → From URL*) with your own URL:
+
+   ```
+   https://raw.githubusercontent.com/<your-user>/<your-repo>/main/calendar.ics
+   ```
+
+   Google refreshes subscribed calendars only every several hours, so updates are not instant. Other calendar apps that support `.ics` subscriptions work too.
+
+Don't edit `calendar.ics` by hand; the workflow overwrites it. Using a different branch than `main` means changing the branch in the URL.
+
 ## Subscribing in Google Calendar
 
-The workflow [`update-calendar.yml`](.github/workflows/update-calendar.yml) runs every 30 minutes (and on manual dispatch), rebuilds `calendar.ics` and commits it only when it changed. The watchlist lives in the workflow's `STATIONS`, `LINES` and `DAYS` env vars (comma-separated lists).
-
-In Google Calendar choose *Other calendars → From URL* and paste:
+For the original feed, choose *Other calendars → From URL* and paste:
 
 ```
 https://raw.githubusercontent.com/marcobiedermann/sbahn-berlin-disruptions/main/calendar.ics
 ```
 
-The repository must be public for this URL to work. Google refreshes subscribed calendars only every several hours, so updates are not instant.
+## Run locally
+
+```bash
+git clone https://github.com/<your-user>/<your-repo>.git && cd <your-repo>
+scripts/build-calendar.sh --output /tmp/feed.ics --station Schöneweide --line "Bus 160"
+```
+
+This queries the live APIs and writes the feed to `/tmp/feed.ics`; import it into any calendar app to inspect it. To work offline, use the bundled fixture (see [Usage](#usage)).
 
 ## Requirements
 
