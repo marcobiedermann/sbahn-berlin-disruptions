@@ -18,11 +18,11 @@ Disruptions come from the GraphQL API behind the [S-Bahn Berlin](https://sbahn.b
 scripts/build-calendar.sh --input <api-response.json> --output <feed.ics> --line S9 [--line S85 ...]
 ```
 
-| Flag       | Description                                                        |
-| ---------- | ------------------------------------------------------------------ |
-| `--input`  | Saved response of the S-Bahn Berlin GraphQL API (JSON, required)   |
-| `--output` | Path of the `.ics` feed to write (required)                        |
-| `--line`   | Line label such as `S9`; repeatable, at least one required         |
+| Flag       | Description                                                      | Example                                    |
+| ---------- | ---------------------------------------------------------------- | ------------------------------------------ |
+| `--input`  | Saved response of the S-Bahn Berlin GraphQL API (JSON, required) | `--input tests/fixtures/api-response.json` |
+| `--output` | Path of the `.ics` feed to write (required)                      | `--output calendar.ics`                    |
+| `--line`   | Line label; repeatable, at least one required                    | `--line S9 --line S85`                     |
 
 A consequence is included if it affects any given line. Unknown lines make the script exit non-zero and list the known lines; the existing output file is never overwritten on failure.
 
