@@ -23,7 +23,8 @@ test_golden() {
   local name="$1" golden_name="$2"
   shift 2
   local out="$tmp/case-$((++case_no)).ics"
-  if ! "$script" --input "$fixture" --output "$out" "$@" >/dev/null 2>&1; then
+  # A fixed clock and a wide horizon keep fixtures valid; cases override --now/--days where they test them.
+  if ! "$script" --input "$fixture" --output "$out" --now "$default_now" --days 365 "$@" >/dev/null 2>&1; then
     fail "$name: script exited non-zero"
     return
   fi
@@ -46,18 +47,20 @@ test_golden() {
 }
 
 # Runs the script expecting failure: non-zero exit, stderr contains $2, existing output untouched.
+# Uses $failing_input instead of the main fixture when set.
 test_fails() {
   local name="$1" expected="$2"
   shift 2
   echo "previous feed" >"$tmp/keep.ics"
   local err status=0
-  err="$("$script" --input "$fixture" --output "$tmp/keep.ics" "$@" 2>&1 >/dev/null)" || status=$?
+  err="$("$script" --input "${failing_input:-$fixture}" --output "$tmp/keep.ics" "$@" 2>&1 >/dev/null)" || status=$?
   if [ "$status" -ne 0 ]; then pass "$name: exits non-zero"; else fail "$name: exits non-zero"; fi
   case "$err" in *"$expected"*) pass "$name: message mentions '$expected'" ;; *) fail "$name: message mentions '$expected' (got: $err)" ;; esac
   if [ "$(cat "$tmp/keep.ics")" = "previous feed" ]; then pass "$name: output untouched"; else fail "$name: output untouched"; fi
 }
 
 case_no=0
+default_now="2026-10-22T12:00:00Z"
 
 test_golden "line S9" line-s9 --line S9
 test_golden "lines S9 + S26" lines-s9-s26 --line S9 --line S26
@@ -69,6 +72,14 @@ test_golden "station OR line" lines-s9-s26 --station Schöneweide --line S26
 test_golden "station and line match once" line-s9 --station Westkreuz --line S9
 test_golden "multiple stations" lines-s9-s26 --station Schöneweide --station Westkreuz --line S26
 
+# Horizon: occurrences overlapping [now, now + days] are kept in full, the rest are dropped.
+test_golden "--days 7 drops later occurrences" line-s85-days-7 --line S85 --days 7
+test_golden "past occurrences dropped, running one kept in full" line-s85-from-26-oct --line S85 --now 2026-10-26T12:00:00Z --days 14
+
+# Without --days the horizon is 14 days: the S26 outage on 10 Nov is out of range on 22 Oct.
+"$script" --input "$fixture" --output "$tmp/default.ics" --line S9 --line S26 --now "$default_now" >/dev/null 2>&1
+if diff <(unfold "$tmp/default.ics") "$golden/line-s9.ics" >/dev/null; then pass "default horizon is 14 days"; else fail "default horizon is 14 days"; fi
+
 # Identical input yields byte-identical output.
 "$script" --input "$fixture" --output "$tmp/a.ics" --line S9 >/dev/null 2>&1
 "$script" --input "$fixture" --output "$tmp/b.ics" --line S9 >/dev/null 2>&1
@@ -79,6 +90,12 @@ test_fails "unknown station" "unknown station" --station Nirgendwo
 test_fails "near-miss station suggests candidates" "S Schöneweide" --station Schöneweid
 test_fails "ambiguous station" "U Ostkreuz" --station Ostkreuz
 test_fails "no stations or lines" "--station or --line"
+
+failing_input="$root/tests/fixtures/malformed.json" test_fails "malformed JSON" "not a valid API response" --line S9
+failing_input="$root/tests/fixtures/graphql-errors.json" test_fails "GraphQL error response" "Internal server error" --line S9
+failing_input="$root/tests/fixtures/graphql-partial-errors.json" test_fails "GraphQL partial data with errors" "Station lookup failed" --station Schöneweide
+test_fails "invalid --days" "--days must be a positive integer" --line S9 --days 0
+test_fails "invalid --now" "--now must be" --line S9 --now yesterday
 
 if [ "$failures" -ne 0 ]; then
   echo "$failures failure(s)"

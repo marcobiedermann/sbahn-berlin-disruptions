@@ -13,6 +13,8 @@ input=""
 output=""
 lines=()
 stations=()
+days=14
+now=""
 
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -20,6 +22,8 @@ while [ $# -gt 0 ]; do
     --output) output="${2:?--output needs a value}"; shift 2 ;;
     --line) lines+=("${2:?--line needs a value}"); shift 2 ;;
     --station) stations+=("${2:?--station needs a value}"); shift 2 ;;
+    --days) days="${2:?--days needs a value}"; shift 2 ;;
+    --now) now="${2:?--now needs a value}"; shift 2 ;;
     *) die "unknown argument: $1" ;;
   esac
 done
@@ -29,9 +33,14 @@ command -v jq >/dev/null || die "jq is required"
 [ -n "$output" ] || die "--output is required"
 [ "$((${#lines[@]} + ${#stations[@]}))" -gt 0 ] || die "at least one --station or --line is required"
 [ -f "$input" ] || die "input file not found: $input"
+[[ "$days" =~ ^[1-9][0-9]*$ ]] || die "--days must be a positive integer, got: $days"
+[ -n "$now" ] || now="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+[[ "$now" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$ ]] || die "--now must be a UTC timestamp like 2026-10-22T12:00:00Z, got: $now"
 
-jq -e '.data.consequences | type == "array"' "$input" >/dev/null 2>&1 ||
-  die "input is not a valid API response (missing data.consequences)"
+if ! jq -e '((.errors // []) | length == 0) and (.data.consequences | type == "array")' "$input" >/dev/null 2>&1; then
+  api_error="$(jq -r '.errors[0].message? // empty' "$input" 2>/dev/null || true)"
+  die "input is not a valid API response${api_error:+: $api_error}"
+fi
 
 to_json_array() {
   if [ $# -eq 0 ]; then echo '[]'; else printf '%s\n' "$@" | jq -R . | jq -s -c .; fi
@@ -72,7 +81,7 @@ station_ids="$(jq -c --argjson queries "$queries" "$norm_def"'
 tmp="$(mktemp "$(dirname "$output")/.feed.XXXXXX")"
 trap 'rm -f "$tmp"' EXIT
 
-TZ=Europe/Berlin jq -j --argjson wanted "$wanted" --argjson stationIds "$station_ids" '
+TZ=Europe/Berlin jq -j --argjson wanted "$wanted" --argjson stationIds "$station_ids" --arg now "$now" --argjson days "$days" '
   def esc: gsub("\\\\"; "\\\\") | gsub(";"; "\\;") | gsub(","; "\\,") | gsub("\n"; "\\n");
 
   # Folds a content line at 75 octets (RFC 5545), counting UTF-8 bytes.
@@ -90,6 +99,7 @@ TZ=Europe/Berlin jq -j --argjson wanted "$wanted" --argjson stationIds "$station
   # Berlin wall-clock time of an API timestamp, as seconds since epoch read as if UTC.
   # Plain arithmetic on it adds calendar days without DST jumps. Needs TZ=Europe/Berlin.
   def wallclock: sub("\\+00:00$"; "Z") | fromdateiso8601 | localtime | mktime;
+  def wallclockAt($epoch): $epoch | localtime | mktime;
   def local: gmtime | strftime("%Y%m%dT%H%M%S");
 
   # One occurrence per day for a daily window: the window is the time of day of the period
@@ -142,6 +152,9 @@ TZ=Europe/Berlin jq -j --argjson wanted "$wanted" --argjson stationIds "$station
   };
 
   .data as $d
+  | ($now | fromdateiso8601) as $nowEpoch
+  | wallclockAt($nowEpoch) as $horizonStart
+  | wallclockAt($nowEpoch + $days * 86400) as $horizonEnd
   | [ $d.stations[] | select(.id as $i | $stationIds | any(. == $i)) | .consequences[].id ] as $stationConsequenceIds
   | [ $d.consequences[]
       | . as $c
@@ -150,7 +163,8 @@ TZ=Europe/Berlin jq -j --argjson wanted "$wanted" --argjson stationIds "$station
           or ($stationConsequenceIds | any(. == $c.id)))
       | .periods[]
       | {c: $c, p: .}
-      | occurrences ]
+      | occurrences
+      | select(.end > $horizonStart and .start < $horizonEnd) ]
   | sort_by([.start, (.c.id | tonumber), (.p.id | tonumber)])
   | map(
       .c as $c | .p as $p
