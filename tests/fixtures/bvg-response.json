@@ -9,7 +9,12 @@
         }
       ],
       "directionOne": "right",
-      "disruptionTypes": [{ "color": "default", "displayName": "Haltestelle verlegt" }],
+      "disruptionTypes": [
+        {
+          "color": "default",
+          "displayName": "Haltestelle verlegt"
+        }
+      ],
       "endDate": "2026-11-02T03:30:00+01:00",
       "hideTime": false,
       "id": "HIM_FREETEXT_357299",
@@ -17,18 +22,32 @@
       "lines": [
         {
           "bus": [
-            { "name": "160", "slug": "160", "lineType": 1, "isExternal": false },
-            { "name": "163", "slug": "163", "lineType": 1, "isExternal": false }
+            {
+              "name": "160",
+              "slug": "160",
+              "lineType": 1,
+              "isExternal": false
+            },
+            {
+              "name": "163",
+              "slug": "163",
+              "lineType": 1,
+              "isExternal": false
+            }
           ]
         }
       ],
-      "messageCategory": [1],
+      "messageCategory": [
+        1
+      ],
       "messageType": "TRAFFIC",
       "modDate": "2026-10-20T21:39:14.123+02:00",
       "scheduled": false,
       "showOnStartpage": false,
       "startDate": "2026-10-05T03:30:00+02:00",
-      "stationOne": { "displayName": "Hermann-Dorner-Allee" },
+      "stationOne": {
+        "displayName": "Hermann-Dorner-Allee"
+      },
       "firstLineLineType": 1
     },
     {
@@ -41,8 +60,14 @@
       ],
       "directionOne": "both",
       "disruptionTypes": [
-        { "color": "info", "displayName": "Umleitung" },
-        { "color": "info", "displayName": "Kein Halt" }
+        {
+          "color": "info",
+          "displayName": "Umleitung"
+        },
+        {
+          "color": "info",
+          "displayName": "Kein Halt"
+        }
       ],
       "endDate": "2026-10-23T16:00:00+02:00",
       "hideTime": false,
@@ -50,7 +75,14 @@
       "images": [],
       "lines": [
         {
-          "bus": [{ "name": "160", "slug": "160", "lineType": 1, "isExternal": false }]
+          "bus": [
+            {
+              "name": "160",
+              "slug": "160",
+              "lineType": 1,
+              "isExternal": false
+            }
+          ]
         }
       ],
       "messageType": "TRAFFIC",
@@ -58,8 +90,12 @@
       "scheduled": false,
       "showOnStartpage": false,
       "startDate": "2026-10-23T08:00:00+02:00",
-      "stationOne": { "displayName": "S+U Rathaus Neukölln" },
-      "stationTwo": { "displayName": "U Hermannplatz" },
+      "stationOne": {
+        "displayName": "S+U Rathaus Neukölln"
+      },
+      "stationTwo": {
+        "displayName": "U Hermannplatz"
+      },
       "firstLineLineType": 1
     },
     {
@@ -70,11 +106,25 @@
           "icon": "bds-alert-line"
         }
       ],
-      "disruptionTypes": [{ "color": "info", "displayName": "Umleitung" }],
+      "disruptionTypes": [
+        {
+          "color": "info",
+          "displayName": "Umleitung"
+        }
+      ],
       "endDate": "2026-10-25T18:00:00+02:00",
       "id": "HIM_FREETEXT_400002",
       "lines": [
-        { "bus": [{ "name": "200", "slug": "200", "lineType": 1, "isExternal": false }] }
+        {
+          "bus": [
+            {
+              "name": "200",
+              "slug": "200",
+              "lineType": 1,
+              "isExternal": false
+            }
+          ]
+        }
       ],
       "messageType": "TRAFFIC",
       "modDate": "2026-10-22T09:00:00+02:00",
@@ -89,11 +139,25 @@
           "icon": "bds-construction-site-line"
         }
       ],
-      "disruptionTypes": [{ "color": "info", "displayName": "Baustelle" }],
+      "disruptionTypes": [
+        {
+          "color": "info",
+          "displayName": "Baustelle"
+        }
+      ],
       "endDate": "2026-12-02T18:00:00+01:00",
       "id": "HIM_FREETEXT_400003",
       "lines": [
-        { "bus": [{ "name": "160", "slug": "160", "lineType": 1, "isExternal": false }] }
+        {
+          "bus": [
+            {
+              "name": "160",
+              "slug": "160",
+              "lineType": 1,
+              "isExternal": false
+            }
+          ]
+        }
       ],
       "messageType": "TRAFFIC",
       "modDate": "2026-10-01T09:00:00+02:00",
@@ -108,11 +172,25 @@
           "icon": "bds-alert-line"
         }
       ],
-      "disruptionTypes": [{ "color": "info", "displayName": "Umleitung" }],
+      "disruptionTypes": [
+        {
+          "color": "info",
+          "displayName": "Umleitung"
+        }
+      ],
       "endDate": "2026-10-20T18:00:00+02:00",
       "id": "HIM_FREETEXT_400004",
       "lines": [
-        { "bus": [{ "name": "160", "slug": "160", "lineType": 1, "isExternal": false }] }
+        {
+          "bus": [
+            {
+              "name": "160",
+              "slug": "160",
+              "lineType": 1,
+              "isExternal": false
+            }
+          ]
+        }
       ],
       "messageType": "TRAFFIC",
       "modDate": "2026-10-10T09:00:00+02:00",
@@ -127,18 +205,31 @@
           "icon": "bds-alert-line"
         }
       ],
-      "disruptionTypes": [{ "color": "info", "displayName": "Aufzug" }],
+      "disruptionTypes": [
+        {
+          "color": "info",
+          "displayName": "Aufzug"
+        }
+      ],
       "endDate": "2026-10-30T18:00:00+01:00",
       "id": "ELEVATOR_1",
       "lines": [
-        { "bus": [{ "name": "160", "slug": "160", "lineType": 1, "isExternal": false }] }
+        {
+          "bus": [
+            {
+              "name": "160",
+              "slug": "160",
+              "lineType": 1,
+              "isExternal": false
+            }
+          ]
+        }
       ],
       "messageType": "ELEVATOR",
       "modDate": "2026-10-10T09:00:00+02:00",
       "startDate": "2026-10-19T08:00:00+02:00",
       "firstLineLineType": 1
-    }
-    ,
+    },
     {
       "content": [
         {
@@ -147,19 +238,103 @@
           "icon": "bds-alert-line"
         }
       ],
-      "disruptionTypes": [{ "color": "default", "displayName": "Kein Halt" }],
+      "disruptionTypes": [
+        {
+          "color": "default",
+          "displayName": "Kein Halt"
+        }
+      ],
       "endDate": "2026-11-03T18:00:00+01:00",
       "id": "HIM_FREETEXT_400005",
       "lines": [
-        { "bus": [{ "name": "160", "slug": "160", "lineType": 1, "isExternal": false }] }
+        {
+          "bus": [
+            {
+              "name": "160",
+              "slug": "160",
+              "lineType": 1,
+              "isExternal": false
+            }
+          ]
+        }
       ],
       "messageType": "TRAFFIC",
       "modDate": "2026-10-21T09:00:00+02:00",
       "startDate": "2026-11-03T08:00:00+01:00",
       "firstLineLineType": 1
+    },
+    {
+      "content": [
+        {
+          "content": "<p>Bus 160: Haltestelle Hermann-Dorner-Allee dauerhaft verlegt.</p>",
+          "headline": "Haltestelle verlegt (unbefristet)",
+          "icon": "bds-alert-line"
+        }
+      ],
+      "disruptionTypes": [
+        {
+          "color": "default",
+          "displayName": "Haltestelle verlegt"
+        }
+      ],
+      "id": "HIM_FREETEXT_400006",
+      "lines": [
+        {
+          "bus": [
+            {
+              "name": "160",
+              "slug": "160",
+              "lineType": 1,
+              "isExternal": false
+            }
+          ]
+        }
+      ],
+      "messageType": "TRAFFIC",
+      "modDate": "2026-08-28T21:39:14+02:00",
+      "startDate": "2026-08-21T20:39:00+02:00",
+      "stationOne": {
+        "displayName": "Hermann-Dorner-Allee"
+      },
+      "firstLineLineType": 1
+    },
+    {
+      "content": [
+        {
+          "content": "<p>Bus 160: Ab Dezember.</p>",
+          "headline": "Zukünftig unbefristet",
+          "icon": "bds-alert-line"
+        }
+      ],
+      "disruptionTypes": [
+        {
+          "color": "default",
+          "displayName": "Baustelle"
+        }
+      ],
+      "id": "HIM_FREETEXT_400007",
+      "lines": [
+        {
+          "bus": [
+            {
+              "name": "160",
+              "slug": "160",
+              "lineType": 1,
+              "isExternal": false
+            }
+          ]
+        }
+      ],
+      "messageType": "TRAFFIC",
+      "modDate": "2026-10-01T09:00:00+02:00",
+      "startDate": "2026-12-05T08:00:00+01:00",
+      "stationOne": {
+        "displayName": "Hermann-Dorner-Allee"
+      },
+      "firstLineLineType": 1
     }
   ],
-  "numFound": 7,
+  "numFound": 9,
   "numPages": 1,
   "page": 1
 }

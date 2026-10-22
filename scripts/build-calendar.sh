@@ -285,7 +285,7 @@ TZ=Europe/Berlin jq -c --argjson wanted "$wanted" --argjson stationIds "$station
 ' "$input"
 }
 
-# BVG items carry offset timestamps and HTML bodies. Items without an end date are not yet supported.
+# BVG items carry offset timestamps, HTML bodies and often no end date.
 read -r -d '' jq_bvg <<'JQ' || true
   # UTC epoch of an offset timestamp like 2026-08-21T20:39:00+02:00 (fractions ignored).
   def epoch:
@@ -327,25 +327,25 @@ read -r -d '' jq_bvg <<'JQ' || true
   | wallclockAt($nowEpoch + $days * 86400) as $horizonEnd
   | ($wanted | map(ascii_upcase)) as $wantedUp
   | [ .elements[]
-      | select(.messageType == "TRAFFIC" and .endDate != null)
+      | select(.messageType == "TRAFFIC")
       | select(labels | any(ascii_upcase | . as $l | $wantedUp | any(. == $l)))
       | (.startDate | epoch | wallclockAt(.)) as $s
-      | (.endDate | epoch | wallclockAt(.)) as $e
-      | select($e > $horizonStart and $s < $horizonEnd)
+      | (if .endDate then (.endDate | epoch | wallclockAt(.)) else null end) as $e
+      | select(if $e then $e > $horizonStart and $s < $horizonEnd else $s < $horizonEnd end)
+      | (if $e then {start: $s, end: $e, allDay: false}
+         else ($s - $s % 86400) as $day | {start: $day, end: ($day + 86400), allDay: true} end) as $span
       | ((.modDate // .startDate) | epoch | todate | utc) as $updated
       | ([.content[]?.headline // empty] | first // "") as $headline
       | ([.disruptionTypes[]?.displayName] | map(select(. as $t | $headline | contains($t) | not))) as $types
       | ([.content[]?.content // empty | plain] | map(select(. != "")) | join("\n\n")) as $body
       | ([.stationOne.displayName?, .stationTwo.displayName?] | map(select(. != null and . != ""))) as $stations
-      | {
-          start: $s, end: $e,
-          allDay: false,
-          uid: "\(.id)-\($s | local | .[0:8])@sbahn-berlin-disruptions",
+      | $span + {
+          uid: "\(.id)-\($span.start | local | .[0:8])@sbahn-berlin-disruptions",
           dtstamp: $updated,
           summary: ([groupLabels | join(", "), $headline] + (if ($types | length) > 0 then [$types | join(", ")] else [] end) | map(select(. != "")) | join(" · ")),
           description:
             ([ $body,
-               "Zeitraum: \($s | clock) – \($e | clock)",
+               "Zeitraum: \($s | clock) – \(if $e then $e | clock else "unbefristet" end)",
                "Linien: \(labels | join(", "))" ]
              + (if ($stations | length) > 0 then ["Haltestelle: \($stations | join(", "))"] else [] end)
              + [ "Mehr: https://www.bvg.de/de/verbindungen/stoerungsmeldungen",

@@ -79,6 +79,7 @@ test_golden "BVG bus 160" bvg-bus-160 --line "Bus 160"
 test_golden "BVG bus 160 + 163 is one event for the shared item" bvg-bus-160-163 --line "Bus 160" --line "Bus 163"
 test_golden "BVG label is case-insensitive" bvg-bus-160 --line "bus 160"
 test_golden "S-Bahn and BVG in one feed" mixed-s9-bus-160 --line S9 --line "Bus 160"
+test_golden "BVG open-ended item is an all-day event on its start day" bvg-open-ended --line "Bus 160" --now 2026-10-22T12:00:00Z --days 1
 test_golden "BVG horizon drops items beyond it" bvg-bus-160-days-3 --line "Bus 160" --days 3
 
 # Horizon: occurrences overlapping [now, now + days] are kept in full, the rest are dropped.
