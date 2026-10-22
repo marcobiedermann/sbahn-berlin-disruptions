@@ -18,6 +18,7 @@ fetch_sbahn() {
   graphql_query='query Consequences($language: Language!) {
     consequences(language: $language) {
       id effect title updated
+      task { id }
       periods { id title type dateStart dateEnd }
       lines { id title link }
     }
@@ -144,6 +145,7 @@ build_sbahn_events() {
               ([ "Zeitraum: \($p.title)",
                  "Linien: \($lineTitles | join(", "))" ]
                + (if ($stations | length) > 0 then ["Bahnhöfe: \($stations | join(", "))"] else [] end)
+               + (if $c.task.id then ["Details: https://sbahn.berlin/fahren/bauen-stoerung/bauen/\($c.task.id)/auswirkung/\($c.id)/"] else [] end)
                + [ "Mehr: \($c.lines | map(.link) | join(", "))",
                    "Stand: \($updated | sub("^(?<d>[0-9]{4})(?<m>[0-9]{2})(?<day>[0-9]{2})T(?<h>[0-9]{2})(?<mi>[0-9]{2})(?<s>[0-9]{2})Z$"; "\(.d)-\(.m)-\(.day)T\(.h):\(.mi):\(.s)Z"))" ]
               ) | join("\n"),

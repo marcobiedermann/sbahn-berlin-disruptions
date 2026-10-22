@@ -54,7 +54,7 @@ DTSTAMP:20261020T080000Z
 DTSTART;TZID=Europe/Berlin:20261028T015000
 DTEND;TZID=Europe/Berlin:20261030T031500
 SUMMARY:S9/S26 · Spandau\, Ost\; Westkreuz bis Charlottenburg und weiter bis Hauptbahnhof · Besonderheit
-DESCRIPTION:Zeitraum: 28.10 (Mi) 02:50 Uhr bis 30.10 (Fr) 04:15 Uhr\nLinien: S9\, S26\nMehr: https://sbahn.berlin/fahren/s9/\, https://sbahn.berlin/fahren/s26/\nStand: 2026-10-20T08:00:00Z
+DESCRIPTION:Zeitraum: 28.10 (Mi) 02:50 Uhr bis 30.10 (Fr) 04:15 Uhr\nLinien: S9\, S26\nDetails: https://sbahn.berlin/fahren/bauen-stoerung/bauen/3/auswirkung/300/\nMehr: https://sbahn.berlin/fahren/s9/\, https://sbahn.berlin/fahren/s26/\nStand: 2026-10-20T08:00:00Z
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
@@ -63,7 +63,7 @@ DTSTAMP:20261015T103418Z
 DTSTART;TZID=Europe/Berlin:20261103T014500
 DTEND;TZID=Europe/Berlin:20261106T034000
 SUMMARY:S9 · Schöneweide ⇄ Flughafen BER · Ersatzverkehr
-DESCRIPTION:Zeitraum: 03.11 (Di) 01:45 Uhr bis 06.11 (Fr) 03:40 Uhr\nLinien: S9\nBahnhöfe: S Schöneweide\nMehr: https://sbahn.berlin/fahren/s9/\nStand: 2026-10-15T10:34:18Z
+DESCRIPTION:Zeitraum: 03.11 (Di) 01:45 Uhr bis 06.11 (Fr) 03:40 Uhr\nLinien: S9\nBahnhöfe: S Schöneweide\nDetails: https://sbahn.berlin/fahren/bauen-stoerung/bauen/1/auswirkung/100/\nMehr: https://sbahn.berlin/fahren/s9/\nStand: 2026-10-15T10:34:18Z
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
