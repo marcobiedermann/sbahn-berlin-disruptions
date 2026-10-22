@@ -1,0 +1,25 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sbahn-berlin-disruptions//DE
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:S-Bahn Berlin Störungen
+BEGIN:VEVENT
+UID:300-31-20261028@sbahn-berlin-disruptions
+DTSTAMP:20261020T080000Z
+DTSTART:20261028T005000Z
+DTEND:20261030T021500Z
+SUMMARY:S9/S26 · Spandau\, Ost\; Westkreuz bis Charlottenburg und weiter bis Hauptbahnhof · Besonderheit
+DESCRIPTION:Zeitraum: 28.10 (Mi) 02:50 Uhr bis 30.10 (Fr) 04:15 Uhr\nLinien: S9\, S26\nBahnhöfe: S Westkreuz\nMehr: https://sbahn.berlin/fahren/s9/\, https://sbahn.berlin/fahren/s26/\nStand: 2026-10-20T08:00:00Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:100-11-20261103@sbahn-berlin-disruptions
+DTSTAMP:20261015T103418Z
+DTSTART:20261103T004500Z
+DTEND:20261106T024000Z
+SUMMARY:S9 · Schöneweide ⇄ Flughafen BER · Ersatzverkehr
+DESCRIPTION:Zeitraum: 03.11 (Di) 01:45 Uhr bis 06.11 (Fr) 03:40 Uhr\nLinien: S9\nBahnhöfe: S Schöneweide\nMehr: https://sbahn.berlin/fahren/s9/\nStand: 2026-10-15T10:34:18Z
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR
