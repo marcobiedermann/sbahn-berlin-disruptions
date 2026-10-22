@@ -23,8 +23,8 @@ test_golden() {
   local name="$1" golden_name="$2"
   shift 2
   local out="$tmp/case-$((++case_no)).ics"
-  # A fixed clock and a wide horizon keep fixtures valid; cases override --now/--days where they test them.
-  if ! "$script" --input "$fixture" --output "$out" --now "$default_now" --days 365 "$@" >/dev/null 2>&1; then
+  # A fixed clock and the maximum horizon keep fixtures valid; cases override --now/--days where they test them.
+  if ! "$script" --input-sbahn-berlin "$fixture" --output "$out" --now "$default_now" --days 14 "$@" >/dev/null 2>&1; then
     fail "$name: script exited non-zero"
     return
   fi
@@ -53,7 +53,7 @@ test_fails() {
   shift 2
   echo "previous feed" >"$tmp/keep.ics"
   local err status=0
-  err="$("$script" --input "${failing_input:-$fixture}" --output "$tmp/keep.ics" "$@" 2>&1 >/dev/null)" || status=$?
+  err="$("$script" --input-sbahn-berlin "${failing_input:-$fixture}" --output "$tmp/keep.ics" "$@" 2>&1 >/dev/null)" || status=$?
   if [ "$status" -ne 0 ]; then pass "$name: exits non-zero"; else fail "$name: exits non-zero"; fi
   case "$err" in *"$expected"*) pass "$name: message mentions '$expected'" ;; *) fail "$name: message mentions '$expected' (got: $err)" ;; esac
   if [ "$(cat "$tmp/keep.ics")" = "previous feed" ]; then pass "$name: output untouched"; else fail "$name: output untouched"; fi
@@ -63,26 +63,26 @@ case_no=0
 default_now="2026-10-22T12:00:00Z"
 
 test_golden "line S9" line-s9 --line S9
-test_golden "lines S9 + S26" lines-s9-s26 --line S9 --line S26
+test_golden "lines S9 + S26" lines-s9-s26 --line S9 --line S26 --now 2026-10-28T12:00:00Z
 test_golden "daily windows, overnight end, DST change" line-s85-daily --line S85
 test_golden "station by name" station-schoeneweide --station Schöneweide
 test_golden "station with S prefix" station-schoeneweide --station "S Schöneweide"
 test_golden "station case-insensitive" station-schoeneweide --station SCHÖNEWEIDE
-test_golden "station OR line" lines-s9-s26 --station Schöneweide --line S26
+test_golden "station OR line" lines-s9-s26 --station Schöneweide --line S26 --now 2026-10-28T12:00:00Z
 test_golden "station and line match once" line-s9 --station Westkreuz --line S9
-test_golden "multiple stations" lines-s9-s26 --station Schöneweide --station Westkreuz --line S26
+test_golden "multiple stations" lines-s9-s26 --station Schöneweide --station Westkreuz --line S26 --now 2026-10-28T12:00:00Z
 
 # Horizon: occurrences overlapping [now, now + days] are kept in full, the rest are dropped.
 test_golden "--days 7 drops later occurrences" line-s85-days-7 --line S85 --days 7
 test_golden "past occurrences dropped, running one kept in full" line-s85-from-26-oct --line S85 --now 2026-10-26T12:00:00Z --days 14
 
 # Without --days the horizon is 14 days: the S26 outage on 10 Nov is out of range on 22 Oct.
-"$script" --input "$fixture" --output "$tmp/default.ics" --line S9 --line S26 --now "$default_now" >/dev/null 2>&1
+"$script" --input-sbahn-berlin "$fixture" --output "$tmp/default.ics" --line S9 --line S26 --now "$default_now" >/dev/null 2>&1
 if diff <(unfold "$tmp/default.ics") "$golden/line-s9.ics" >/dev/null; then pass "default horizon is 14 days"; else fail "default horizon is 14 days"; fi
 
 # Identical input yields byte-identical output.
-"$script" --input "$fixture" --output "$tmp/a.ics" --line S9 >/dev/null 2>&1
-"$script" --input "$fixture" --output "$tmp/b.ics" --line S9 >/dev/null 2>&1
+"$script" --input-sbahn-berlin "$fixture" --output "$tmp/a.ics" --line S9 >/dev/null 2>&1
+"$script" --input-sbahn-berlin "$fixture" --output "$tmp/b.ics" --line S9 >/dev/null 2>&1
 if cmp -s "$tmp/a.ics" "$tmp/b.ics"; then pass "deterministic output"; else fail "deterministic output"; fi
 
 test_fails "unknown line" "Known lines: S9, S26" --line S99
@@ -94,15 +94,18 @@ test_fails "no stations or lines" "--station or --line"
 failing_input="$root/tests/fixtures/malformed.json" test_fails "malformed JSON" "not a valid API response" --line S9
 failing_input="$root/tests/fixtures/graphql-errors.json" test_fails "GraphQL error response" "Internal server error" --line S9
 failing_input="$root/tests/fixtures/graphql-partial-errors.json" test_fails "GraphQL partial data with errors" "Station lookup failed" --station Schöneweide
-test_fails "invalid --days" "--days must be a positive integer" --line S9 --days 0
+test_fails "invalid --days" "--days must be an integer from 1 to 14" --line S9 --days 0
+test_fails "--days above 14" "--days must be an integer from 1 to 14" --line S9 --days 15
+test_fails "old --input flag is gone" "unknown argument: --input" --line S9 --input "$fixture"
+test_fails "old --api-url flag is gone" "unknown argument: --api-url" --line S9 --api-url "file://$fixture"
 test_fails "invalid --now" "--now must be" --line S9 --now yesterday
 
 # Without --input the script fetches the API; a file:// URL stands in for the endpoint.
-"$script" --output "$tmp/fetched.ics" --api-url "file://$fixture" --now "$default_now" --days 365 --line S9 >/dev/null 2>&1
+"$script" --output "$tmp/fetched.ics" --api-url-sbahn-berlin "file://$fixture" --now "$default_now" --days 14 --line S9 >/dev/null 2>&1
 if diff <(unfold "$tmp/fetched.ics") "$golden/line-s9.ics" >/dev/null; then pass "fetches API when --input is absent"; else fail "fetches API when --input is absent"; fi
 
 echo "previous feed" >"$tmp/keep.ics"
-err="$("$script" --output "$tmp/keep.ics" --api-url "file://$tmp/missing.json" --line S9 2>&1 >/dev/null)" && status=0 || status=$?
+err="$("$script" --output "$tmp/keep.ics" --api-url-sbahn-berlin "file://$tmp/missing.json" --line S9 2>&1 >/dev/null)" && status=0 || status=$?
 if [ "$status" -ne 0 ]; then pass "failed fetch exits non-zero"; else fail "failed fetch exits non-zero"; fi
 case "$err" in *"could not fetch"*) pass "failed fetch explains itself" ;; *) fail "failed fetch explains itself (got: $err)" ;; esac
 if [ "$(cat "$tmp/keep.ics")" = "previous feed" ]; then pass "failed fetch leaves output untouched"; else fail "failed fetch leaves output untouched"; fi

@@ -1,11 +1,15 @@
 # S-Bahn Berlin Disruptions
 
-A personal, statically hosted calendar feed of S-Bahn Berlin disruptions that affect chosen stations and lines, subscribed to from Google Calendar.
+A personal, statically hosted calendar feed of Berlin public transport disruptions (S-Bahn Berlin and BVG) that affect chosen stations and lines, subscribed to from Google Calendar.
 
 ## Language
 
+**Operator**:
+A transport company that publishes consequences: S-Bahn Berlin (S-Bahn) or BVG (U-Bahn, Tram, Bus).
+_Avoid_: Provider, agency
+
 **Consequence**:
-A single disruption announcement published by S-Bahn Berlin, with an effect, affected lines, and one or more periods.
+A single disruption announcement published by an operator, with an effect, affected lines, and one or more periods.
 _Avoid_: Disruption (as a data term), incident, alert
 
 **Effect**:
@@ -29,7 +33,7 @@ An S-Bahn stop, identified by the user via its name (e.g. "Schöneweide"), not a
 _Avoid_: Stop, Bahnhof
 
 **Line**:
-An S-Bahn route, identified by its label (e.g. "S9").
+A route of any mode, identified by its label (e.g. "S9", "U2", "Tram M10", "Bus 160"). Bus and tram labels carry a mode prefix because their bare names collide.
 _Avoid_: Route
 
 **Watchlist**:
