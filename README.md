@@ -22,7 +22,7 @@ The repository must be public for this URL to work. Google refreshes subscribed 
 
 ## Requirements
 
-`bash`, `jq` and `perl` (tests only). Nothing else.
+`bash`, `curl` and `jq` to run the script. `perl` and [`shellcheck`](https://www.shellcheck.net/) (e.g. `brew install shellcheck`) for the tests and the pre-commit hook. Nothing else.
 
 ## Usage
 
@@ -61,5 +61,7 @@ scripts/build-calendar.sh --input tests/fixtures/api-response.json --output /tmp
 ```bash
 tests/run.sh
 ```
+
+To run it automatically before every commit (shellcheck + tests), enable the bundled hook once: `git config core.hooksPath .githooks`. CI runs the same checks on pull requests.
 
 The tests call the script through its command line with `tests/fixtures/api-response.json` and compare the output to the files in `tests/golden/` (after undoing line folding), and also check line length, CRLF endings, deterministic output and error handling.
