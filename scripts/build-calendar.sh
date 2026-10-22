@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
-# Builds an iCalendar feed of S-Bahn Berlin consequences for stations and lines.
+# Builds an iCalendar feed of consequences for stations and lines.
 #
 # Usage: build-calendar.sh --output <feed.ics> [--station <name> ...] [--line <label> ...]
-#                          [--days <n>] [--now <timestamp>] [--input <api-response.json>]
-# Without --input the S-Bahn Berlin GraphQL API is queried (--api-url overrides the endpoint).
+#                          [--days <n>] [--now <timestamp>] [--input-sbahn-berlin <api-response.json>]
+# Without --input-sbahn-berlin the S-Bahn Berlin GraphQL API is queried
+# (--api-url-sbahn-berlin overrides the endpoint). --days accepts 1 to 14.
 set -euo pipefail
 
 die() {
@@ -17,20 +18,20 @@ lines=()
 stations=()
 days=14
 now=""
-api_url="https://api.sbahn.berlin/construction-api/query"
+api_url_sbahn="https://api.sbahn.berlin/construction-api/query"
 fetched=""
 tmp=""
 trap 'rm -f "$fetched" "$tmp"' EXIT
 
 while [ $# -gt 0 ]; do
   case "$1" in
-    --input) input="${2:?--input needs a value}"; shift 2 ;;
+    --input-sbahn-berlin) input="${2:?--input-sbahn-berlin needs a value}"; shift 2 ;;
     --output) output="${2:?--output needs a value}"; shift 2 ;;
     --line) lines+=("${2:?--line needs a value}"); shift 2 ;;
     --station) stations+=("${2:?--station needs a value}"); shift 2 ;;
     --days) days="${2:?--days needs a value}"; shift 2 ;;
     --now) now="${2:?--now needs a value}"; shift 2 ;;
-    --api-url) api_url="${2:?--api-url needs a value}"; shift 2 ;;
+    --api-url-sbahn-berlin) api_url_sbahn="${2:?--api-url-sbahn-berlin needs a value}"; shift 2 ;;
     *) die "unknown argument: $1" ;;
   esac
 done
@@ -39,7 +40,7 @@ command -v jq >/dev/null || die "jq is required"
 [ -n "$output" ] || die "--output is required"
 [ "$((${#lines[@]} + ${#stations[@]}))" -gt 0 ] || die "at least one --station or --line is required"
 [ -z "$input" ] || [ -f "$input" ] || die "input file not found: $input"
-[[ "$days" =~ ^[1-9][0-9]*$ ]] || die "--days must be a positive integer, got: $days"
+[[ "$days" =~ ^[1-9][0-9]*$ ]] && [ "$days" -le 14 ] || die "--days must be an integer from 1 to 14, got: $days"
 [ -n "$now" ] || now="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 [[ "$now" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$ ]] || die "--now must be a UTC timestamp like 2026-10-22T12:00:00Z, got: $now"
 
@@ -58,14 +59,14 @@ if [ -z "$input" ]; then
   request="$(jq -n -c --arg query "$graphql_query" '{query: $query, variables: {language: "GERMAN"}}')"
   fetched="$(mktemp)"
   curl --silent --show-error --fail --location --max-time 30 --retry 2 --retry-delay 5 \
-    --request POST "$api_url" \
+    --request POST "$api_url_sbahn" \
     --header 'content-type: application/json' \
     --header 'accept: application/json' \
     --header 'origin: https://sbahn.berlin' \
     --header 'referer: https://sbahn.berlin/' \
     --header 'user-agent: Mozilla/5.0 (compatible; sbahn-berlin-disruptions)' \
     --data "$request" \
-    --output "$fetched" || die "could not fetch $api_url"
+    --output "$fetched" || die "could not fetch $api_url_sbahn"
   input="$fetched"
 fi
 if ! jq -e '((.errors // []) | length == 0) and (.data.consequences | type == "array")' "$input" >/dev/null 2>&1; then
@@ -109,9 +110,10 @@ station_ids="$(jq -c --argjson queries "$queries" "$norm_def"'
   | [.data.stations[] | select(.title | norm | . as $t | $names | any(. == $t)) | .id]
 ' "$input")"
 
-tmp="$(mktemp "$(dirname "$output")/.feed.XXXXXX")"
-
-TZ=Europe/Berlin jq -j --argjson wanted "$wanted" --argjson stationIds "$station_ids" --arg now "$now" --argjson days "$days" '
+# jq definitions shared by the event builders and the renderer. Needs TZ=Europe/Berlin.
+# Builders emit events {start, end, allDay, uid, dtstamp, summary, description, order};
+# start/end are Berlin wall-clock seconds (see wallclock).
+read -r -d '' jq_common <<'JQ' || true
   def esc: gsub("\\\\"; "\\\\") | gsub(";"; "\\;") | gsub(","; "\\,") | gsub("\n"; "\\n");
 
   # Folds a content line at 75 octets (RFC 5545), counting UTF-8 bytes.
@@ -132,25 +134,6 @@ TZ=Europe/Berlin jq -j --argjson wanted "$wanted" --argjson stationIds "$station
   def wallclockAt($epoch): $epoch | localtime | mktime;
   def local: gmtime | strftime("%Y%m%dT%H%M%S");
 
-  # One occurrence per day for a daily window: the window is the time of day of the period
-  # start and end, and the last window ends at the period end.
-  def occurrences:
-    if .p.type == "REPEATING_DAILY" then
-      (.p.dateStart | wallclock) as $s
-      | (.p.dateEnd | wallclock) as $e
-      | ($s % 86400) as $from
-      | ($e % 86400) as $to
-      | (if $to <= $from then 86400 else 0 end) as $wrap
-      | ($s - $from) as $firstDay
-      | (($e - $e % 86400 - $wrap - $firstDay) / 86400 | floor + 1) as $days
-      | if $days < 1 then {c, p, start: $s, end: $e}
-        else range(0; $days) as $k
-          | {c, p, start: ($firstDay + $k * 86400 + $from), end: ($firstDay + $k * 86400 + $to + $wrap)}
-        end
-    else
-      {c, p, start: (.p.dateStart | wallclock), end: (.p.dateEnd | wallclock)}
-    end;
-
   def timezone: [
     "BEGIN:VTIMEZONE",
     "TZID:Europe/Berlin",
@@ -170,6 +153,57 @@ TZ=Europe/Berlin jq -j --argjson wanted "$wanted" --argjson stationIds "$station
     "END:STANDARD",
     "END:VTIMEZONE"
   ];
+JQ
+
+read -r -d '' jq_render <<'JQ' || true
+  def stamp: if .allDay
+    then "DTSTART;VALUE=DATE:\(.start | local | .[0:8])", "DTEND;VALUE=DATE:\(.end | local | .[0:8])"
+    else "DTSTART;TZID=Europe/Berlin:\(.start | local)", "DTEND;TZID=Europe/Berlin:\(.end | local)"
+    end;
+
+  sort_by([.start, .order])
+  | map([
+      "BEGIN:VEVENT",
+      "UID:\(.uid)",
+      "DTSTAMP:\(.dtstamp)",
+      stamp,
+      "SUMMARY:\(.summary | esc)",
+      "DESCRIPTION:\(.description | esc)",
+      "TRANSP:TRANSPARENT",
+      "END:VEVENT"
+    ]) as $events
+  | ([ "BEGIN:VCALENDAR",
+       "VERSION:2.0",
+       "PRODID:-//sbahn-berlin-disruptions//DE",
+       "CALSCALE:GREGORIAN",
+       "METHOD:PUBLISH",
+       "X-WR-CALNAME:Berlin ÖPNV Störungen" ]
+     + timezone
+     + ($events | add // [])
+     + [ "END:VCALENDAR" ])
+  | .[] | fold + "\r\n"
+JQ
+
+sbahn_events="$(TZ=Europe/Berlin jq -c --argjson wanted "$wanted" --argjson stationIds "$station_ids" --arg now "$now" --argjson days "$days" "$jq_common"'
+  # One occurrence per day for a daily window: the window is the time of day of the period
+  # start and end, and the last window ends at the period end.
+  def occurrences:
+    if .p.type == "REPEATING_DAILY" then
+      (.p.dateStart | wallclock) as $s
+      | (.p.dateEnd | wallclock) as $e
+      | ($s % 86400) as $from
+      | ($e % 86400) as $to
+      | (if $to <= $from then 86400 else 0 end) as $wrap
+      | ($s - $from) as $firstDay
+      | (($e - $e % 86400 - $wrap - $firstDay) / 86400 | floor + 1) as $days
+      | if $days < 1 then {c, p, start: $s, end: $e}
+        else range(0; $days) as $k
+          | {c, p, start: ($firstDay + $k * 86400 + $from), end: ($firstDay + $k * 86400 + $to + $wrap)}
+        end
+    else
+      {c, p, start: (.p.dateStart | wallclock), end: (.p.dateEnd | wallclock)}
+    end;
+
 
   def effects: {
     NO_SERVICE: "Kein Zugverkehr",
@@ -195,7 +229,6 @@ TZ=Europe/Berlin jq -j --argjson wanted "$wanted" --argjson stationIds "$station
       | {c: $c, p: .}
       | occurrences
       | select(.end > $horizonStart and .start < $horizonEnd) ]
-  | sort_by([.start, (.c.id | tonumber), (.p.id | tonumber)])
   | map(
       .c as $c | .p as $p
       | ($c.lines | map(.title)) as $lineTitles
@@ -203,34 +236,25 @@ TZ=Europe/Berlin jq -j --argjson wanted "$wanted" --argjson stationIds "$station
       | ($c.updated | utc) as $updated
       | (.start | local) as $start
       | ($c.title | gsub("<>"; "⇄") | gsub(">"; "→")) as $title
-      | [
-          "BEGIN:VEVENT",
-          "UID:\($c.id)-\($p.id)-\($start[0:8])@sbahn-berlin-disruptions",
-          "DTSTAMP:\($updated)",
-          "DTSTART;TZID=Europe/Berlin:\($start)",
-          "DTEND;TZID=Europe/Berlin:\(.end | local)",
-          "SUMMARY:\(($lineTitles | join("/")) + " · " + $title + " · " + (effects[$c.effect] // $c.effect) | esc)",
-          "DESCRIPTION:\(
+      | {
+          start: .start, end: .end,
+          allDay: false,
+          uid: "\($c.id)-\($p.id)-\($start[0:8])@sbahn-berlin-disruptions",
+          dtstamp: $updated,
+          summary: (($lineTitles | join("/")) + " · " + $title + " · " + (effects[$c.effect] // $c.effect)),
+          description:
             ([ "Zeitraum: \($p.title)",
                "Linien: \($lineTitles | join(", "))" ]
              + (if ($stations | length) > 0 then ["Bahnhöfe: \($stations | join(", "))"] else [] end)
              + [ "Mehr: \($c.lines | map(.link) | join(", "))",
                  "Stand: \($updated | sub("^(?<d>[0-9]{4})(?<m>[0-9]{2})(?<day>[0-9]{2})T(?<h>[0-9]{2})(?<mi>[0-9]{2})(?<s>[0-9]{2})Z$"; "\(.d)-\(.m)-\(.day)T\(.h):\(.mi):\(.s)Z"))" ]
-            ) | join("\n") | esc)",
-          "TRANSP:TRANSPARENT",
-          "END:VEVENT"
-        ]
-    ) as $events
-  | ([ "BEGIN:VCALENDAR",
-       "VERSION:2.0",
-       "PRODID:-//sbahn-berlin-disruptions//DE",
-       "CALSCALE:GREGORIAN",
-       "METHOD:PUBLISH",
-       "X-WR-CALNAME:S-Bahn Berlin Störungen" ]
-     + timezone
-     + ($events | add // [])
-     + [ "END:VCALENDAR" ])
-  | .[] | fold + "\r\n"
-' "$input" >"$tmp"
+            ) | join("\n"),
+          order: [0, ($c.id | tonumber), ($p.id | tonumber)]
+        }
+    )
+' "$input")"
+
+tmp="$(mktemp "$(dirname "$output")/.feed.XXXXXX")"
+TZ=Europe/Berlin jq -n -j --argjson events "$sbahn_events" "$jq_common"'$events | '"$jq_render" >"$tmp"
 
 mv "$tmp" "$output"
