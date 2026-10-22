@@ -24,7 +24,7 @@ scripts/build-calendar.sh --input <api-response.json> --output <feed.ics> --line
 | `--output` | Path of the `.ics` feed to write (required)                      | `--output calendar.ics`                    |
 | `--line`   | Line label; repeatable, at least one required                    | `--line S9 --line S85`                     |
 
-A consequence is included if it affects any given line. Unknown lines make the script exit non-zero and list the known lines; the existing output file is never overwritten on failure.
+A consequence is included if it affects any given line. You can pass multiple lines by repeating `--line`; multiple stations will work the same way with `--station` once it lands (#3), matching consequences for any station or any line. Unknown lines make the script exit non-zero and list the known lines; the existing output file is never overwritten on failure.
 
 Example using the bundled fixture:
 
