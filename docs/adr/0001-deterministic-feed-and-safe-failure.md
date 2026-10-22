@@ -7,7 +7,7 @@ The **Feed** is committed by a cron workflow, so three choices keep it stable an
 Unchanged data yields a byte-identical file, so the workflow commits only real changes.
 
 - `DTSTAMP` is the **Consequence**'s `updated` value, never the run time.
-- `UID` is `<consequenceId>-<periodId>-<localdate>@sbahn-berlin-disruptions`, so Google updates events instead of duplicating them.
+- `UID` is `<consequenceId>-<periodId>-<localdate>@sbahn-berlin-disruptions`, so Google updates events instead of duplicating them. BVG events use `<bvgId>-<localdate>@…` (see ADR 0002).
 - Events that vanish from the API vanish from the **Feed**; it mirrors the current state.
 
 ## Wall-clock expansion

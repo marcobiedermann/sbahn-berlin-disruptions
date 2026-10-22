@@ -67,6 +67,10 @@ test_golden "line S9" line-s9 --line S9
 test_golden "S-Bahn label is case-insensitive" line-s9 --line s9
 test_golden "lines S9 + S26" lines-s9-s26 --line S9 --line S26 --now 2026-10-28T12:00:00Z
 test_golden "daily windows, overnight end, DST change" line-s85-daily --line S85
+# The live API now sends +02:00 offsets; the same instants must give the same feed.
+offset_fixture="$root/tests/fixtures/api-response-offset.json"
+test_golden "S-Bahn timestamps with +02:00 offsets" line-s9 --line S9 --input-sbahn-berlin "$offset_fixture"
+test_golden "S-Bahn daily windows with +02:00 offsets" line-s85-daily --line S85 --input-sbahn-berlin "$offset_fixture"
 test_golden "station by name" station-schoeneweide --station Schöneweide
 test_golden "station with S prefix" station-schoeneweide --station "S Schöneweide"
 test_golden "station case-insensitive" station-schoeneweide --station SCHÖNEWEIDE

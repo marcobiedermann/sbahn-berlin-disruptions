@@ -1,4 +1,4 @@
-# S-Bahn Berlin Disruptions
+# Berlin ÖPNV Disruptions
 
 A personal, statically hosted calendar feed of Berlin public transport disruptions (S-Bahn Berlin and BVG) that affect chosen stations and lines, subscribed to from Google Calendar.
 
@@ -21,7 +21,7 @@ A span of time during which a consequence applies; either one continuous span or
 _Avoid_: Interval, timeframe
 
 **Daily window**:
-The recurring time-of-day range of a repeating period (e.g. 08:00 - 16:00), occurring on each day of its date range. If the end time of day is not later than the start, the window ends the next day; the last window ends at the period's `dateEnd`.
+The recurring time-of-day range of a repeating S-Bahn Berlin period (e.g. 08:00 - 16:00), occurring on each day of its date range. If the end time of day is not later than the start, the window ends the next day; the last window ends at the period's `dateEnd`.
 _Avoid_: Recurrence
 
 **Occurrence**:
@@ -29,7 +29,7 @@ One concrete calendar event: a continuous period, or a single day of a daily win
 _Avoid_: Instance, entry
 
 **Station**:
-An S-Bahn stop, identified by the user via its name (e.g. "Schöneweide"), not an internal ID. Resolved by exact match on the title without its `S `/`S+U `/`U ` prefix; zero or several matches is an error.
+An S-Bahn Berlin stop (BVG stops are not supported), identified by the user via its name (e.g. "Schöneweide"), not an internal ID. Resolved by exact match on the title without its `S `/`S+U `/`U ` prefix; zero or several matches is an error.
 _Avoid_: Stop, Bahnhof
 
 **Line**:

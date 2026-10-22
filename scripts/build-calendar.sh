@@ -7,6 +7,14 @@
 # Lines: S9 (S-Bahn Berlin); U2, "Tram M10", "Bus 160" (BVG). Stations are S-Bahn Berlin only.
 # Without --input-sbahn-berlin the S-Bahn Berlin GraphQL API is queried
 # (--api-url-sbahn-berlin and --api-url-bvg override the endpoints). --days accepts 1 to 14.
+#
+# Sections, in file order:
+#   argument parsing and validation  -> then "Route each line" (label -> operator)
+#   jq_common    shared jq defs: timestamps (epoch, wallclock), ICS escaping and folding
+#   jq_render    events -> ICS text
+#   build_sbahn_events()  S-Bahn Berlin fetch + jq builder (GraphQL, periods, stations)
+#   jq_bvg       BVG builder (HTML-to-text, lines per mode, open-ended items)
+#   fetch_bvg()  BVG paging; orchestration at the bottom merges both operators' events
 set -euo pipefail
 
 die() {
@@ -53,7 +61,6 @@ command -v jq >/dev/null || die "jq is required"
 [ -n "$now" ] || now="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 [[ "$now" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$ ]] || die "--now must be a UTC timestamp like 2026-10-22T12:00:00Z, got: $now"
 
-
 # Route each line to its operator by label. BVG labels are canonicalised ("bus 160" -> "Bus 160").
 sbahn_lines=()
 bvg_lines=()
@@ -91,11 +98,19 @@ read -r -d '' jq_common <<'JQ' || true
         end)
     | (.out + [.cur | implode]) | join("\r\n ");
 
-  def utc: gsub("[-:]"; "") | sub("\\+0000$"; "Z");
+  # UTC epoch of an offset timestamp like 2026-08-21T20:39:00+02:00 (fractions ignored). Both operators send offsets, e.g. +00:00 or +02:00.
+  def epoch:
+    capture("^(?<dt>[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2})(\\.[0-9]+)?(?<z>Z|[+-][0-9]{2}:[0-9]{2})$") as $m
+    | ($m.dt + "Z" | fromdateiso8601)
+      - (if $m.z == "Z" then 0
+         else (if $m.z[0:1] == "-" then -1 else 1 end) * (($m.z[1:3] | tonumber) * 3600 + ($m.z[4:6] | tonumber) * 60)
+         end);
+
+  def utc: epoch | todate | gsub("[-:]"; "");
 
   # Berlin wall-clock time of an API timestamp, as seconds since epoch read as if UTC.
   # Plain arithmetic on it adds calendar days without DST jumps. Needs TZ=Europe/Berlin.
-  def wallclock: sub("\\+00:00$"; "Z") | fromdateiso8601 | localtime | mktime;
+  def wallclock: epoch | localtime | mktime;
   def wallclockAt($epoch): $epoch | localtime | mktime;
   def local: gmtime | strftime("%Y%m%dT%H%M%S");
 
@@ -291,14 +306,6 @@ TZ=Europe/Berlin jq -c --argjson wanted "$wanted" --argjson stationIds "$station
 
 # BVG items carry offset timestamps, HTML bodies and often no end date.
 read -r -d '' jq_bvg <<'JQ' || true
-  # UTC epoch of an offset timestamp like 2026-08-21T20:39:00+02:00 (fractions ignored).
-  def epoch:
-    capture("^(?<dt>[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2})(\\.[0-9]+)?(?<z>Z|[+-][0-9]{2}:[0-9]{2})$") as $m
-    | ($m.dt + "Z" | fromdateiso8601)
-      - (if $m.z == "Z" then 0
-         else (if $m.z[0:1] == "-" then -1 else 1 end) * (($m.z[1:3] | tonumber) * 3600 + ($m.z[4:6] | tonumber) * 60)
-         end);
-
   def entities:
     gsub("&(?<n>[a-zA-Z]+);"; ({nbsp: " ", auml: "ä", ouml: "ö", uuml: "ü", Auml: "Ä", Ouml: "Ö", Uuml: "Ü",
         szlig: "ß", ndash: "–", mdash: "—", quot: "\"", apos: "'", lt: "<", gt: ">", amp: "&"}[.n] // "&\(.n);"))

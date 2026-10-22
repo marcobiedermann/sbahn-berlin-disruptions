@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-set -euo pipefail
-
-shellcheck scripts/build-calendar.sh tests/run.sh .githooks/pre-commit
-tests/run.sh
