@@ -1,0 +1,382 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sbahn-berlin-disruptions//DE
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:S-Bahn Berlin Störungen
+BEGIN:VTIMEZONE
+TZID:Europe/Berlin
+BEGIN:DAYLIGHT
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+TZNAME:CEST
+DTSTART:19700329T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+TZNAME:CET
+DTSTART:19701025T030000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:312-423-20250328@sbahn-berlin-disruptions
+DTSTAMP:20260910T050056Z
+DTSTART;TZID=Europe/Berlin:20250328T020000
+DTEND;TZID=Europe/Berlin:20280817T040000
+SUMMARY:S1/S25/S85 · Kein Halt in Wollankstraße in Fahrtrichtung Norden  
+ · Halt entfällt
+DESCRIPTION:Zeitraum: bis 17.08.2028 (Do) 04:00 Uhr\nLinien: S1\, S25\, S85
+ \nBahnhöfe: S Wollankstraße\nMehr: https://sbahn.berlin/fahren/s1/\, htt
+ ps://sbahn.berlin/fahren/s25/\, https://sbahn.berlin/fahren/s85/\nStand: 2
+ 026-09-10T05:00:56Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:671-1449-20261020@sbahn-berlin-disruptions
+DTSTAMP:20261009T100500Z
+DTSTART;TZID=Europe/Berlin:20261020T014500
+DTEND;TZID=Europe/Berlin:20261023T034000
+SUMMARY:S9 · Warschauer Straße ⇄ Westkreuz · Besonderheit
+DESCRIPTION:Zeitraum: bis morgen 03:40 Uhr\nLinien: S9\nBahnhöfe: S Westkr
+ euz\, S+U Warschauer Straße\, S+U Alexanderplatz\, S Bellevue\, S+U Haupt
+ bahnhof\, S Ostbahnhof\, S+U Zoologischer Garten\, S Charlottenburg\, S+U 
+ Friedrichstraße\, S Hackescher Markt\, S+U Jannowitzbrücke\, S Savignypl
+ atz\, S Tiergarten\nMehr: https://sbahn.berlin/fahren/s9/\nStand: 2026-10-
+ 09T10:05:00Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3722-1422-20261022@sbahn-berlin-disruptions
+DTSTAMP:20260928T051000Z
+DTSTART;TZID=Europe/Berlin:20261022T080000
+DTEND;TZID=Europe/Berlin:20261022T160000
+SUMMARY:S1/S85 · Schönholz ⇄ Frohnau · Taktänderung
+DESCRIPTION:Zeitraum: bis morgen\, täglich 08:00 - 16:00 Uhr\nLinien: S1\,
+  S85\nBahnhöfe: S Waidmannslust\, S Frohnau\, S Hermsdorf\, S Schönholz\
+ , S Wilhelmsruh\, S+U Wittenau\nMehr: https://sbahn.berlin/fahren/s1/\, ht
+ tps://sbahn.berlin/fahren/s85/\nStand: 2026-09-28T05:10:00Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3722-1422-20261023@sbahn-berlin-disruptions
+DTSTAMP:20260928T051000Z
+DTSTART;TZID=Europe/Berlin:20261023T080000
+DTEND;TZID=Europe/Berlin:20261023T160000
+SUMMARY:S1/S85 · Schönholz ⇄ Frohnau · Taktänderung
+DESCRIPTION:Zeitraum: bis morgen\, täglich 08:00 - 16:00 Uhr\nLinien: S1\,
+  S85\nBahnhöfe: S Waidmannslust\, S Frohnau\, S Hermsdorf\, S Schönholz\
+ , S Wilhelmsruh\, S+U Wittenau\nMehr: https://sbahn.berlin/fahren/s1/\, ht
+ tps://sbahn.berlin/fahren/s85/\nStand: 2026-09-28T05:10:00Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3844-1447-20261026@sbahn-berlin-disruptions
+DTSTAMP:20261009T093551Z
+DTSTART;TZID=Europe/Berlin:20261026T080000
+DTEND;TZID=Europe/Berlin:20261026T160000
+SUMMARY:S1/S85/S26 · (Nordbahnhof) Schönholz ⇄ Frohnau · Taktänderung
+DESCRIPTION:Zeitraum: 26.10 (Mo) bis 30.10 (Fr)\, täglich 08:00 - 16:00 Uh
+ r\nLinien: S1\, S85\, S26\nBahnhöfe: S+U Gesundbrunnen\, S Waidmannslust\
+ , S Frohnau\, S Hermsdorf\, S Nordbahnhof\, S Schönholz\, S Wilhelmsruh\,
+  S Bornholmer Straße\, S Humboldthain\, S+U Wittenau\, S Wollankstraße\n
+ Mehr: https://sbahn.berlin/fahren/s1/\, https://sbahn.berlin/fahren/s85/\,
+  https://sbahn.berlin/fahren/s26/\nStand: 2026-10-09T09:35:51Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3844-1447-20261027@sbahn-berlin-disruptions
+DTSTAMP:20261009T093551Z
+DTSTART;TZID=Europe/Berlin:20261027T080000
+DTEND;TZID=Europe/Berlin:20261027T160000
+SUMMARY:S1/S85/S26 · (Nordbahnhof) Schönholz ⇄ Frohnau · Taktänderung
+DESCRIPTION:Zeitraum: 26.10 (Mo) bis 30.10 (Fr)\, täglich 08:00 - 16:00 Uh
+ r\nLinien: S1\, S85\, S26\nBahnhöfe: S+U Gesundbrunnen\, S Waidmannslust\
+ , S Frohnau\, S Hermsdorf\, S Nordbahnhof\, S Schönholz\, S Wilhelmsruh\,
+  S Bornholmer Straße\, S Humboldthain\, S+U Wittenau\, S Wollankstraße\n
+ Mehr: https://sbahn.berlin/fahren/s1/\, https://sbahn.berlin/fahren/s85/\,
+  https://sbahn.berlin/fahren/s26/\nStand: 2026-10-09T09:35:51Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3847-1451-20261028@sbahn-berlin-disruptions
+DTSTAMP:20261009T101501Z
+DTSTART;TZID=Europe/Berlin:20261028T015000
+DTEND;TZID=Europe/Berlin:20261028T031500
+SUMMARY:S9 · Alexanderplatz ⇄ Treptower Park · Taktänderung
+DESCRIPTION:Zeitraum: 28.10 (Mi) bis 30.10 (Fr)\, täglich 01:50 - 03:15 Uh
+ r\nLinien: S9\nBahnhöfe: S Flughafen BER\, S+U Warschauer Straße\, S Alt
+ glienicke\, S Baumschulenweg\, S Ostbahnhof\, S Adlershof\, S Schönefeld 
+ (bei Berlin)\, S Schöneweide\, S Johannisthal\, S Grünbergallee\, S Plä
+ nterwald\, S Treptower Park\, S Waßmannsdorf\nMehr: https://sbahn.berlin/
+ fahren/s9/\nStand: 2026-10-09T10:15:01Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3844-1447-20261028@sbahn-berlin-disruptions
+DTSTAMP:20261009T093551Z
+DTSTART;TZID=Europe/Berlin:20261028T080000
+DTEND;TZID=Europe/Berlin:20261028T160000
+SUMMARY:S1/S85/S26 · (Nordbahnhof) Schönholz ⇄ Frohnau · Taktänderung
+DESCRIPTION:Zeitraum: 26.10 (Mo) bis 30.10 (Fr)\, täglich 08:00 - 16:00 Uh
+ r\nLinien: S1\, S85\, S26\nBahnhöfe: S+U Gesundbrunnen\, S Waidmannslust\
+ , S Frohnau\, S Hermsdorf\, S Nordbahnhof\, S Schönholz\, S Wilhelmsruh\,
+  S Bornholmer Straße\, S Humboldthain\, S+U Wittenau\, S Wollankstraße\n
+ Mehr: https://sbahn.berlin/fahren/s1/\, https://sbahn.berlin/fahren/s85/\,
+  https://sbahn.berlin/fahren/s26/\nStand: 2026-10-09T09:35:51Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3847-1451-20261029@sbahn-berlin-disruptions
+DTSTAMP:20261009T101501Z
+DTSTART;TZID=Europe/Berlin:20261029T015000
+DTEND;TZID=Europe/Berlin:20261029T031500
+SUMMARY:S9 · Alexanderplatz ⇄ Treptower Park · Taktänderung
+DESCRIPTION:Zeitraum: 28.10 (Mi) bis 30.10 (Fr)\, täglich 01:50 - 03:15 Uh
+ r\nLinien: S9\nBahnhöfe: S Flughafen BER\, S+U Warschauer Straße\, S Alt
+ glienicke\, S Baumschulenweg\, S Ostbahnhof\, S Adlershof\, S Schönefeld 
+ (bei Berlin)\, S Schöneweide\, S Johannisthal\, S Grünbergallee\, S Plä
+ nterwald\, S Treptower Park\, S Waßmannsdorf\nMehr: https://sbahn.berlin/
+ fahren/s9/\nStand: 2026-10-09T10:15:01Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3844-1447-20261029@sbahn-berlin-disruptions
+DTSTAMP:20261009T093551Z
+DTSTART;TZID=Europe/Berlin:20261029T080000
+DTEND;TZID=Europe/Berlin:20261029T160000
+SUMMARY:S1/S85/S26 · (Nordbahnhof) Schönholz ⇄ Frohnau · Taktänderung
+DESCRIPTION:Zeitraum: 26.10 (Mo) bis 30.10 (Fr)\, täglich 08:00 - 16:00 Uh
+ r\nLinien: S1\, S85\, S26\nBahnhöfe: S+U Gesundbrunnen\, S Waidmannslust\
+ , S Frohnau\, S Hermsdorf\, S Nordbahnhof\, S Schönholz\, S Wilhelmsruh\,
+  S Bornholmer Straße\, S Humboldthain\, S+U Wittenau\, S Wollankstraße\n
+ Mehr: https://sbahn.berlin/fahren/s1/\, https://sbahn.berlin/fahren/s85/\,
+  https://sbahn.berlin/fahren/s26/\nStand: 2026-10-09T09:35:51Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3847-1451-20261030@sbahn-berlin-disruptions
+DTSTAMP:20261009T101501Z
+DTSTART;TZID=Europe/Berlin:20261030T015000
+DTEND;TZID=Europe/Berlin:20261030T031500
+SUMMARY:S9 · Alexanderplatz ⇄ Treptower Park · Taktänderung
+DESCRIPTION:Zeitraum: 28.10 (Mi) bis 30.10 (Fr)\, täglich 01:50 - 03:15 Uh
+ r\nLinien: S9\nBahnhöfe: S Flughafen BER\, S+U Warschauer Straße\, S Alt
+ glienicke\, S Baumschulenweg\, S Ostbahnhof\, S Adlershof\, S Schönefeld 
+ (bei Berlin)\, S Schöneweide\, S Johannisthal\, S Grünbergallee\, S Plä
+ nterwald\, S Treptower Park\, S Waßmannsdorf\nMehr: https://sbahn.berlin/
+ fahren/s9/\nStand: 2026-10-09T10:15:01Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3844-1447-20261030@sbahn-berlin-disruptions
+DTSTAMP:20261009T093551Z
+DTSTART;TZID=Europe/Berlin:20261030T080000
+DTEND;TZID=Europe/Berlin:20261030T160000
+SUMMARY:S1/S85/S26 · (Nordbahnhof) Schönholz ⇄ Frohnau · Taktänderung
+DESCRIPTION:Zeitraum: 26.10 (Mo) bis 30.10 (Fr)\, täglich 08:00 - 16:00 Uh
+ r\nLinien: S1\, S85\, S26\nBahnhöfe: S+U Gesundbrunnen\, S Waidmannslust\
+ , S Frohnau\, S Hermsdorf\, S Nordbahnhof\, S Schönholz\, S Wilhelmsruh\,
+  S Bornholmer Straße\, S Humboldthain\, S+U Wittenau\, S Wollankstraße\n
+ Mehr: https://sbahn.berlin/fahren/s1/\, https://sbahn.berlin/fahren/s85/\,
+  https://sbahn.berlin/fahren/s26/\nStand: 2026-10-09T09:35:51Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3407-1365-20261030@sbahn-berlin-disruptions
+DTSTAMP:20261014T085001Z
+DTSTART;TZID=Europe/Berlin:20261030T214500
+DTEND;TZID=Europe/Berlin:20261102T013000
+SUMMARY:S41/S8/S85/S42 · Schönhauser Allee ⇄ Landsberger Allee · Ersat
+ zverkehr
+DESCRIPTION:Zeitraum: 30.10 (Fr) 21:45 Uhr bis 02.11 (Mo) 01:30 Uhr\nLinien
+ : S41\, S8\, S85\, S42\nBahnhöfe: S Greifswalder Straße\, S Landsberger 
+ Allee\, S Prenzlauer Allee\, S+U Schönhauser Allee\nMehr: https://sbahn.b
+ erlin/fahren/s41/\, https://sbahn.berlin/fahren/s8/\, https://sbahn.berlin
+ /fahren/s85/\, https://sbahn.berlin/fahren/s42/\nStand: 2026-10-14T08:50:0
+ 1Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3886-1365-20261030@sbahn-berlin-disruptions
+DTSTAMP:20261014T075740Z
+DTSTART;TZID=Europe/Berlin:20261030T214500
+DTEND;TZID=Europe/Berlin:20261102T013000
+SUMMARY:S41/S8/S85/S42 · Landsberger Allee ⇄ Frankfurter Allee · Pendel
+ verkehr
+DESCRIPTION:Zeitraum: 30.10 (Fr) 21:45 Uhr bis 02.11 (Mo) 01:30 Uhr\nLinien
+ : S41\, S8\, S85\, S42\nBahnhöfe: S+U Frankfurter Allee\, S Landsberger A
+ llee\, S Storkower Straße\nMehr: https://sbahn.berlin/fahren/s41/\, https
+ ://sbahn.berlin/fahren/s8/\, https://sbahn.berlin/fahren/s85/\, https://sb
+ ahn.berlin/fahren/s42/\nStand: 2026-10-14T07:57:40Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3889-1365-20261030@sbahn-berlin-disruptions
+DTSTAMP:20261014T081501Z
+DTSTART;TZID=Europe/Berlin:20261030T214500
+DTEND;TZID=Europe/Berlin:20261102T013000
+SUMMARY:S8/S85 · Schönhauser Allee ⇄ Bornholmer Straße (Pankow) · Tak
+ tänderung
+DESCRIPTION:Zeitraum: 30.10 (Fr) 21:45 Uhr bis 02.11 (Mo) 01:30 Uhr\nLinien
+ : S8\, S85\nBahnhöfe: S Bornholmer Straße\, S+U Schönhauser Allee\nMehr
+ : https://sbahn.berlin/fahren/s8/\, https://sbahn.berlin/fahren/s85/\nStan
+ d: 2026-10-14T08:15:01Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3896-1365-20261030@sbahn-berlin-disruptions
+DTSTAMP:20261014T082001Z
+DTSTART;TZID=Europe/Berlin:20261030T214500
+DTEND;TZID=Europe/Berlin:20261102T013000
+SUMMARY:S8/S85/S9 · Treptower Park → Plänterwald · Zugangebot geänder
+ t
+DESCRIPTION:Zeitraum: 30.10 (Fr) 21:45 Uhr bis 02.11 (Mo) 01:30 Uhr\nLinien
+ : S8\, S85\, S9\nBahnhöfe: S Plänterwald\, S Treptower Park\nMehr: https
+ ://sbahn.berlin/fahren/s8/\, https://sbahn.berlin/fahren/s85/\, https://sb
+ ahn.berlin/fahren/s9/\nStand: 2026-10-14T08:20:01Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3911-1462-20261102@sbahn-berlin-disruptions
+DTSTAMP:20261015T044001Z
+DTSTART;TZID=Europe/Berlin:20261102T220000
+DTEND;TZID=Europe/Berlin:20261103T013000
+SUMMARY:S3/S5/S7/S9 · Tiergarten ⇄ Charlottenburg · Taktänderung
+DESCRIPTION:Zeitraum: 02.11 (Mo) 22:00 Uhr bis 03.11 (Di) 01:30 Uhr\nLinien
+ : S3\, S5\, S7\, S9\nBahnhöfe: S+U Zoologischer Garten\, S Charlottenburg
+ \, S Savignyplatz\, S Tiergarten\nMehr: https://sbahn.berlin/fahren/s3/\, 
+ https://sbahn.berlin/fahren/s5/\, https://sbahn.berlin/fahren/s7/\, https:
+ //sbahn.berlin/fahren/s9/\nStand: 2026-10-15T04:40:01Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3918-1462-20261102@sbahn-berlin-disruptions
+DTSTAMP:20261016T070503Z
+DTSTART;TZID=Europe/Berlin:20261102T220000
+DTEND;TZID=Europe/Berlin:20261103T013000
+SUMMARY:S9 · Spandau → Friedrichstraße · Zugangebot geändert
+DESCRIPTION:Zeitraum: 02.11 (Mo) 22:00 Uhr bis 03.11 (Di) 01:30 Uhr\nLinien
+ : S9\nBahnhöfe: S Spandau\, S Westkreuz\, S Bellevue\, S+U Hauptbahnhof\,
+  S+U Zoologischer Garten\, S Charlottenburg\, S+U Friedrichstraße\, S Hee
+ rstraße\, S Messe Süd (Eichkamp)\, S Olympiastadion\, S Pichelsberg\, S 
+ Savignyplatz\, S Stresow\, S Tiergarten\nMehr: https://sbahn.berlin/fahren
+ /s9/\nStand: 2026-10-16T07:05:03Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:671-1450-20261103@sbahn-berlin-disruptions
+DTSTAMP:20261009T100500Z
+DTSTART;TZID=Europe/Berlin:20261103T014500
+DTEND;TZID=Europe/Berlin:20261106T034000
+SUMMARY:S9 · Warschauer Straße ⇄ Westkreuz · Besonderheit
+DESCRIPTION:Zeitraum: 03.11 (Di) 01:45 Uhr bis 06.11 (Fr) 03:40 Uhr\nLinien
+ : S9\nBahnhöfe: S Westkreuz\, S+U Warschauer Straße\, S+U Alexanderplatz
+ \, S Bellevue\, S+U Hauptbahnhof\, S Ostbahnhof\, S+U Zoologischer Garten\
+ , S Charlottenburg\, S+U Friedrichstraße\, S Hackescher Markt\, S+U Janno
+ witzbrücke\, S Savignyplatz\, S Tiergarten\nMehr: https://sbahn.berlin/fa
+ hren/s9/\nStand: 2026-10-09T10:05:00Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3919-1463-20261103@sbahn-berlin-disruptions
+DTSTAMP:20261015T060933Z
+DTSTART;TZID=Europe/Berlin:20261103T220000
+DTEND;TZID=Europe/Berlin:20261104T013000
+SUMMARY:S3/S5/S7/S9 · Friedrichstraße ⇄ Zoologischer Garten · Taktänd
+ erung
+DESCRIPTION:Zeitraum: 03.11 (Di) bis 05.11 (Do)\, täglich 22:00 - 01:30 Uh
+ r\nLinien: S3\, S5\, S7\, S9\nBahnhöfe: S Bellevue\, S+U Hauptbahnhof\, S
+ +U Zoologischer Garten\, S+U Friedrichstraße\, S Tiergarten\nMehr: https:
+ //sbahn.berlin/fahren/s3/\, https://sbahn.berlin/fahren/s5/\, https://sbah
+ n.berlin/fahren/s7/\, https://sbahn.berlin/fahren/s9/\nStand: 2026-10-15T0
+ 6:09:33Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3920-1463-20261103@sbahn-berlin-disruptions
+DTSTAMP:20261015T063001Z
+DTSTART;TZID=Europe/Berlin:20261103T220000
+DTEND;TZID=Europe/Berlin:20261104T013000
+SUMMARY:S3/S7/S9 · Warschauer Straße ⇄ Friedrichstraße · Zugangebot g
+ eändert
+DESCRIPTION:Zeitraum: 03.11 (Di) bis 05.11 (Do)\, täglich 22:00 - 01:30 Uh
+ r\nLinien: S3\, S7\, S9\nBahnhöfe: S+U Warschauer Straße\, S+U Alexander
+ platz\, S Ostbahnhof\, S+U Friedrichstraße\, S Hackescher Markt\, S+U Jan
+ nowitzbrücke\nMehr: https://sbahn.berlin/fahren/s3/\, https://sbahn.berli
+ n/fahren/s7/\, https://sbahn.berlin/fahren/s9/\nStand: 2026-10-15T06:30:01
+ Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3414-1372-20261104@sbahn-berlin-disruptions
+DTSTAMP:20261016T073000Z
+DTSTART;TZID=Europe/Berlin:20261104T213000
+DTEND;TZID=Europe/Berlin:20261105T013000
+SUMMARY:S46/S8 · Grünau ⇄ Schöneweide · Ersatzverkehr
+DESCRIPTION:Zeitraum: 04.11 (Mi) 21:30 Uhr bis 05.11 (Do) 01:30 Uhr\nLinien
+ : S46\, S8\nBahnhöfe: S Grünau\, S Adlershof\, S Schöneweide\, S Johann
+ isthal\nMehr: https://sbahn.berlin/fahren/s46/\, https://sbahn.berlin/fahr
+ en/s8/\nStand: 2026-10-16T07:30:00Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3415-1372-20261104@sbahn-berlin-disruptions
+DTSTAMP:20261016T080001Z
+DTSTART;TZID=Europe/Berlin:20261104T213000
+DTEND;TZID=Europe/Berlin:20261105T013000
+SUMMARY:S85/S9 · Grünbergallee ⇄ Schöneweide · Ersatzverkehr
+DESCRIPTION:Zeitraum: 04.11 (Mi) 21:30 Uhr bis 05.11 (Do) 01:30 Uhr\nLinien
+ : S85\, S9\nBahnhöfe: S Altglienicke\, S Grünbergallee\nMehr: https://sb
+ ahn.berlin/fahren/s85/\, https://sbahn.berlin/fahren/s9/\nStand: 2026-10-1
+ 6T08:00:01Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3935-1372-20261104@sbahn-berlin-disruptions
+DTSTAMP:20261016T064001Z
+DTSTART;TZID=Europe/Berlin:20261104T213000
+DTEND;TZID=Europe/Berlin:20261105T013000
+SUMMARY:S47/S46/S8/S9 · Spindlersfeld ⇄ Schöneweide ⇄ Treptower Park 
+ · Zugangebot geändert
+DESCRIPTION:Zeitraum: 04.11 (Mi) 21:30 Uhr bis 05.11 (Do) 01:30 Uhr\nLinien
+ : S47\, S46\, S8\, S9\nBahnhöfe: S Spindlersfeld\, S Baumschulenweg\, S S
+ chöneweide\, S Oberspree\, S Plänterwald\, S Treptower Park\nMehr: https
+ ://sbahn.berlin/fahren/s47/\, https://sbahn.berlin/fahren/s46/\, https://s
+ bahn.berlin/fahren/s8/\, https://sbahn.berlin/fahren/s9/\nStand: 2026-10-1
+ 6T06:40:01Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3919-1463-20261104@sbahn-berlin-disruptions
+DTSTAMP:20261015T060933Z
+DTSTART;TZID=Europe/Berlin:20261104T220000
+DTEND;TZID=Europe/Berlin:20261105T013000
+SUMMARY:S3/S5/S7/S9 · Friedrichstraße ⇄ Zoologischer Garten · Taktänd
+ erung
+DESCRIPTION:Zeitraum: 03.11 (Di) bis 05.11 (Do)\, täglich 22:00 - 01:30 Uh
+ r\nLinien: S3\, S5\, S7\, S9\nBahnhöfe: S Bellevue\, S+U Hauptbahnhof\, S
+ +U Zoologischer Garten\, S+U Friedrichstraße\, S Tiergarten\nMehr: https:
+ //sbahn.berlin/fahren/s3/\, https://sbahn.berlin/fahren/s5/\, https://sbah
+ n.berlin/fahren/s7/\, https://sbahn.berlin/fahren/s9/\nStand: 2026-10-15T0
+ 6:09:33Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3920-1463-20261104@sbahn-berlin-disruptions
+DTSTAMP:20261015T063001Z
+DTSTART;TZID=Europe/Berlin:20261104T220000
+DTEND;TZID=Europe/Berlin:20261105T013000
+SUMMARY:S3/S7/S9 · Warschauer Straße ⇄ Friedrichstraße · Zugangebot g
+ eändert
+DESCRIPTION:Zeitraum: 03.11 (Di) bis 05.11 (Do)\, täglich 22:00 - 01:30 Uh
+ r\nLinien: S3\, S7\, S9\nBahnhöfe: S+U Warschauer Straße\, S+U Alexander
+ platz\, S Ostbahnhof\, S+U Friedrichstraße\, S Hackescher Markt\, S+U Jan
+ nowitzbrücke\nMehr: https://sbahn.berlin/fahren/s3/\, https://sbahn.berli
+ n/fahren/s7/\, https://sbahn.berlin/fahren/s9/\nStand: 2026-10-15T06:30:01
+ Z
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

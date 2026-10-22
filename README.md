@@ -6,7 +6,19 @@ Builds an iCalendar feed of S-Bahn Berlin disruptions (consequences) for the lin
 
 Disruptions come from the GraphQL API behind the [S-Bahn Berlin](https://sbahn.berlin/) website (`https://api.sbahn.berlin/construction-api/query`). It is an unofficial, undocumented API discovered via the browser's network tab, so it may change without notice.
 
-> Work in progress: so far the script reads a saved API response. The live API fetch and the scheduled workflow are tracked in the open issues.
+Without `--input` the script queries the live API (`--api-url` overrides the endpoint). `--input <file>` reads a saved response instead, which the tests use.
+
+## Subscribing in Google Calendar
+
+The workflow [`update-calendar.yml`](.github/workflows/update-calendar.yml) runs every 30 minutes (and on manual dispatch), rebuilds `calendar.ics` and commits it only when it changed. The watchlist lives in the workflow's `STATIONS`, `LINES` and `DAYS` env vars (comma-separated lists).
+
+In Google Calendar choose *Other calendars → From URL* and paste:
+
+```
+https://raw.githubusercontent.com/marcobiedermann/sbahn-berlin-disruptions/main/calendar.ics
+```
+
+The repository must be public for this URL to work. Google refreshes subscribed calendars only every several hours, so updates are not instant.
 
 ## Requirements
 
@@ -15,12 +27,13 @@ Disruptions come from the GraphQL API behind the [S-Bahn Berlin](https://sbahn.b
 ## Usage
 
 ```bash
-scripts/build-calendar.sh --input <api-response.json> --output <feed.ics> [--station <name> ...] [--line <label> ...] [--days <n>] [--now <timestamp>]
+scripts/build-calendar.sh --output <feed.ics> [--station <name> ...] [--line <label> ...] [--days <n>] [--now <timestamp>] [--input <api-response.json>] [--api-url <url>]
 ```
 
 | Flag        | Description                                                                    | Example                                    |
 | ----------- | ------------------------------------------------------------------------------ | ------------------------------------------ |
-| `--input`   | Saved response of the S-Bahn Berlin GraphQL API (JSON, required)               | `--input tests/fixtures/api-response.json` |
+| `--input`   | Saved API response (JSON); if omitted, the live API is queried                 | `--input tests/fixtures/api-response.json` |
+| `--api-url` | GraphQL endpoint to query when `--input` is absent                             | `--api-url https://api.sbahn.berlin/construction-api/query` |
 | `--output`  | Path of the `.ics` feed to write (required)                                    | `--output calendar.ics`                    |
 | `--station` | Station name; repeatable. At least one `--station` or `--line` is required     | `--station Schöneweide --station Westkreuz` |
 | `--line`    | Line label; repeatable                                                         | `--line S9 --line S85`                     |

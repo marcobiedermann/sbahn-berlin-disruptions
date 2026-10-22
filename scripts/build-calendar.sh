@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
-# Builds an iCalendar feed of S-Bahn Berlin consequences for the given lines.
+# Builds an iCalendar feed of S-Bahn Berlin consequences for stations and lines.
 #
-# Usage: build-calendar.sh --input <api-response.json> --output <feed.ics> --line <S9> [--line <S85> ...]
+# Usage: build-calendar.sh --output <feed.ics> [--station <name> ...] [--line <label> ...]
+#                          [--days <n>] [--now <timestamp>] [--input <api-response.json>]
+# Without --input the S-Bahn Berlin GraphQL API is queried (--api-url overrides the endpoint).
 set -euo pipefail
 
 die() {
@@ -15,6 +17,10 @@ lines=()
 stations=()
 days=14
 now=""
+api_url="https://api.sbahn.berlin/construction-api/query"
+fetched=""
+tmp=""
+trap 'rm -f "$fetched" "$tmp"' EXIT
 
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -24,19 +30,43 @@ while [ $# -gt 0 ]; do
     --station) stations+=("${2:?--station needs a value}"); shift 2 ;;
     --days) days="${2:?--days needs a value}"; shift 2 ;;
     --now) now="${2:?--now needs a value}"; shift 2 ;;
+    --api-url) api_url="${2:?--api-url needs a value}"; shift 2 ;;
     *) die "unknown argument: $1" ;;
   esac
 done
 
 command -v jq >/dev/null || die "jq is required"
-[ -n "$input" ] || die "--input is required"
 [ -n "$output" ] || die "--output is required"
 [ "$((${#lines[@]} + ${#stations[@]}))" -gt 0 ] || die "at least one --station or --line is required"
-[ -f "$input" ] || die "input file not found: $input"
+[ -z "$input" ] || [ -f "$input" ] || die "input file not found: $input"
 [[ "$days" =~ ^[1-9][0-9]*$ ]] || die "--days must be a positive integer, got: $days"
 [ -n "$now" ] || now="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 [[ "$now" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$ ]] || die "--now must be a UTC timestamp like 2026-10-22T12:00:00Z, got: $now"
 
+if [ -z "$input" ]; then
+  command -v curl >/dev/null || die "curl is required"
+  graphql_query='query Consequences($language: Language!) {
+    consequences(language: $language) {
+      id effect title updated
+      periods { id title type dateStart dateEnd }
+      lines { id title link }
+    }
+    lines { id title }
+    stations { id title consequences { id } }
+  }'
+  request="$(jq -n -c --arg query "$graphql_query" '{query: $query, variables: {language: "GERMAN"}}')"
+  fetched="$(mktemp)"
+  curl --silent --show-error --fail --location --max-time 30 --retry 2 --retry-delay 5 \
+    --request POST "$api_url" \
+    --header 'content-type: application/json' \
+    --header 'accept: application/json' \
+    --header 'origin: https://sbahn.berlin' \
+    --header 'referer: https://sbahn.berlin/' \
+    --header 'user-agent: Mozilla/5.0 (compatible; sbahn-berlin-disruptions)' \
+    --data "$request" \
+    --output "$fetched" || die "could not fetch $api_url"
+  input="$fetched"
+fi
 if ! jq -e '((.errors // []) | length == 0) and (.data.consequences | type == "array")' "$input" >/dev/null 2>&1; then
   api_error="$(jq -r '.errors[0].message? // empty' "$input" 2>/dev/null || true)"
   die "input is not a valid API response${api_error:+: $api_error}"
@@ -79,7 +109,6 @@ station_ids="$(jq -c --argjson queries "$queries" "$norm_def"'
 ' "$input")"
 
 tmp="$(mktemp "$(dirname "$output")/.feed.XXXXXX")"
-trap 'rm -f "$tmp"' EXIT
 
 TZ=Europe/Berlin jq -j --argjson wanted "$wanted" --argjson stationIds "$station_ids" --arg now "$now" --argjson days "$days" '
   def esc: gsub("\\\\"; "\\\\") | gsub(";"; "\\;") | gsub(","; "\\,") | gsub("\n"; "\\n");
@@ -204,4 +233,3 @@ TZ=Europe/Berlin jq -j --argjson wanted "$wanted" --argjson stationIds "$station
 ' "$input" >"$tmp"
 
 mv "$tmp" "$output"
-trap - EXIT
