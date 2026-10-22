@@ -61,7 +61,7 @@ for label in ${lines[@]+"${lines[@]}"}; do
     mode="$(echo "${mode:0:1}" | tr '[:lower:]' '[:upper:]')${mode:1}"
     bvg_lines+=("$mode ${BASH_REMATCH[2]}")
   elif [[ "$label" =~ ^[Ss][0-9]+$ ]]; then
-    sbahn_lines+=("$label")
+    sbahn_lines+=("$(echo "$label" | tr '[:lower:]' '[:upper:]')")
   else
     die "invalid line \"$label\". Use S9 (S-Bahn), U2 (U-Bahn), \"Tram M10\" or \"Bus 160\""
   fi
@@ -161,6 +161,7 @@ if [ -z "$input" ]; then
   }'
   request="$(jq -n -c --arg query "$graphql_query" '{query: $query, variables: {language: "GERMAN"}}')"
   fetched="$(mktemp)"
+  trap 'rm -f "$fetched"' EXIT # runs in the subshell of build_sbahn_events
   curl --silent --show-error --fail --location --max-time 30 --retry 2 --retry-delay 5 \
     --request POST "$api_url_sbahn" \
     --header 'content-type: application/json' \

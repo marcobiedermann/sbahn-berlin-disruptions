@@ -64,6 +64,7 @@ case_no=0
 default_now="2026-10-22T12:00:00Z"
 
 test_golden "line S9" line-s9 --line S9
+test_golden "S-Bahn label is case-insensitive" line-s9 --line s9
 test_golden "lines S9 + S26" lines-s9-s26 --line S9 --line S26 --now 2026-10-28T12:00:00Z
 test_golden "daily windows, overnight end, DST change" line-s85-daily --line S85
 test_golden "station by name" station-schoeneweide --station Schöneweide
