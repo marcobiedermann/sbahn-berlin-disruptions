@@ -14,6 +14,6 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Lint
-        run: shellcheck scripts/build-calendar.sh tests/run.sh tests/regen-golden.sh
+        run: shellcheck scripts/build-calendar.sh scripts/lib/*.sh tests/run.sh tests/regen-golden.sh
       - name: Test
         run: tests/run.sh

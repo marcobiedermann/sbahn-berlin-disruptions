@@ -3,7 +3,7 @@
 Unofficial, undocumented GraphQL endpoint: `POST https://api.sbahn.berlin/construction-api/query`. Verified live in October 2026.
 
 - Send `origin: https://sbahn.berlin`, `referer: https://sbahn.berlin/` and a user-agent, as the website does.
-- Variables: `{"language":"GERMAN"}`. The query the script sends is in `scripts/build-calendar.sh`.
+- Variables: `{"language":"GERMAN"}`. The query the script sends is in `scripts/lib/sbahn-berlin.sh`.
 - Errors arrive as HTTP 200 with a top-level `errors` array; the script treats them as failure.
 - A **Station** has `id` and `t3Id`. Schöneweide is `id` 66 / `t3Id` 150; `id` 150 is "S Sundgauer Straße". The script resolves stations by title, never by ID.
 - Station titles carry a prefix (`S `, `S+U `, `U `). "Schöneweide Betriebsbahnhof" is a different station.
