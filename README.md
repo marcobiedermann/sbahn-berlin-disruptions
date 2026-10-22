@@ -22,7 +22,7 @@ The repository must be public for this URL to work. Google refreshes subscribed 
 
 ## Requirements
 
-`bash`, `jq` and `perl` (tests only). Nothing else.
+`bash`, `curl` and `jq` to run the script. `perl` and [`shellcheck`](https://www.shellcheck.net/) (e.g. `brew install shellcheck`) for the tests and the pre-commit hook. Nothing else.
 
 ## Usage
 
