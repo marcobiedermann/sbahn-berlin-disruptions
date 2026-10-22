@@ -1,6 +1,6 @@
 # Berlin ÖPNV Disruptions Calendar
 
-Builds an iCalendar feed of public transport (ÖPNV) disruptions in Berlin for the stations and lines you care about, covering S-Bahn Berlin and BVG (bus, tram, U-Bahn), so you can subscribe to it in Google Calendar. See `GLOSSARY.md` for terminology.
+Builds an iCalendar feed of public transport (ÖPNV) disruptions in Berlin for the stations and lines you care about, covering S-Bahn Berlin and BVG (bus, tram, U-Bahn), so you can subscribe to it in Google Calendar.
 
 ## How it works
 
