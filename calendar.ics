@@ -36,57 +36,15 @@ DESCRIPTION:Bus 160\, 163: Verlegung der Haltestellen Hermann-Dorner-Allee
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:3847-1451-20261028@sbahn-berlin-disruptions
-DTSTAMP:20261009T101501Z
-DTSTART;TZID=Europe/Berlin:20261028T015000
-DTEND;TZID=Europe/Berlin:20261028T031500
-SUMMARY:S9 · Alexanderplatz ⇄ Treptower Park · Taktänderung
-DESCRIPTION:Zeitraum: 28.10 (Mi) bis 30.10 (Fr)\, täglich 01:50 - 03:15 Uh
- r\nLinien: S9\nBahnhöfe: S Flughafen BER\, S+U Warschauer Straße\, S Alt
- glienicke\, S Baumschulenweg\, S Ostbahnhof\, S Adlershof\, S Schönefeld 
- (bei Berlin)\, S Schöneweide\, S Johannisthal\, S Grünbergallee\, S Plä
- nterwald\, S Treptower Park\, S Waßmannsdorf\nMehr: https://sbahn.berlin/
- fahren/s9/\nStand: 2026-10-09T10:15:01Z
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:3847-1451-20261029@sbahn-berlin-disruptions
-DTSTAMP:20261009T101501Z
-DTSTART;TZID=Europe/Berlin:20261029T015000
-DTEND;TZID=Europe/Berlin:20261029T031500
-SUMMARY:S9 · Alexanderplatz ⇄ Treptower Park · Taktänderung
-DESCRIPTION:Zeitraum: 28.10 (Mi) bis 30.10 (Fr)\, täglich 01:50 - 03:15 Uh
- r\nLinien: S9\nBahnhöfe: S Flughafen BER\, S+U Warschauer Straße\, S Alt
- glienicke\, S Baumschulenweg\, S Ostbahnhof\, S Adlershof\, S Schönefeld 
- (bei Berlin)\, S Schöneweide\, S Johannisthal\, S Grünbergallee\, S Plä
- nterwald\, S Treptower Park\, S Waßmannsdorf\nMehr: https://sbahn.berlin/
- fahren/s9/\nStand: 2026-10-09T10:15:01Z
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:3847-1451-20261030@sbahn-berlin-disruptions
-DTSTAMP:20261009T101501Z
-DTSTART;TZID=Europe/Berlin:20261030T015000
-DTEND;TZID=Europe/Berlin:20261030T031500
-SUMMARY:S9 · Alexanderplatz ⇄ Treptower Park · Taktänderung
-DESCRIPTION:Zeitraum: 28.10 (Mi) bis 30.10 (Fr)\, täglich 01:50 - 03:15 Uh
- r\nLinien: S9\nBahnhöfe: S Flughafen BER\, S+U Warschauer Straße\, S Alt
- glienicke\, S Baumschulenweg\, S Ostbahnhof\, S Adlershof\, S Schönefeld 
- (bei Berlin)\, S Schöneweide\, S Johannisthal\, S Grünbergallee\, S Plä
- nterwald\, S Treptower Park\, S Waßmannsdorf\nMehr: https://sbahn.berlin/
- fahren/s9/\nStand: 2026-10-09T10:15:01Z
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
 UID:3414-1372-20261104@sbahn-berlin-disruptions
 DTSTAMP:20261016T073000Z
 DTSTART;TZID=Europe/Berlin:20261104T213000
 DTEND;TZID=Europe/Berlin:20261105T013000
 SUMMARY:S46/S8 · Grünau ⇄ Schöneweide · Ersatzverkehr
 DESCRIPTION:Zeitraum: 04.11 (Mi) 21:30 Uhr bis 05.11 (Do) 01:30 Uhr\nLinien
- : S46\, S8\nBahnhöfe: S Grünau\, S Adlershof\, S Schöneweide\, S Johann
- isthal\nMehr: https://sbahn.berlin/fahren/s46/\, https://sbahn.berlin/fahr
- en/s8/\nStand: 2026-10-16T07:30:00Z
+ : S46\, S8\nBahnhöfe: S Grünau\, S Schöneweide\nMehr: https://sbahn.ber
+ lin/fahren/s46/\, https://sbahn.berlin/fahren/s8/\nStand: 2026-10-16T07:30
+ :00Z
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
@@ -97,11 +55,10 @@ DTEND;TZID=Europe/Berlin:20261105T013000
 SUMMARY:S47/S46/S8/S9 · Spindlersfeld ⇄ Schöneweide ⇄ Treptower Park 
  · Zugangebot geändert
 DESCRIPTION:Zeitraum: 04.11 (Mi) 21:30 Uhr bis 05.11 (Do) 01:30 Uhr\nLinien
- : S47\, S46\, S8\, S9\nBahnhöfe: S Spindlersfeld\, S Baumschulenweg\, S S
- chöneweide\, S Oberspree\, S Plänterwald\, S Treptower Park\nMehr: https
- ://sbahn.berlin/fahren/s47/\, https://sbahn.berlin/fahren/s46/\, https://s
- bahn.berlin/fahren/s8/\, https://sbahn.berlin/fahren/s9/\nStand: 2026-10-1
- 6T06:40:01Z
+ : S47\, S46\, S8\, S9\nBahnhöfe: S Spindlersfeld\, S Schöneweide\, S Tre
+ ptower Park\nMehr: https://sbahn.berlin/fahren/s47/\, https://sbahn.berlin
+ /fahren/s46/\, https://sbahn.berlin/fahren/s8/\, https://sbahn.berlin/fahr
+ en/s9/\nStand: 2026-10-16T06:40:01Z
 TRANSP:TRANSPARENT
 END:VEVENT
 END:VCALENDAR
