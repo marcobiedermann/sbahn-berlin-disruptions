@@ -7,6 +7,7 @@ Unofficial, undocumented GraphQL endpoint: `POST https://api.sbahn.berlin/constr
 - Errors arrive as HTTP 200 with a top-level `errors` array; the script treats them as failure.
 - A **Station** has `id` and `t3Id`. Schöneweide is `id` 66 / `t3Id` 150; `id` 150 is "S Sundgauer Straße". The script resolves stations by title, never by ID.
 - Station titles carry a prefix (`S `, `S+U `, `U `). "Schöneweide Betriebsbahnhof" is a different station.
+- `stations[].consequences` also links stations that are only mentioned in the "Alternative Fahrtmöglichkeit" text (e.g. consequence 3847 "Alexanderplatz <> Treptower Park" is linked to Schöneweide). The script therefore requires the station in the consequence title (ADR 0003).
 - Period `type` is `DEFAULT` (continuous) or `REPEATING_DAILY`. For daily periods `dateStart`/`dateEnd` give the date range plus the **Daily window** as time of day; `dateEnd` is the end of the last window (an overnight window ends on the next calendar day).
 - Timestamps are UTC (`+00:00`).
 - `tests/fixtures/api-response.json` is a trimmed response with the same shape; extend it when you need a new case.

@@ -234,7 +234,12 @@ station_ids="$(jq -c --argjson queries "$queries" "$norm_def"'
   | [.data.stations[] | select(.title | norm | . as $t | $names | any(. == $t)) | .id]
 ' "$input")"
 
-TZ=Europe/Berlin jq -c --argjson wanted "$wanted" --argjson stationIds "$station_ids" --arg now "$now" --argjson days "$days" "$jq_common"'
+# The API also links a station to consequences that only mention it in the alternative-route text,
+# so a station counts as affected only if it is a whole stop name in the consequence title.
+TZ=Europe/Berlin jq -c --argjson wanted "$wanted" --argjson stationIds "$station_ids" --arg now "$now" --argjson days "$days" "$jq_common$norm_def"'
+  def namedIn($title):
+    ($title | split("<>") | map(split(">")[]) | map(split("/")[]) | map(gsub("^ +| +$"; "") | norm)) as $stops
+    | (.title | norm) as $n | $stops | any(. == $n);
   # One occurrence per day for a daily window: the window is the time of day of the period
   # start and end, and the last window ends at the period end.
   def occurrences:
@@ -269,12 +274,12 @@ TZ=Europe/Berlin jq -c --argjson wanted "$wanted" --argjson stationIds "$station
   | ($now | fromdateiso8601) as $nowEpoch
   | wallclockAt($nowEpoch) as $horizonStart
   | wallclockAt($nowEpoch + $days * 86400) as $horizonEnd
-  | [ $d.stations[] | select(.id as $i | $stationIds | any(. == $i)) | .consequences[].id ] as $stationConsequenceIds
   | [ $d.consequences[]
       | . as $c
+      | [$d.stations[] | select(.consequences | any(.id == $c.id)) | select(namedIn($c.title))] as $namedStations
       | select(
           (([.lines[].title] | map(select(. as $t | $wanted | any(. == $t)))) | length > 0)
-          or ($stationConsequenceIds | any(. == $c.id)))
+          or ($namedStations | any(.id as $i | $stationIds | any(. == $i))))
       | .periods[]
       | {c: $c, p: .}
       | occurrences
@@ -282,7 +287,7 @@ TZ=Europe/Berlin jq -c --argjson wanted "$wanted" --argjson stationIds "$station
   | map(
       .c as $c | .p as $p
       | ($c.lines | map(.title)) as $lineTitles
-      | [$d.stations[] | select(.consequences | any(.id == $c.id)) | .title] as $stations
+      | [$d.stations[] | select(.consequences | any(.id == $c.id)) | select(namedIn($c.title)) | .title] as $stations
       | ($c.updated | utc) as $updated
       | (.start | local) as $start
       | ($c.title | gsub("<>"; "⇄") | gsub(">"; "→")) as $title

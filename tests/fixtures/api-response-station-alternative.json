@@ -1,0 +1,138 @@
+{
+  "data": {
+    "consequences": [
+      {
+        "id": "900",
+        "type": "CONSTRUCTION_ACTIVITY",
+        "effect": "REPLACEMENT",
+        "score": 1,
+        "timeFrames": [],
+        "title": "Alexanderplatz <> Treptower Park",
+        "updated": "2026-10-15T10:34:18+00:00",
+        "periods": [
+          {
+            "id": "91",
+            "score": 1,
+            "title": "x",
+            "type": "DEFAULT",
+            "dateStart": "2026-10-27T22:00:00+00:00",
+            "dateEnd": "2026-10-28T03:00:00+00:00"
+          }
+        ],
+        "lines": [
+          {
+            "id": "15",
+            "t3Id": "15",
+            "title": "S9",
+            "link": "https://sbahn.berlin/fahren/s9/",
+            "direction": "LINEAR"
+          }
+        ],
+        "task": {
+          "id": "1"
+        }
+      },
+      {
+        "id": "901",
+        "type": "CONSTRUCTION_ACTIVITY",
+        "effect": "REPLACEMENT",
+        "score": 1,
+        "timeFrames": [],
+        "title": "Treptower Park > Schöneweide",
+        "updated": "2026-10-15T10:34:18+00:00",
+        "periods": [
+          {
+            "id": "92",
+            "score": 1,
+            "title": "x",
+            "type": "DEFAULT",
+            "dateStart": "2026-10-29T22:00:00+00:00",
+            "dateEnd": "2026-10-30T03:00:00+00:00"
+          }
+        ],
+        "lines": [
+          {
+            "id": "15",
+            "t3Id": "15",
+            "title": "S9",
+            "link": "https://sbahn.berlin/fahren/s9/",
+            "direction": "LINEAR"
+          }
+        ],
+        "task": {
+          "id": "1"
+        }
+      },
+      {
+        "id": "902",
+        "type": "CONSTRUCTION_ACTIVITY",
+        "effect": "REPLACEMENT",
+        "score": 1,
+        "timeFrames": [],
+        "title": "Schöneweide Betriebsbahnhof <> Ostkreuz",
+        "updated": "2026-10-15T10:34:18+00:00",
+        "periods": [
+          {
+            "id": "93",
+            "score": 1,
+            "title": "x",
+            "type": "DEFAULT",
+            "dateStart": "2026-10-31T22:00:00+00:00",
+            "dateEnd": "2026-11-01T03:00:00+00:00"
+          }
+        ],
+        "lines": [
+          {
+            "id": "15",
+            "t3Id": "15",
+            "title": "S9",
+            "link": "https://sbahn.berlin/fahren/s9/",
+            "direction": "LINEAR"
+          }
+        ],
+        "task": {
+          "id": "1"
+        }
+      }
+    ],
+    "lines": [
+      {
+        "id": "15",
+        "t3Id": "15",
+        "title": "S9",
+        "link": "https://sbahn.berlin/fahren/s9/",
+        "direction": "LINEAR"
+      }
+    ],
+    "stations": [
+      {
+        "id": "66",
+        "t3Id": "150",
+        "title": "S Schöneweide",
+        "link": "https://sbahn.berlin/fahren/bahnhofsuebersicht/schoeneweide/",
+        "consequences": [
+          {
+            "id": "900"
+          },
+          {
+            "id": "901"
+          },
+          {
+            "id": "902"
+          }
+        ]
+      },
+      {
+        "id": "67",
+        "t3Id": "151",
+        "title": "S Schöneweide Betriebsbahnhof",
+        "link": "https://sbahn.berlin/fahren/bahnhofsuebersicht/schoeneweide-betriebsbahnhof/",
+        "consequences": [
+          {
+            "id": "902"
+          }
+        ]
+      }
+    ]
+  }
+}

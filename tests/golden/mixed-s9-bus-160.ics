@@ -54,7 +54,7 @@ DTSTAMP:20261020T080000Z
 DTSTART;TZID=Europe/Berlin:20261028T015000
 DTEND;TZID=Europe/Berlin:20261030T031500
 SUMMARY:S9/S26 · Spandau\, Ost\; Westkreuz bis Charlottenburg und weiter bis Hauptbahnhof · Besonderheit
-DESCRIPTION:Zeitraum: 28.10 (Mi) 02:50 Uhr bis 30.10 (Fr) 04:15 Uhr\nLinien: S9\, S26\nBahnhöfe: S Westkreuz\nMehr: https://sbahn.berlin/fahren/s9/\, https://sbahn.berlin/fahren/s26/\nStand: 2026-10-20T08:00:00Z
+DESCRIPTION:Zeitraum: 28.10 (Mi) 02:50 Uhr bis 30.10 (Fr) 04:15 Uhr\nLinien: S9\, S26\nMehr: https://sbahn.berlin/fahren/s9/\, https://sbahn.berlin/fahren/s26/\nStand: 2026-10-20T08:00:00Z
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT

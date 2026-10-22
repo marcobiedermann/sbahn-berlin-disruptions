@@ -29,7 +29,7 @@ One concrete calendar event: a continuous period, or a single day of a daily win
 _Avoid_: Instance, entry
 
 **Station**:
-An S-Bahn Berlin stop (BVG stops are not supported), identified by the user via its name (e.g. "Schöneweide"), not an internal ID. Resolved by exact match on the title without its `S `/`S+U `/`U ` prefix; zero or several matches is an error.
+An S-Bahn Berlin stop (BVG stops are not supported), identified by the user via its name (e.g. "Schöneweide"), not an internal ID. Resolved by exact match on the title without its `S `/`S+U `/`U ` prefix; zero or several matches is an error. A consequence affects a station only if the station is named in the consequence title (see ADR 0003); the API's station links also cover mere alternative-route mentions.
 _Avoid_: Stop, Bahnhof
 
 **Line**:

@@ -77,6 +77,8 @@ test_golden "station case-insensitive" station-schoeneweide --station SCHÖNEWEI
 test_golden "station OR line" lines-s9-s26 --station Schöneweide --line S26 --now 2026-10-28T12:00:00Z
 test_golden "station and line match once" line-s9 --station Westkreuz --line S9
 test_golden "multiple stations" lines-s9-s26 --station Schöneweide --station Westkreuz --line S26 --now 2026-10-28T12:00:00Z
+# The API also links a station to consequences that only mention it in the alternative-route text; only titles naming the stop count.
+test_golden "station named in title only" station-title-match --station Schöneweide --input-sbahn-berlin "$root/tests/fixtures/api-response-station-alternative.json" --now 2026-10-26T12:00:00Z
 
 # BVG: lines are routed to the operator by label, items without a watched line or of another type are ignored.
 test_golden "BVG bus 160" bvg-bus-160 --line "Bus 160"
