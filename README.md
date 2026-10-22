@@ -1,10 +1,15 @@
-# S-Bahn Berlin Disruptions Calendar
+# Berlin ÖPNV Disruptions Calendar
 
-Builds an iCalendar feed of S-Bahn Berlin disruptions (consequences) for the lines you care about, so you can subscribe to it in Google Calendar. See `GLOSSARY.md` for terminology.
+Builds an iCalendar feed of public transport (ÖPNV) disruptions in Berlin for the stations and lines you care about, covering S-Bahn Berlin and BVG (bus, tram, U-Bahn), so you can subscribe to it in Google Calendar. See `GLOSSARY.md` for terminology.
 
 ## Data source
 
-Disruptions come from the GraphQL API behind the [S-Bahn Berlin](https://sbahn.berlin/) website (`https://api.sbahn.berlin/construction-api/query`). It is an unofficial, undocumented API discovered via the browser's network tab, so it may change without notice.
+Disruptions come from two operators:
+
+- **S-Bahn Berlin:** the GraphQL API behind the [S-Bahn Berlin](https://sbahn.berlin/) website (`https://api.sbahn.berlin/construction-api/query`).
+- **BVG:** the disruption service behind [bvg.de](https://www.bvg.de/) (`https://www.bvg.de/disruption-reports-service/disruptions/v1/de`).
+
+Both are unofficial, undocumented APIs discovered via the browser's network tab, so they may change without notice.
 
 Without `--input-sbahn-berlin` the script queries the live API (`--api-url-sbahn-berlin` overrides the endpoint). `--input-sbahn-berlin <file>` reads a saved response instead, which the tests use. BVG lines (bus, tram, U-Bahn) work the same way with `--api-url-bvg` and `--input-bvg`. An operator is only queried if the watchlist needs it; if any queried operator fails, the whole run fails and the existing feed is kept.
 
