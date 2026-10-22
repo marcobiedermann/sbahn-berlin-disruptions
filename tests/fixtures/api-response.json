@@ -114,6 +114,27 @@
         "title": "S Westkreuz",
         "link": "https://sbahn.berlin/fahren/bahnhofsuebersicht/westkreuz/",
         "consequences": [{ "id": "300" }]
+      },
+      {
+        "id": "67",
+        "t3Id": "151",
+        "title": "S Schöneweide Betriebsbahnhof",
+        "link": "https://sbahn.berlin/fahren/bahnhofsuebersicht/schoeneweide-betriebsbahnhof/",
+        "consequences": [{ "id": "200" }]
+      },
+      {
+        "id": "71",
+        "t3Id": "170",
+        "title": "S Ostkreuz",
+        "link": "https://sbahn.berlin/fahren/bahnhofsuebersicht/ostkreuz/",
+        "consequences": []
+      },
+      {
+        "id": "72",
+        "t3Id": "171",
+        "title": "U Ostkreuz",
+        "link": "https://sbahn.berlin/fahren/bahnhofsuebersicht/ostkreuz-u/",
+        "consequences": []
       }
     ]
   }

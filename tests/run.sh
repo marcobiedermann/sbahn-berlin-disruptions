@@ -20,18 +20,18 @@ unfold() { perl -0pe 's/\r\n //g; s/\r//g' "$1"; }
 max_line_octets() { LC_ALL=C awk '{ sub(/\r$/, ""); if (length($0) > m) m = length($0) } END { print m + 0 }' "$1"; }
 
 test_golden() {
-  local name="$1"
-  shift
-  local out="$tmp/$name.ics"
+  local name="$1" golden_name="$2"
+  shift 2
+  local out="$tmp/case-$((++case_no)).ics"
   if ! "$script" --input "$fixture" --output "$out" "$@" >/dev/null 2>&1; then
     fail "$name: script exited non-zero"
     return
   fi
-  if diff <(unfold "$out") "$golden/$name.ics" >"$tmp/$name.diff"; then
+  if diff <(unfold "$out") "$golden/$golden_name.ics" >"$tmp/case.diff"; then
     pass "$name: matches golden"
   else
     fail "$name: differs from golden"
-    cat "$tmp/$name.diff"
+    cat "$tmp/case.diff"
   fi
   if [ "$(max_line_octets "$out")" -le 75 ]; then
     pass "$name: lines folded to 75 octets"
@@ -45,21 +45,39 @@ test_golden() {
   fi
 }
 
-test_golden line-s9 --line S9
-test_golden lines-s9-s26 --line S9 --line S26
+# Runs the script expecting failure: non-zero exit, stderr contains $2, existing output untouched.
+test_fails() {
+  local name="$1" expected="$2"
+  shift 2
+  echo "previous feed" >"$tmp/keep.ics"
+  local err status=0
+  err="$("$script" --input "$fixture" --output "$tmp/keep.ics" "$@" 2>&1 >/dev/null)" || status=$?
+  if [ "$status" -ne 0 ]; then pass "$name: exits non-zero"; else fail "$name: exits non-zero"; fi
+  case "$err" in *"$expected"*) pass "$name: message mentions '$expected'" ;; *) fail "$name: message mentions '$expected' (got: $err)" ;; esac
+  if [ "$(cat "$tmp/keep.ics")" = "previous feed" ]; then pass "$name: output untouched"; else fail "$name: output untouched"; fi
+}
+
+case_no=0
+
+test_golden "line S9" line-s9 --line S9
+test_golden "lines S9 + S26" lines-s9-s26 --line S9 --line S26
+test_golden "station by name" station-schoeneweide --station Schöneweide
+test_golden "station with S prefix" station-schoeneweide --station "S Schöneweide"
+test_golden "station case-insensitive" station-schoeneweide --station SCHÖNEWEIDE
+test_golden "station OR line" lines-s9-s26 --station Schöneweide --line S26
+test_golden "station and line match once" line-s9 --station Westkreuz --line S9
+test_golden "multiple stations" lines-s9-s26 --station Schöneweide --station Westkreuz --line S26
 
 # Identical input yields byte-identical output.
 "$script" --input "$fixture" --output "$tmp/a.ics" --line S9 >/dev/null 2>&1
 "$script" --input "$fixture" --output "$tmp/b.ics" --line S9 >/dev/null 2>&1
 if cmp -s "$tmp/a.ics" "$tmp/b.ics"; then pass "deterministic output"; else fail "deterministic output"; fi
 
-# Unknown line: non-zero exit, known lines listed, existing output untouched.
-echo "previous feed" >"$tmp/keep.ics"
-err="$("$script" --input "$fixture" --output "$tmp/keep.ics" --line S99 2>&1 >/dev/null)"
-status=$?
-if [ "$status" -ne 0 ]; then pass "unknown line exits non-zero"; else fail "unknown line exits non-zero"; fi
-case "$err" in *S9*S26*) pass "unknown line lists known lines" ;; *) fail "unknown line lists known lines: $err" ;; esac
-if [ "$(cat "$tmp/keep.ics")" = "previous feed" ]; then pass "output untouched on error"; else fail "output untouched on error"; fi
+test_fails "unknown line" "Known lines: S9, S26" --line S99
+test_fails "unknown station" "unknown station" --station Nirgendwo
+test_fails "near-miss station suggests candidates" "S Schöneweide" --station Schöneweid
+test_fails "ambiguous station" "U Ostkreuz" --station Ostkreuz
+test_fails "no stations or lines" "--station or --line"
 
 if [ "$failures" -ne 0 ]; then
   echo "$failures failure(s)"

@@ -28,7 +28,7 @@ DTSTAMP:20260928T051000Z
 DTSTART:20261110T210000Z
 DTEND:20261111T020000Z
 SUMMARY:S26 · Nordbahnhof ⇄ Blankenburg · Kein Zugverkehr
-DESCRIPTION:Zeitraum: 10.11 (Di) 22:00 Uhr bis 11.11 (Mi) 03:00 Uhr\nLinien: S26\nMehr: https://sbahn.berlin/fahren/s26/\nStand: 2026-09-28T05:10:00Z
+DESCRIPTION:Zeitraum: 10.11 (Di) 22:00 Uhr bis 11.11 (Mi) 03:00 Uhr\nLinien: S26\nBahnhöfe: S Schöneweide Betriebsbahnhof\nMehr: https://sbahn.berlin/fahren/s26/\nStand: 2026-09-28T05:10:00Z
 TRANSP:TRANSPARENT
 END:VEVENT
 END:VCALENDAR
