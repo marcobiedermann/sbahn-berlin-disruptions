@@ -63,4 +63,28 @@ DESCRIPTION:Zeitraum: 04.11 (Mi) 21:30 Uhr bis 05.11 (Do) 01:30 Uhr\nLinien
  in/fahren/s9/\nStand: 2026-10-16T06:40:01Z
 TRANSP:TRANSPARENT
 END:VEVENT
+BEGIN:VEVENT
+UID:3422-1396-20261106@sbahn-berlin-disruptions
+DTSTAMP:20261015T103418Z
+DTSTART;TZID=Europe/Berlin:20261106T214500
+DTEND;TZID=Europe/Berlin:20261109T013000
+SUMMARY:S47 · Spindlersfeld ⇄ Schöneweide · Zugangebot geändert
+DESCRIPTION:Zeitraum: 06.11 (Fr) 21:45 Uhr bis 09.11 (Mo) 01:30 Uhr\nLinien
+ : S47\nBahnhöfe: S Spindlersfeld\, S Schöneweide\nDetails: https://sbahn
+ .berlin/fahren/bauen-stoerung/bauen/2619/auswirkung/3422/\nMehr: https://s
+ bahn.berlin/fahren/s47/\nStand: 2026-10-15T10:34:18Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3423-1396-20261106@sbahn-berlin-disruptions
+DTSTAMP:20261015T103501Z
+DTSTART;TZID=Europe/Berlin:20261106T214500
+DTEND;TZID=Europe/Berlin:20261109T013000
+SUMMARY:S9 · Treptower Park → Schöneweide · Zugangebot geändert
+DESCRIPTION:Zeitraum: 06.11 (Fr) 21:45 Uhr bis 09.11 (Mo) 01:30 Uhr\nLinien
+ : S9\nBahnhöfe: S Schöneweide\, S Treptower Park\nDetails: https://sbahn
+ .berlin/fahren/bauen-stoerung/bauen/2619/auswirkung/3423/\nMehr: https://s
+ bahn.berlin/fahren/s9/\nStand: 2026-10-15T10:35:01Z
+TRANSP:TRANSPARENT
+END:VEVENT
 END:VCALENDAR
