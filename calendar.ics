@@ -23,7 +23,7 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:HIM_FREETEXT_357299-20260821@sbahn-berlin-disruptions
-DTSTAMP:20260828T193914Z
+DTSTAMP:20261027T080501Z
 DTSTART;VALUE=DATE:20260821
 DTEND;VALUE=DATE:20260822
 SUMMARY:Bus 160/163 · Haltestelle verlegt
@@ -31,8 +31,8 @@ DESCRIPTION:Bus 160\, 163: Verlegung der Haltestellen Hermann-Dorner-Allee
  um ungefähr 200 Meter an den bisherigen Standort James-Franck-Str.. Grund
  : Neuer Standort noch im Bau.\nZeitraum: 21.08.2026 20:39 – unbefristet\
  nLinien: Bus 160\, Bus 163\nHaltestelle: Hermann-Dorner-Allee\nMehr: https
- ://www.bvg.de/de/verbindungen/stoerungsmeldungen\nStand: 2026-08-28T19:39:
- 14Z
+ ://www.bvg.de/de/verbindungen/stoerungsmeldungen\nStand: 2026-10-27T08:05:
+ 01Z
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
