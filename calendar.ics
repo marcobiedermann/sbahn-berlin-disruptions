@@ -36,6 +36,20 @@ DESCRIPTION:Bus 160\, 163: Verlegung der Haltestellen Hermann-Dorner-Allee
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
+UID:HIM_FREETEXT_370998-20261029@sbahn-berlin-disruptions
+DTSTAMP:20261029T103104Z
+DTSTART;VALUE=DATE:20261029
+DTEND;VALUE=DATE:20261030
+SUMMARY:Bus 160 · Umleitung · Störung
+DESCRIPTION:Bus 160: Umleitung aufgrund von Bauarbeiten(Kranarbeiten) Richt
+ ung Hasselwerderstraße von Köpenicker Straße/Kirche bis Rudower Straße
+ /Wegedornstraße.\nZeitraum: 29.10.2026 11:28 – unbefristet\nLinien: Bus
+  160\nHaltestelle: Altglienicke Kirche\, Rudower Chaussee/Wegedornstr.\nMe
+ hr: https://www.bvg.de/de/verbindungen/stoerungsmeldungen\nStand: 2026-10-
+ 29T10:31:04Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
 UID:3414-1372-20261104@sbahn-berlin-disruptions
 DTSTAMP:20261016T073000Z
 DTSTART;TZID=Europe/Berlin:20261104T213000
