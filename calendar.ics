@@ -140,7 +140,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:3437-1384-20261116@sbahn-berlin-disruptions
-DTSTAMP:20261022T111001Z
+DTSTAMP:20261103T080001Z
 DTSTART;TZID=Europe/Berlin:20261116T213000
 DTEND;TZID=Europe/Berlin:20261117T013000
 SUMMARY:S8/S85/S9 · Schöneweide ⇄ Ostkreuz · Ersatzverkehr
@@ -148,7 +148,7 @@ DESCRIPTION:Zeitraum: 16.11 (Mo) 21:30 Uhr bis 17.11 (Di) 01:30 Uhr\nLinien
  : S8\, S85\, S9\nBahnhöfe: S Schöneweide\, S Ostkreuz\nDetails: https://
  sbahn.berlin/fahren/bauen-stoerung/bauen/2627/auswirkung/3437/\nMehr: http
  s://sbahn.berlin/fahren/s8/\, https://sbahn.berlin/fahren/s85/\, https://s
- bahn.berlin/fahren/s9/\nStand: 2026-10-22T11:10:01Z
+ bahn.berlin/fahren/s9/\nStand: 2026-11-03T08:00:01Z
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
