@@ -64,6 +64,19 @@ DESCRIPTION:Zeitraum: heute\, 21:30 Uhr bis morgen 01:30 Uhr\nLinien: S47\,
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
+UID:HIM_FREETEXT_371603-20261105@sbahn-berlin-disruptions
+DTSTAMP:20261102T122555Z
+DTSTART;VALUE=DATE:20261105
+DTEND;VALUE=DATE:20261106
+SUMMARY:Bus 163 · Haltestelle verlegt
+DESCRIPTION:Bus 163: Verlegung der Haltestelle Bohnsdorf Kirche um 140 Mete
+ r weiter in bzw. entgegen der Fahrtrichtung.\nZeitraum: 05.11.2026 06:00 
+ – unbefristet\nLinien: Bus 163\nHaltestelle: Bohnsdorf Kirche\nMehr: htt
+ ps://www.bvg.de/de/verbindungen/stoerungsmeldungen\nStand: 2026-11-02T12:2
+ 5:55Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
 UID:3422-1396-20261106@sbahn-berlin-disruptions
 DTSTAMP:20261015T103418Z
 DTSTART;TZID=Europe/Berlin:20261106T214500
