@@ -41,11 +41,10 @@ DTSTAMP:20261016T073000Z
 DTSTART;TZID=Europe/Berlin:20261104T213000
 DTEND;TZID=Europe/Berlin:20261105T013000
 SUMMARY:S46/S8 · Grünau ⇄ Schöneweide · Ersatzverkehr
-DESCRIPTION:Zeitraum: heute\, 21:30 Uhr bis morgen 01:30 Uhr\nLinien: S46\,
-  S8\nBahnhöfe: S Grünau\, S Schöneweide\nDetails: https://sbahn.berlin/
- fahren/bauen-stoerung/bauen/2616/auswirkung/3414/\nMehr: https://sbahn.ber
- lin/fahren/s46/\, https://sbahn.berlin/fahren/s8/\nStand: 2026-10-16T07:30
- :00Z
+DESCRIPTION:Zeitraum: bis morgen 01:30 Uhr\nLinien: S46\, S8\nBahnhöfe: S 
+ Grünau\, S Schöneweide\nDetails: https://sbahn.berlin/fahren/bauen-stoer
+ ung/bauen/2616/auswirkung/3414/\nMehr: https://sbahn.berlin/fahren/s46/\, 
+ https://sbahn.berlin/fahren/s8/\nStand: 2026-10-16T07:30:00Z
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
@@ -55,12 +54,12 @@ DTSTART;TZID=Europe/Berlin:20261104T213000
 DTEND;TZID=Europe/Berlin:20261105T013000
 SUMMARY:S47/S46/S8/S9 · Spindlersfeld ⇄ Schöneweide ⇄ Treptower Park 
  · Zugangebot geändert
-DESCRIPTION:Zeitraum: heute\, 21:30 Uhr bis morgen 01:30 Uhr\nLinien: S47\,
-  S46\, S8\, S9\nBahnhöfe: S Spindlersfeld\, S Schöneweide\, S Treptower 
- Park\nDetails: https://sbahn.berlin/fahren/bauen-stoerung/bauen/2616/auswi
- rkung/3935/\nMehr: https://sbahn.berlin/fahren/s47/\, https://sbahn.berlin
- /fahren/s46/\, https://sbahn.berlin/fahren/s8/\, https://sbahn.berlin/fahr
- en/s9/\nStand: 2026-10-16T06:40:01Z
+DESCRIPTION:Zeitraum: bis morgen 01:30 Uhr\nLinien: S47\, S46\, S8\, S9\nBa
+ hnhöfe: S Spindlersfeld\, S Schöneweide\, S Treptower Park\nDetails: htt
+ ps://sbahn.berlin/fahren/bauen-stoerung/bauen/2616/auswirkung/3935/\nMehr:
+  https://sbahn.berlin/fahren/s47/\, https://sbahn.berlin/fahren/s46/\, htt
+ ps://sbahn.berlin/fahren/s8/\, https://sbahn.berlin/fahren/s9/\nStand: 202
+ 6-10-16T06:40:01Z
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
