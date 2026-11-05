@@ -36,33 +36,6 @@ DESCRIPTION:Bus 160\, 163: Verlegung der Haltestellen Hermann-Dorner-Allee
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:3414-1372-20261104@sbahn-berlin-disruptions
-DTSTAMP:20261016T073000Z
-DTSTART;TZID=Europe/Berlin:20261104T213000
-DTEND;TZID=Europe/Berlin:20261105T013000
-SUMMARY:S46/S8 · Grünau ⇄ Schöneweide · Ersatzverkehr
-DESCRIPTION:Zeitraum: bis morgen 01:30 Uhr\nLinien: S46\, S8\nBahnhöfe: S 
- Grünau\, S Schöneweide\nDetails: https://sbahn.berlin/fahren/bauen-stoer
- ung/bauen/2616/auswirkung/3414/\nMehr: https://sbahn.berlin/fahren/s46/\, 
- https://sbahn.berlin/fahren/s8/\nStand: 2026-10-16T07:30:00Z
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:3935-1372-20261104@sbahn-berlin-disruptions
-DTSTAMP:20261016T064001Z
-DTSTART;TZID=Europe/Berlin:20261104T213000
-DTEND;TZID=Europe/Berlin:20261105T013000
-SUMMARY:S47/S46/S8/S9 · Spindlersfeld ⇄ Schöneweide ⇄ Treptower Park 
- · Zugangebot geändert
-DESCRIPTION:Zeitraum: bis morgen 01:30 Uhr\nLinien: S47\, S46\, S8\, S9\nBa
- hnhöfe: S Spindlersfeld\, S Schöneweide\, S Treptower Park\nDetails: htt
- ps://sbahn.berlin/fahren/bauen-stoerung/bauen/2616/auswirkung/3935/\nMehr:
-  https://sbahn.berlin/fahren/s47/\, https://sbahn.berlin/fahren/s46/\, htt
- ps://sbahn.berlin/fahren/s8/\, https://sbahn.berlin/fahren/s9/\nStand: 202
- 6-10-16T06:40:01Z
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
 UID:HIM_FREETEXT_371603-20261105@sbahn-berlin-disruptions
 DTSTAMP:20261102T122555Z
 DTSTART;VALUE=DATE:20261105
@@ -81,10 +54,10 @@ DTSTAMP:20261015T103418Z
 DTSTART;TZID=Europe/Berlin:20261106T214500
 DTEND;TZID=Europe/Berlin:20261109T013000
 SUMMARY:S47 · Spindlersfeld ⇄ Schöneweide · Zugangebot geändert
-DESCRIPTION:Zeitraum: 06.11 (Fr) 21:45 Uhr bis 09.11 (Mo) 01:30 Uhr\nLinien
- : S47\nBahnhöfe: S Spindlersfeld\, S Schöneweide\nDetails: https://sbahn
- .berlin/fahren/bauen-stoerung/bauen/2619/auswirkung/3422/\nMehr: https://s
- bahn.berlin/fahren/s47/\nStand: 2026-10-15T10:34:18Z
+DESCRIPTION:Zeitraum: morgen\, 21:45 Uhr bis 09.11 (Mo) 01:30 Uhr\nLinien: 
+ S47\nBahnhöfe: S Spindlersfeld\, S Schöneweide\nDetails: https://sbahn.b
+ erlin/fahren/bauen-stoerung/bauen/2619/auswirkung/3422/\nMehr: https://sba
+ hn.berlin/fahren/s47/\nStand: 2026-10-15T10:34:18Z
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
@@ -93,10 +66,10 @@ DTSTAMP:20261015T103501Z
 DTSTART;TZID=Europe/Berlin:20261106T214500
 DTEND;TZID=Europe/Berlin:20261109T013000
 SUMMARY:S9 · Treptower Park → Schöneweide · Zugangebot geändert
-DESCRIPTION:Zeitraum: 06.11 (Fr) 21:45 Uhr bis 09.11 (Mo) 01:30 Uhr\nLinien
- : S9\nBahnhöfe: S Schöneweide\, S Treptower Park\nDetails: https://sbahn
- .berlin/fahren/bauen-stoerung/bauen/2619/auswirkung/3423/\nMehr: https://s
- bahn.berlin/fahren/s9/\nStand: 2026-10-15T10:35:01Z
+DESCRIPTION:Zeitraum: morgen\, 21:45 Uhr bis 09.11 (Mo) 01:30 Uhr\nLinien: 
+ S9\nBahnhöfe: S Schöneweide\, S Treptower Park\nDetails: https://sbahn.b
+ erlin/fahren/bauen-stoerung/bauen/2619/auswirkung/3423/\nMehr: https://sba
+ hn.berlin/fahren/s9/\nStand: 2026-10-15T10:35:01Z
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
