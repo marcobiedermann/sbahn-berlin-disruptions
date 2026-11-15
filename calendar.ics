@@ -54,10 +54,10 @@ DTSTAMP:20261102T124805Z
 DTSTART;TZID=Europe/Berlin:20261113T214500
 DTEND;TZID=Europe/Berlin:20261116T013000
 SUMMARY:S46/S47 · Schöneweide ⇄ Neukölln · Ersatzverkehr
-DESCRIPTION:Zeitraum: bis 16.11 (Mo) 01:30 Uhr\nLinien: S46\, S47\nBahnhöf
- e: S+U Neukölln\, S Schöneweide\nDetails: https://sbahn.berlin/fahren/ba
- uen-stoerung/bauen/2625/auswirkung/3431/\nMehr: https://sbahn.berlin/fahre
- n/s46/\, https://sbahn.berlin/fahren/s47/\nStand: 2026-11-02T12:48:05Z
+DESCRIPTION:Zeitraum: bis morgen 01:30 Uhr\nLinien: S46\, S47\nBahnhöfe: S
+ +U Neukölln\, S Schöneweide\nDetails: https://sbahn.berlin/fahren/bauen-
+ stoerung/bauen/2625/auswirkung/3431/\nMehr: https://sbahn.berlin/fahren/s4
+ 6/\, https://sbahn.berlin/fahren/s47/\nStand: 2026-11-02T12:48:05Z
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
@@ -66,11 +66,11 @@ DTSTAMP:20261102T124648Z
 DTSTART;TZID=Europe/Berlin:20261113T214500
 DTEND;TZID=Europe/Berlin:20261116T013000
 SUMMARY:S8/S85/S9 · Schöneweide ⇄ Treptower Park · Ersatzverkehr
-DESCRIPTION:Zeitraum: bis 16.11 (Mo) 01:30 Uhr\nLinien: S8\, S85\, S9\nBahn
- höfe: S Schöneweide\, S Treptower Park\nDetails: https://sbahn.berlin/fa
- hren/bauen-stoerung/bauen/2625/auswirkung/3432/\nMehr: https://sbahn.berli
- n/fahren/s8/\, https://sbahn.berlin/fahren/s85/\, https://sbahn.berlin/fah
- ren/s9/\nStand: 2026-11-02T12:46:48Z
+DESCRIPTION:Zeitraum: bis morgen 01:30 Uhr\nLinien: S8\, S85\, S9\nBahnhöf
+ e: S Schöneweide\, S Treptower Park\nDetails: https://sbahn.berlin/fahren
+ /bauen-stoerung/bauen/2625/auswirkung/3432/\nMehr: https://sbahn.berlin/fa
+ hren/s8/\, https://sbahn.berlin/fahren/s85/\, https://sbahn.berlin/fahren/
+ s9/\nStand: 2026-11-02T12:46:48Z
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
@@ -79,10 +79,10 @@ DTSTAMP:20261022T122001Z
 DTSTART;TZID=Europe/Berlin:20261113T214500
 DTEND;TZID=Europe/Berlin:20261116T013000
 SUMMARY:S8 · Grünau ⇄ Schöneweide · Kein Zugverkehr
-DESCRIPTION:Zeitraum: bis 16.11 (Mo) 01:30 Uhr\nLinien: S8\nBahnhöfe: S Gr
- ünau\, S Schöneweide\nDetails: https://sbahn.berlin/fahren/bauen-stoerun
- g/bauen/2625/auswirkung/3433/\nMehr: https://sbahn.berlin/fahren/s8/\nStan
- d: 2026-10-22T12:20:01Z
+DESCRIPTION:Zeitraum: bis morgen 01:30 Uhr\nLinien: S8\nBahnhöfe: S Grüna
+ u\, S Schöneweide\nDetails: https://sbahn.berlin/fahren/bauen-stoerung/ba
+ uen/2625/auswirkung/3433/\nMehr: https://sbahn.berlin/fahren/s8/\nStand: 2
+ 026-10-22T12:20:01Z
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
@@ -91,10 +91,10 @@ DTSTAMP:20261022T130006Z
 DTSTART;TZID=Europe/Berlin:20261113T214500
 DTEND;TZID=Europe/Berlin:20261116T013000
 SUMMARY:S85/S9 · Flughafen BER ⇄ Schöneweide · Zugangebot geändert
-DESCRIPTION:Zeitraum: bis 16.11 (Mo) 01:30 Uhr\nLinien: S85\, S9\nBahnhöfe
- : S Flughafen BER\, S Schöneweide\nDetails: https://sbahn.berlin/fahren/b
- auen-stoerung/bauen/2625/auswirkung/4013/\nMehr: https://sbahn.berlin/fahr
- en/s85/\, https://sbahn.berlin/fahren/s9/\nStand: 2026-10-22T13:00:06Z
+DESCRIPTION:Zeitraum: bis morgen 01:30 Uhr\nLinien: S85\, S9\nBahnhöfe: S 
+ Flughafen BER\, S Schöneweide\nDetails: https://sbahn.berlin/fahren/bauen
+ -stoerung/bauen/2625/auswirkung/4013/\nMehr: https://sbahn.berlin/fahren/s
+ 85/\, https://sbahn.berlin/fahren/s9/\nStand: 2026-10-22T13:00:06Z
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
@@ -103,11 +103,11 @@ DTSTAMP:20261103T080001Z
 DTSTART;TZID=Europe/Berlin:20261116T213000
 DTEND;TZID=Europe/Berlin:20261117T013000
 SUMMARY:S8/S85/S9 · Schöneweide ⇄ Ostkreuz · Ersatzverkehr
-DESCRIPTION:Zeitraum: 16.11 (Mo) 21:30 Uhr bis 17.11 (Di) 01:30 Uhr\nLinien
- : S8\, S85\, S9\nBahnhöfe: S Schöneweide\, S Ostkreuz\nDetails: https://
- sbahn.berlin/fahren/bauen-stoerung/bauen/2627/auswirkung/3437/\nMehr: http
- s://sbahn.berlin/fahren/s8/\, https://sbahn.berlin/fahren/s85/\, https://s
- bahn.berlin/fahren/s9/\nStand: 2026-11-03T08:00:01Z
+DESCRIPTION:Zeitraum: morgen\, 21:30 Uhr bis 17.11 (Di) 01:30 Uhr\nLinien: 
+ S8\, S85\, S9\nBahnhöfe: S Schöneweide\, S Ostkreuz\nDetails: https://sb
+ ahn.berlin/fahren/bauen-stoerung/bauen/2627/auswirkung/3437/\nMehr: https:
+ //sbahn.berlin/fahren/s8/\, https://sbahn.berlin/fahren/s85/\, https://sba
+ hn.berlin/fahren/s9/\nStand: 2026-11-03T08:00:01Z
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
@@ -116,10 +116,10 @@ DTSTAMP:20261022T112119Z
 DTSTART;TZID=Europe/Berlin:20261116T213000
 DTEND;TZID=Europe/Berlin:20261117T013000
 SUMMARY:S8 · Grünau ⇄ Schöneweide · Kein Zugverkehr
-DESCRIPTION:Zeitraum: 16.11 (Mo) 21:30 Uhr bis 17.11 (Di) 01:30 Uhr\nLinien
- : S8\nBahnhöfe: S Grünau\, S Schöneweide\nDetails: https://sbahn.berlin
- /fahren/bauen-stoerung/bauen/2627/auswirkung/3439/\nMehr: https://sbahn.be
- rlin/fahren/s8/\nStand: 2026-10-22T11:21:19Z
+DESCRIPTION:Zeitraum: morgen\, 21:30 Uhr bis 17.11 (Di) 01:30 Uhr\nLinien: 
+ S8\nBahnhöfe: S Grünau\, S Schöneweide\nDetails: https://sbahn.berlin/f
+ ahren/bauen-stoerung/bauen/2627/auswirkung/3439/\nMehr: https://sbahn.berl
+ in/fahren/s8/\nStand: 2026-10-22T11:21:19Z
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
@@ -128,11 +128,11 @@ DTSTAMP:20261022T114001Z
 DTSTART;TZID=Europe/Berlin:20261116T213000
 DTEND;TZID=Europe/Berlin:20261117T013000
 SUMMARY:S46/S47 · Schöneweide ⇄ Baumschulenweg · Kein Zugverkehr
-DESCRIPTION:Zeitraum: 16.11 (Mo) 21:30 Uhr bis 17.11 (Di) 01:30 Uhr\nLinien
- : S46\, S47\nBahnhöfe: S Baumschulenweg\, S Schöneweide\nDetails: https:
- //sbahn.berlin/fahren/bauen-stoerung/bauen/2627/auswirkung/4003/\nMehr: ht
- tps://sbahn.berlin/fahren/s46/\, https://sbahn.berlin/fahren/s47/\nStand: 
- 2026-10-22T11:40:01Z
+DESCRIPTION:Zeitraum: morgen\, 21:30 Uhr bis 17.11 (Di) 01:30 Uhr\nLinien: 
+ S46\, S47\nBahnhöfe: S Baumschulenweg\, S Schöneweide\nDetails: https://
+ sbahn.berlin/fahren/bauen-stoerung/bauen/2627/auswirkung/4003/\nMehr: http
+ s://sbahn.berlin/fahren/s46/\, https://sbahn.berlin/fahren/s47/\nStand: 20
+ 26-10-22T11:40:01Z
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
@@ -141,11 +141,11 @@ DTSTAMP:20261022T115001Z
 DTSTART;TZID=Europe/Berlin:20261116T213000
 DTEND;TZID=Europe/Berlin:20261117T013000
 SUMMARY:S85/S9 · Flughafen BER ⇄ Schöneweide · Zugangebot geändert
-DESCRIPTION:Zeitraum: 16.11 (Mo) 21:30 Uhr bis 17.11 (Di) 01:30 Uhr\nLinien
- : S85\, S9\nBahnhöfe: S Flughafen BER\, S Schöneweide\nDetails: https://
- sbahn.berlin/fahren/bauen-stoerung/bauen/2627/auswirkung/4004/\nMehr: http
- s://sbahn.berlin/fahren/s85/\, https://sbahn.berlin/fahren/s9/\nStand: 202
- 6-10-22T11:50:01Z
+DESCRIPTION:Zeitraum: morgen\, 21:30 Uhr bis 17.11 (Di) 01:30 Uhr\nLinien: 
+ S85\, S9\nBahnhöfe: S Flughafen BER\, S Schöneweide\nDetails: https://sb
+ ahn.berlin/fahren/bauen-stoerung/bauen/2627/auswirkung/4004/\nMehr: https:
+ //sbahn.berlin/fahren/s85/\, https://sbahn.berlin/fahren/s9/\nStand: 2026-
+ 10-22T11:50:01Z
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
@@ -154,10 +154,10 @@ DTSTAMP:20261022T115001Z
 DTSTART;TZID=Europe/Berlin:20261116T213000
 DTEND;TZID=Europe/Berlin:20261117T013000
 SUMMARY:S47 · Spindlersfeld ⇄ Schöneweide · Zugangebot geändert
-DESCRIPTION:Zeitraum: 16.11 (Mo) 21:30 Uhr bis 17.11 (Di) 01:30 Uhr\nLinien
- : S47\nBahnhöfe: S Spindlersfeld\, S Schöneweide\nDetails: https://sbahn
- .berlin/fahren/bauen-stoerung/bauen/2627/auswirkung/4005/\nMehr: https://s
- bahn.berlin/fahren/s47/\nStand: 2026-10-22T11:50:01Z
+DESCRIPTION:Zeitraum: morgen\, 21:30 Uhr bis 17.11 (Di) 01:30 Uhr\nLinien: 
+ S47\nBahnhöfe: S Spindlersfeld\, S Schöneweide\nDetails: https://sbahn.b
+ erlin/fahren/bauen-stoerung/bauen/2627/auswirkung/4005/\nMehr: https://sba
+ hn.berlin/fahren/s47/\nStand: 2026-10-22T11:50:01Z
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
