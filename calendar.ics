@@ -173,4 +173,16 @@ DESCRIPTION:Zeitraum: morgen\, 21:30 Uhr bis 18.11 (Mi) 01:30 Uhr\nLinien:
  lin/fahren/s46/\nStand: 2026-10-22T13:00:06Z
 TRANSP:TRANSPARENT
 END:VEVENT
+BEGIN:VEVENT
+UID:4019-1395-20261130@sbahn-berlin-disruptions
+DTSTAMP:20261022T134501Z
+DTSTART;TZID=Europe/Berlin:20261130T040000
+DTEND;TZID=Europe/Berlin:20261204T013000
+SUMMARY:S46 · Schöneweide · Zugangebot geändert
+DESCRIPTION:Zeitraum: 30.11 (Mo) 04:00 Uhr bis 04.12 (Fr) 01:30 Uhr\nLinien
+ : S46\nBahnhöfe: S Schöneweide\nDetails: https://sbahn.berlin/fahren/bau
+ en-stoerung/bauen/2636/auswirkung/4019/\nMehr: https://sbahn.berlin/fahren
+ /s46/\nStand: 2026-10-22T13:45:01Z
+TRANSP:TRANSPARENT
+END:VEVENT
 END:VCALENDAR
