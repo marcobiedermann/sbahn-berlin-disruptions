@@ -36,6 +36,19 @@ DESCRIPTION:Bus 160\, 163: Verlegung der Haltestellen Hermann-Dorner-Allee
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
+UID:HIM_FREETEXT_369877-20261026@sbahn-berlin-disruptions
+DTSTAMP:20261118T093109Z
+DTSTART;VALUE=DATE:20261026
+DTEND;VALUE=DATE:20261027
+SUMMARY:Bus 160/165/N60/N65 · Haltestelle verlegt
+DESCRIPTION:Bus 160\, 165\, N60: Verlegung der Haltestelle S Schöneweide u
+ m 100 Meter weiter in bzw. entgegen der Fahrtrichtung.\nZeitraum: 26.10.20
+ 26 06:00 – unbefristet\nLinien: Bus 160\, Bus 165\, Bus N60\, Bus N65\nH
+ altestelle: S Schöneweide Bhf\nMehr: https://www.bvg.de/de/verbindungen/s
+ toerungsmeldungen\nStand: 2026-11-18T09:31:09Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
 UID:HIM_FREETEXT_371603-20261105@sbahn-berlin-disruptions
 DTSTAMP:20261102T122555Z
 DTSTART;VALUE=DATE:20261105
