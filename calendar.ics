@@ -49,68 +49,6 @@ DESCRIPTION:Bus 163: Verlegung der Haltestelle Bohnsdorf Kirche um 140 Mete
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:3443-1388-20261117@sbahn-berlin-disruptions
-DTSTAMP:20261106T050001Z
-DTSTART;TZID=Europe/Berlin:20261117T213000
-DTEND;TZID=Europe/Berlin:20261118T013000
-SUMMARY:S47 · Spindlersfeld ⇄ Schöneweide · Ersatzverkehr
-DESCRIPTION:Zeitraum: heute\, 21:30 Uhr bis morgen 01:30 Uhr\nLinien: S47\n
- Bahnhöfe: S Spindlersfeld\, S Schöneweide\nDetails: https://sbahn.berlin
- /fahren/bauen-stoerung/bauen/2631/auswirkung/3443/\nMehr: https://sbahn.be
- rlin/fahren/s47/\nStand: 2026-11-06T05:00:01Z
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:3444-1388-20261117@sbahn-berlin-disruptions
-DTSTAMP:20261106T050001Z
-DTSTART;TZID=Europe/Berlin:20261117T213000
-DTEND;TZID=Europe/Berlin:20261118T013000
-SUMMARY:S46/S8 · Grünau ⇄ Schöneweide · Ersatzverkehr
-DESCRIPTION:Zeitraum: heute\, 21:30 Uhr bis morgen 01:30 Uhr\nLinien: S46\,
-  S8\nBahnhöfe: S Grünau\, S Schöneweide\nDetails: https://sbahn.berlin/
- fahren/bauen-stoerung/bauen/2631/auswirkung/3444/\nMehr: https://sbahn.ber
- lin/fahren/s46/\, https://sbahn.berlin/fahren/s8/\nStand: 2026-11-06T05:00
- :01Z
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:3445-1388-20261117@sbahn-berlin-disruptions
-DTSTAMP:20261106T050001Z
-DTSTART;TZID=Europe/Berlin:20261117T213000
-DTEND;TZID=Europe/Berlin:20261118T013000
-SUMMARY:S85/S9 · Grünbergallee ⇄ Schöneweide · Ersatzverkehr
-DESCRIPTION:Zeitraum: heute\, 21:30 Uhr bis morgen 01:30 Uhr\nLinien: S85\,
-  S9\nBahnhöfe: S Schöneweide\, S Grünbergallee\nDetails: https://sbahn.
- berlin/fahren/bauen-stoerung/bauen/2631/auswirkung/3445/\nMehr: https://sb
- ahn.berlin/fahren/s85/\, https://sbahn.berlin/fahren/s9/\nStand: 2026-11-0
- 6T05:00:01Z
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:3447-1388-20261117@sbahn-berlin-disruptions
-DTSTAMP:20261022T124001Z
-DTSTART;TZID=Europe/Berlin:20261117T213000
-DTEND;TZID=Europe/Berlin:20261118T013000
-SUMMARY:S47 · Schöneweide ⇄ Südkreuz · Kein Zugverkehr
-DESCRIPTION:Zeitraum: heute\, 21:30 Uhr bis morgen 01:30 Uhr\nLinien: S47\n
- Bahnhöfe: S Südkreuz\, S Schöneweide\nDetails: https://sbahn.berlin/fah
- ren/bauen-stoerung/bauen/2631/auswirkung/3447/\nMehr: https://sbahn.berlin
- /fahren/s47/\nStand: 2026-10-22T12:40:01Z
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:3449-1388-20261117@sbahn-berlin-disruptions
-DTSTAMP:20261022T130006Z
-DTSTART;TZID=Europe/Berlin:20261117T213000
-DTEND;TZID=Europe/Berlin:20261118T013000
-SUMMARY:S46 · Schöneweide → Westend · Zugangebot geändert
-DESCRIPTION:Zeitraum: heute\, 21:30 Uhr bis morgen 01:30 Uhr\nLinien: S46\n
- Bahnhöfe: S Westend\, S Schöneweide\nDetails: https://sbahn.berlin/fahre
- n/bauen-stoerung/bauen/2631/auswirkung/3449/\nMehr: https://sbahn.berlin/f
- ahren/s46/\nStand: 2026-10-22T13:00:06Z
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
 UID:4019-1395-20261130@sbahn-berlin-disruptions
 DTSTAMP:20261022T134501Z
 DTSTART;TZID=Europe/Berlin:20261130T040000
