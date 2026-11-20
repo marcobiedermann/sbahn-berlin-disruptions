@@ -73,4 +73,67 @@ DESCRIPTION:Zeitraum: 30.11 (Mo) 04:00 Uhr bis 04.12 (Fr) 01:30 Uhr\nLinien
  /s46/\nStand: 2026-10-22T13:45:01Z
 TRANSP:TRANSPARENT
 END:VEVENT
+BEGIN:VEVENT
+UID:3960-1468-20261204@sbahn-berlin-disruptions
+DTSTAMP:20261113T125001Z
+DTSTART;TZID=Europe/Berlin:20261204T214500
+DTEND;TZID=Europe/Berlin:20261207T013000
+SUMMARY:S46/S47 · Schöneweide ⇄ Neukölln · Ersatzverkehr
+DESCRIPTION:Zeitraum: 04.12 (Fr) 21:45 Uhr bis 07.12 (Mo) 01:30 Uhr\nLinien
+ : S46\, S47\nBahnhöfe: S+U Neukölln\, S Schöneweide\nDetails: https://s
+ bahn.berlin/fahren/bauen-stoerung/bauen/3044/auswirkung/3960/\nMehr: https
+ ://sbahn.berlin/fahren/s46/\, https://sbahn.berlin/fahren/s47/\nStand: 202
+ 6-11-13T12:50:01Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3961-1468-20261204@sbahn-berlin-disruptions
+DTSTAMP:20261120T080541Z
+DTSTART;TZID=Europe/Berlin:20261204T214500
+DTEND;TZID=Europe/Berlin:20261207T013000
+SUMMARY:S8/S85/S9 · Schöneweide ⇄ Treptower Park · Ersatzverkehr
+DESCRIPTION:Zeitraum: 04.12 (Fr) 21:45 Uhr bis 07.12 (Mo) 01:30 Uhr\nLinien
+ : S8\, S85\, S9\nBahnhöfe: S Schöneweide\, S Treptower Park\nDetails: ht
+ tps://sbahn.berlin/fahren/bauen-stoerung/bauen/3044/auswirkung/3961/\nMehr
+ : https://sbahn.berlin/fahren/s8/\, https://sbahn.berlin/fahren/s85/\, htt
+ ps://sbahn.berlin/fahren/s9/\nStand: 2026-11-20T08:05:41Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:4027-1468-20261204@sbahn-berlin-disruptions
+DTSTAMP:20261023T090501Z
+DTSTART;TZID=Europe/Berlin:20261204T214500
+DTEND;TZID=Europe/Berlin:20261207T013000
+SUMMARY:S8 · Grünau ⇄ Schöneweide · Kein Zugverkehr
+DESCRIPTION:Zeitraum: 04.12 (Fr) 21:45 Uhr bis 07.12 (Mo) 01:30 Uhr\nLinien
+ : S8\nBahnhöfe: S Grünau\, S Schöneweide\nDetails: https://sbahn.berlin
+ /fahren/bauen-stoerung/bauen/3044/auswirkung/4027/\nMehr: https://sbahn.be
+ rlin/fahren/s8/\nStand: 2026-10-23T09:05:01Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:4028-1468-20261204@sbahn-berlin-disruptions
+DTSTAMP:20261023T091001Z
+DTSTART;TZID=Europe/Berlin:20261204T214500
+DTEND;TZID=Europe/Berlin:20261207T013000
+SUMMARY:S85/S9 · Flughafen BER ⇄ Schöneweide · Zugangebot geändert
+DESCRIPTION:Zeitraum: 04.12 (Fr) 21:45 Uhr bis 07.12 (Mo) 01:30 Uhr\nLinien
+ : S85\, S9\nBahnhöfe: S Flughafen BER\, S Schöneweide\nDetails: https://
+ sbahn.berlin/fahren/bauen-stoerung/bauen/3044/auswirkung/4028/\nMehr: http
+ s://sbahn.berlin/fahren/s85/\, https://sbahn.berlin/fahren/s9/\nStand: 202
+ 6-10-23T09:10:01Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:4029-1468-20261204@sbahn-berlin-disruptions
+DTSTAMP:20261023T091501Z
+DTSTART;TZID=Europe/Berlin:20261204T214500
+DTEND;TZID=Europe/Berlin:20261207T013000
+SUMMARY:S46 · Schöneweide → Grünau · Zugangebot geändert
+DESCRIPTION:Zeitraum: 04.12 (Fr) 21:45 Uhr bis 07.12 (Mo) 01:30 Uhr\nLinien
+ : S46\nBahnhöfe: S Grünau\, S Schöneweide\nDetails: https://sbahn.berli
+ n/fahren/bauen-stoerung/bauen/3044/auswirkung/4029/\nMehr: https://sbahn.b
+ erlin/fahren/s46/\nStand: 2026-10-23T09:15:01Z
+TRANSP:TRANSPARENT
+END:VEVENT
 END:VCALENDAR
