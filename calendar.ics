@@ -23,7 +23,7 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:HIM_FREETEXT_357299-20260821@sbahn-berlin-disruptions
-DTSTAMP:20261027T080501Z
+DTSTAMP:20261124T070548Z
 DTSTART;VALUE=DATE:20260821
 DTEND;VALUE=DATE:20260822
 SUMMARY:Bus 160/163 · Haltestelle verlegt
@@ -31,8 +31,8 @@ DESCRIPTION:Bus 160\, 163: Verlegung der Haltestellen Hermann-Dorner-Allee
  um ungefähr 200 Meter an den bisherigen Standort James-Franck-Str.. Grund
  : Neuer Standort noch im Bau.\nZeitraum: 21.08.2026 20:39 – unbefristet\
  nLinien: Bus 160\, Bus 163\nHaltestelle: Hermann-Dorner-Allee\nMehr: https
- ://www.bvg.de/de/verbindungen/stoerungsmeldungen\nStand: 2026-10-27T08:05:
- 01Z
+ ://www.bvg.de/de/verbindungen/stoerungsmeldungen\nStand: 2026-11-24T07:05:
+ 48Z
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
@@ -50,15 +50,27 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:HIM_FREETEXT_371603-20261105@sbahn-berlin-disruptions
-DTSTAMP:20261102T122555Z
+DTSTAMP:20261124T083606Z
 DTSTART;VALUE=DATE:20261105
 DTEND;VALUE=DATE:20261106
 SUMMARY:Bus 163 · Haltestelle verlegt
 DESCRIPTION:Bus 163: Verlegung der Haltestelle Bohnsdorf Kirche um 140 Mete
  r weiter in bzw. entgegen der Fahrtrichtung.\nZeitraum: 05.11.2026 06:00 
  – unbefristet\nLinien: Bus 163\nHaltestelle: Bohnsdorf Kirche\nMehr: htt
- ps://www.bvg.de/de/verbindungen/stoerungsmeldungen\nStand: 2026-11-02T12:2
- 5:55Z
+ ps://www.bvg.de/de/verbindungen/stoerungsmeldungen\nStand: 2026-11-24T08:3
+ 6:06Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:4301-1528-20261126@sbahn-berlin-disruptions
+DTSTAMP:20261124T072001Z
+DTSTART;TZID=Europe/Berlin:20261126T203000
+DTEND;TZID=Europe/Berlin:20261127T013000
+SUMMARY:S85 · Schöneweide ⇄ Frohnau · Kein Zugverkehr
+DESCRIPTION:Zeitraum: 26.11 (Do) 20:30 Uhr bis 27.11 (Fr) 01:30 Uhr\nLinien
+ : S85\nBahnhöfe: S Frohnau\, S Schöneweide\nDetails: https://sbahn.berli
+ n/fahren/bauen-stoerung/bauen/3300/auswirkung/4301/\nMehr: https://sbahn.b
+ erlin/fahren/s85/\nStand: 2026-11-24T07:20:01Z
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
