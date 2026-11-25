@@ -67,10 +67,10 @@ DTSTAMP:20261124T072001Z
 DTSTART;TZID=Europe/Berlin:20261126T203000
 DTEND;TZID=Europe/Berlin:20261127T013000
 SUMMARY:S85 · Schöneweide ⇄ Frohnau · Kein Zugverkehr
-DESCRIPTION:Zeitraum: morgen\, 20:30 Uhr bis 27.11 (Fr) 01:30 Uhr\nLinien: 
- S85\nBahnhöfe: S Frohnau\, S Schöneweide\nDetails: https://sbahn.berlin/
- fahren/bauen-stoerung/bauen/3300/auswirkung/4301/\nMehr: https://sbahn.ber
- lin/fahren/s85/\nStand: 2026-11-24T07:20:01Z
+DESCRIPTION:Zeitraum: heute\, 20:30 Uhr bis morgen 01:30 Uhr\nLinien: S85\n
+ Bahnhöfe: S Frohnau\, S Schöneweide\nDetails: https://sbahn.berlin/fahre
+ n/bauen-stoerung/bauen/3300/auswirkung/4301/\nMehr: https://sbahn.berlin/f
+ ahren/s85/\nStand: 2026-11-24T07:20:01Z
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
@@ -146,6 +146,19 @@ DESCRIPTION:Zeitraum: 04.12 (Fr) 21:45 Uhr bis 07.12 (Mo) 01:30 Uhr\nLinien
  : S46\nBahnhöfe: S Grünau\, S Schöneweide\nDetails: https://sbahn.berli
  n/fahren/bauen-stoerung/bauen/3044/auswirkung/4029/\nMehr: https://sbahn.b
  erlin/fahren/s46/\nStand: 2026-10-23T09:15:01Z
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:4269-1520-20261209@sbahn-berlin-disruptions
+DTSTAMP:20261120T091501Z
+DTSTART;TZID=Europe/Berlin:20261209T220000
+DTEND;TZID=Europe/Berlin:20261210T013000
+SUMMARY:S85/S9 · Flughafen BER ⇄ Schöneweide · Taktänderung
+DESCRIPTION:Zeitraum: 09.12 (Mi) 22:00 Uhr bis 10.12 (Do) 01:30 Uhr\nLinien
+ : S85\, S9\nBahnhöfe: S Flughafen BER\, S Schöneweide\nDetails: https://
+ sbahn.berlin/fahren/bauen-stoerung/bauen/3273/auswirkung/4269/\nMehr: http
+ s://sbahn.berlin/fahren/s85/\, https://sbahn.berlin/fahren/s9/\nStand: 202
+ 6-11-20T09:15:01Z
 TRANSP:TRANSPARENT
 END:VEVENT
 END:VCALENDAR
