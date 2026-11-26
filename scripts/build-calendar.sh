@@ -91,13 +91,17 @@ read -r -d '' jq_render <<'JQ' || true
     else "DTSTART;TZID=Europe/Berlin:\(.start | local)", "DTEND;TZID=Europe/Berlin:\(.end | local)"
     end;
 
+  # Night occurrence: entirely within 22:00-05:00 Berlin wall-clock time. Shifting by 2h turns that into 00:00-07:00 of one day.
+  def night: (.start + 7200) as $s | (.end + 7199) as $e
+    | (.allDay | not) and ($s / 86400 | floor) == ($e / 86400 | floor) and ($e % 86400) < 25200;
+
   sort_by([.start, .order])
   | map([
       "BEGIN:VEVENT",
       "UID:\(.uid)",
       "DTSTAMP:\(.dtstamp)",
       stamp,
-      "SUMMARY:\(.summary | esc)",
+      "SUMMARY:\(if night then "🌙 " else "" end)\(.summary | esc)",
       "DESCRIPTION:\(.description | esc)",
       "TRANSP:TRANSPARENT",
       "END:VEVENT"

@@ -28,6 +28,10 @@ _Avoid_: Recurrence
 One concrete calendar event: a continuous period, or a single day of a daily window.
 _Avoid_: Instance, entry
 
+**Night occurrence**:
+An occurrence lying entirely within 22:00-05:00 Berlin time. Its summary gets a 🌙 prefix; every event is already `TRANSP:TRANSPARENT`, so Google Calendar shows it as free. All-day occurrences are never night occurrences.
+_Avoid_: Low-priority event
+
 **Station**:
 An S-Bahn Berlin stop (BVG stops are not supported), identified by the user via its name (e.g. "Schöneweide"), not an internal ID. Resolved by exact match on the title without its `S `/`S+U `/`U ` prefix; zero or several matches is an error. A consequence affects a station only if the station is named in the consequence title (see ADR 0003); the API's station links also cover mere alternative-route mentions.
 _Avoid_: Stop, Bahnhof
