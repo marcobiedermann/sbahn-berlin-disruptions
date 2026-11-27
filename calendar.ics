@@ -62,18 +62,6 @@ DESCRIPTION:Bus 163: Verlegung der Haltestelle Bohnsdorf Kirche um 140 Mete
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:4301-1528-20261126@sbahn-berlin-disruptions
-DTSTAMP:20261124T072001Z
-DTSTART;TZID=Europe/Berlin:20261126T203000
-DTEND;TZID=Europe/Berlin:20261127T013000
-SUMMARY:S85 · Schöneweide ⇄ Frohnau · Kein Zugverkehr
-DESCRIPTION:Zeitraum: bis 01:30 Uhr\nLinien: S85\nBahnhöfe: S Frohnau\, S 
- Schöneweide\nDetails: https://sbahn.berlin/fahren/bauen-stoerung/bauen/33
- 00/auswirkung/4301/\nMehr: https://sbahn.berlin/fahren/s85/\nStand: 2026-1
- 1-24T07:20:01Z
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
 UID:4019-1395-20261130@sbahn-berlin-disruptions
 DTSTAMP:20261022T134501Z
 DTSTART;TZID=Europe/Berlin:20261130T040000
